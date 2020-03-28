@@ -2,7 +2,7 @@ package main;
 
 import javax.sound.midi.MidiUnavailableException;
 
-import exceptions.config.ProgramUncofiguredException;
+import exceptions.config.ProgramUnconfiguredException;
 import launchpad.listeners.MainLaunchpadListener;
 import main.manager.ProgramManager;
 import net.thecodersbreakfast.lp4j.midi.MidiDeviceConfiguration;
@@ -26,7 +26,7 @@ public class MainFacade {
 	private void initConfiguration() {
 		try {
 			new LaunchpadConfigParser();
-		} catch (ProgramUncofiguredException e) {
+		} catch (ProgramUnconfiguredException e) {
 			// Skip the configuration, but keep program alive...
 			e.printStackTrace();
 		}
