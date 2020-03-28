@@ -1,5 +1,6 @@
 package launchpad.listeners;
 
+import main.manager.ProgramManager;
 import net.thecodersbreakfast.lp4j.api.BackBufferOperation;
 import net.thecodersbreakfast.lp4j.api.Button;
 import net.thecodersbreakfast.lp4j.api.Color;
@@ -9,14 +10,12 @@ import net.thecodersbreakfast.lp4j.api.Pad;
 
 public class MainLaunchpadListener extends LaunchpadListenerAdapter {
 	
-	private LaunchpadClient client;
+	private LaunchpadClient client = ProgramManager.getInstance().getLaunchpadClient();
 	private static boolean[][] buttons;
 	private static final byte BUTTONS_COUNT_X = 8;
 	private static final byte BUTTONS_COUNT_Y = 8;
 	
-	public MainLaunchpadListener(LaunchpadClient client) {
-		this.client = client;
-		
+	public MainLaunchpadListener() {
 		buttons = new boolean[BUTTONS_COUNT_X][BUTTONS_COUNT_Y];
 		for(int x = 0; x < BUTTONS_COUNT_X; x++) {
 			for(int y = 0; y < BUTTONS_COUNT_Y; y++) {

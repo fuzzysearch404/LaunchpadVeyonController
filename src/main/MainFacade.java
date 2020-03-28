@@ -4,7 +4,7 @@ import javax.sound.midi.MidiUnavailableException;
 
 import exceptions.config.ProgramUncofiguredException;
 import launchpad.listeners.MainLaunchpadListener;
-import net.thecodersbreakfast.lp4j.api.LaunchpadClient;
+import main.manager.ProgramManager;
 import net.thecodersbreakfast.lp4j.midi.MidiDeviceConfiguration;
 import net.thecodersbreakfast.lp4j.midi.MidiLaunchpad;
 import setup.LaunchpadConfigParser;
@@ -12,20 +12,27 @@ import setup.LaunchpadConfigParser;
 public class MainFacade {
 
 	public void run() throws MidiUnavailableException {
-		MidiLaunchpad launchpad;
+		MidiLaunchpad launchpad = new MidiLaunchpad(MidiDeviceConfiguration.autodetect());
+		ProgramManager.getInstance(launchpad);
 		
-		launchpad = new MidiLaunchpad(MidiDeviceConfiguration.autodetect());
+		// Resets the Launchpad's buffers, so the lights turn off if there were on before.
+		ProgramManager.getInstance().getLaunchpadClient().reset();
 		
-		LaunchpadClient client = launchpad.getClient();
-		// Resets the Launchpad's buffers, so the lights turn off.
-		client.reset();
+		initConfiguration();
 		
+		setLaunchpadListeners();
+	}
+	
+	private void initConfiguration() {
 		try {
-			LaunchpadConfigParser cfg = new LaunchpadConfigParser(client);
+			new LaunchpadConfigParser();
 		} catch (ProgramUncofiguredException e) {
+			// Skip the configuration, but keep program alive...
 			e.printStackTrace();
 		}
-		
-		launchpad.setListener(new MainLaunchpadListener(client));
+	}
+	
+	private void setLaunchpadListeners() {
+		ProgramManager.getInstance().getLaunchpad().setListener(new MainLaunchpadListener());
 	}
 }
