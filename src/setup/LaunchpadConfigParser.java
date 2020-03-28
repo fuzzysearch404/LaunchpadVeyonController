@@ -13,10 +13,11 @@ import org.json.JSONObject;
 
 import exceptions.config.ConfigException;
 import exceptions.config.ProgramUncofiguredException;
-import models.Device;
-import net.thecodersbreakfast.lp4j.api.BackBufferOperation;
+import exceptions.launchpad.OutOfLaunchpadPadBoundsException;
+import main.manager.ProgramManager;
+import models.launchpad.LaunchpadPad;
+import models.veyon.Device;
 import net.thecodersbreakfast.lp4j.api.Launchpad;
-import net.thecodersbreakfast.lp4j.api.LaunchpadClient;
 import net.thecodersbreakfast.lp4j.api.Pad;
 
 /**
@@ -28,21 +29,18 @@ import net.thecodersbreakfast.lp4j.api.Pad;
  */
 public class LaunchpadConfigParser {
 
-	private LaunchpadClient launchpadClient;
 	private ArrayList<Device> deviceList = new ArrayList<Device>();
 	private String strPath;
 	private String json;
 
-	public LaunchpadConfigParser(LaunchpadClient launchpadClient) throws ProgramUncofiguredException {
-		this.launchpadClient = launchpadClient;
+	public LaunchpadConfigParser() throws ProgramUncofiguredException {
 		this.strPath = CONFIG_FILE_DEFAULT_FULL_FILE_PATH;
 
 		configure();
 	}
 	
-	public LaunchpadConfigParser(LaunchpadClient launchpadClient, String pathToConfig)
+	public LaunchpadConfigParser(String pathToConfig)
 			throws ProgramUncofiguredException {
-		this.launchpadClient = launchpadClient;
 		this.strPath = pathToConfig;
 
 		configure();
@@ -62,8 +60,12 @@ public class LaunchpadConfigParser {
 			throw new ProgramUncofiguredException("Could not find config file or could not read it.", e);
 		}
 
-		readJSON();
-		lightUpByConfiguration();
+		ProgramManager.getInstance().setDevices(readJSON());
+		
+		if(deviceList.isEmpty())
+			throw new ProgramUncofiguredException("The configuration file was parsed, but no devices where configured.");
+		
+		ProgramManager.getInstance().getLightManager().lightUpByDevices();
 	}
 
 	/**
@@ -72,6 +74,57 @@ public class LaunchpadConfigParser {
 	 * configuration data from it and converts
 	 * it to a {@link ArrayList} of {@link Device}.
 	 * 
+	 * Configuration file body:
+	 * The JSON file must consist of object
+	 * with this structure:
+	 * 
+	 * row_number (1-7):
+	 * 		collumn_number (1-7):
+	 * 			-ip: The IP address of the device.
+	 * 
+	 * Configuration file example:
+	 * 
+	 * {
+	 * 	"0": {
+	 * 		"0":{
+	 * 			"ip":"8.8.8.8"
+	 * 		},
+	 * 		"1":{
+	 * 			"ip":"8.8.8.8"
+	 * 		}
+	 * 	},
+	 * 	"2" {
+	 * 		"5":{
+	 * 			"ip":"8.8.8.8"
+	 * 		}
+	 * 	}
+	 * }
+	 * 
+	 * This will load data for Launchpad's
+	 * row 1 collumns 1 and 2 and row 3
+	 * collum 6. (indexes start from 0)
+	 * 
+	 * 	     +---+---+---+---+---+---+---+---+ 
+	 *       |   |   |   |   |   |   |   |	 |
+	 *       +---+---+---+---+---+---+---+---+ 
+	 *         
+	 *       +---+---+---+---+---+---+---+---+  +---+
+	 *       | X | X |   |   |   |   |   |   |  | 	|
+	 *       +---+---+---+---+---+---+---+---+  +---+
+	 *       |   |   |   |   |   |   |   |   |  | 	|
+	 *       +---+---+---+---+---+---+---+---+  +---+
+	 *       |   |   |   |   |   | X |   |   |  | 	|
+	 *       +---+---+---+---+---+---+---+---+  +---+
+	 *       |   |   |   |   |   |   |   |   |  | 	|
+	 *       +---+---+---+---+---+---+---+---+  +---+
+	 *       |   |   |   |   |   |   |   |   |  | 	|
+	 *       +---+---+---+---+---+---+---+---+  +---+
+	 *       |   |   |   |   |   |   |   |   |  | 	|
+	 *       +---+---+---+---+---+---+---+---+  +---+
+	 *       |   |   |   |   |   |   |   |   |  | 	|
+	 *       +---+---+---+---+---+---+---+---+  +---+
+	 *       |   |   |   |   |   |   |   |   |  | 	|
+	 *       +---+---+---+---+---+---+---+---+  +---+
 	 * 
 	 * @return the loaded {@link Device} objects.
 	 */
@@ -88,10 +141,10 @@ public class LaunchpadConfigParser {
 				JSONObject row = (JSONObject) objRow;
 				Iterator<String> collumnKeys = row.keys();
 				
-				int rowIndex = -1;
+				int y = -1;
 				
 				try {
-					rowIndex = parseKeyToInteger(key);
+					y = parseKeyToInteger(key);
 				} catch (ConfigException e) {
 					e.printStackTrace();
 					continue;
@@ -103,10 +156,10 @@ public class LaunchpadConfigParser {
 
 					Object objCollumn = row.get(key);
 					
-					int collumnIndex = -1;
+					int x = -1;
 
 					try {
-						collumnIndex = parseKeyToInteger(key);
+						x = parseKeyToInteger(key);
 					} catch (ConfigException e1) {
 						e1.printStackTrace();
 						continue;
@@ -116,7 +169,15 @@ public class LaunchpadConfigParser {
 						JSONObject collumn = (JSONObject) objCollumn;
 						String ipAdress = collumn.getString("ip");
 						
-						Device device = new Device(ipAdress, rowIndex, collumnIndex);
+						LaunchpadPad pad;
+						try {
+							pad = new LaunchpadPad(x, y);
+						}
+						catch (OutOfLaunchpadPadBoundsException e) {
+							continue;
+						}
+						
+						Device device = new Device(ipAdress, pad);
 						deviceList.add(device);
 					} else
 						System.err.println("Invalid config collumn: " + key);
@@ -152,7 +213,7 @@ public class LaunchpadConfigParser {
 		}
 
 		// Indexes start from 0
-		if (num < 0 || num > LAUNCHPAD_PAD_ROWS - 1) {
+		if (num < LAUNCHPAD_PAD_MIN_X || num > LAUNCHPAD_PAD_MAX_X) {
 			throw new ConfigException("Key out of launchpad button bounds. Key: " + key);
 		}
 
@@ -166,16 +227,6 @@ public class LaunchpadConfigParser {
 	private void readConfigurationFile() throws IOException {
 		Path path = Paths.get(strPath);
 		json = Files.readString(path);
-	}
-	
-	/**
-	 * Lights up lights on {@link Launchpad} according to
-	 * the provided configuration.
-	 */
-	private void lightUpByConfiguration() {
-		for(Device d: deviceList) {
-			launchpadClient.setPadLight(Pad.at(d.getCollumn(), d.getRow()), COLOR_DEVICE_LOADED, BackBufferOperation.NONE);
-		}
 	}
 
 }

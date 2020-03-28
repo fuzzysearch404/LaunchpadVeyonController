@@ -1,5 +1,6 @@
-package models;
+package models.veyon;
 
+import models.launchpad.LaunchpadPad;
 import net.thecodersbreakfast.lp4j.api.Launchpad;
 
 /**
@@ -13,17 +14,15 @@ import net.thecodersbreakfast.lp4j.api.Launchpad;
 public class Device {
 	
 	private String ipAdreess;
-	private int row;
-	private int collumn;
+	private LaunchpadPad pad;
 	
 	public Device(String ipAdress) {
 		this.ipAdreess = ipAdress;
 	}
 
-	public Device(String ipAdreess, int row, int collumn) {
+	public Device(String ipAdreess, LaunchpadPad pad) {
 		setIpAdreess(ipAdreess);
-		setRow(row);
-		setCollumn(collumn);
+		setPad(pad);
 	}
 
 	public String getIpAdreess() {
@@ -34,20 +33,12 @@ public class Device {
 		this.ipAdreess = ipAdreess;
 	}
 
-	public int getRow() {
-		return row;
+	public LaunchpadPad getPad() {
+		return pad;
 	}
 
-	public void setRow(int row) {
-		this.row = row;
-	}
-
-	public int getCollumn() {
-		return collumn;
-	}
-
-	public void setCollumn(int collumn) {
-		this.collumn = collumn;
+	public void setPad(LaunchpadPad pad) {
+		this.pad = pad;
 	}
 
 }
