@@ -1,5 +1,15 @@
 package models;
 
+import net.thecodersbreakfast.lp4j.api.Launchpad;
+
+/**
+ * This class represents Veyon's devices 
+ * and them on the Novation {@link Launchpad}
+ * pads.
+ * 
+ * @author Roberts Ziediņš
+ *
+ */
 public class Device {
 	
 	private String ipAdreess;
