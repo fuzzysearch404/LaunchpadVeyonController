@@ -12,7 +12,7 @@ import java.util.Iterator;
 import org.json.JSONObject;
 
 import exceptions.config.ConfigException;
-import exceptions.config.ProgramUncofiguredException;
+import exceptions.config.ProgramUnconfiguredException;
 import exceptions.launchpad.OutOfLaunchpadPadBoundsException;
 import main.manager.ProgramManager;
 import models.launchpad.LaunchpadPad;
@@ -33,14 +33,14 @@ public class LaunchpadConfigParser {
 	private String strPath;
 	private String json;
 
-	public LaunchpadConfigParser() throws ProgramUncofiguredException {
+	public LaunchpadConfigParser() throws ProgramUnconfiguredException {
 		this.strPath = CONFIG_FILE_DEFAULT_FULL_FILE_PATH;
 
 		configure();
 	}
 	
 	public LaunchpadConfigParser(String pathToConfig)
-			throws ProgramUncofiguredException {
+			throws ProgramUnconfiguredException {
 		this.strPath = pathToConfig;
 
 		configure();
@@ -50,20 +50,20 @@ public class LaunchpadConfigParser {
 	 * The main method of this class that executes
 	 * all the configuration phases.
 	 * 
-	 * @throws ProgramUncofiguredException if the
+	 * @throws ProgramUnconfiguredException if the
 	 * configuration failed.
 	 */
-	private void configure() throws ProgramUncofiguredException {
+	private void configure() throws ProgramUnconfiguredException {
 		try {
 			readConfigurationFile();
 		} catch (IOException e) {
-			throw new ProgramUncofiguredException("Could not find config file or could not read it.", e);
+			throw new ProgramUnconfiguredException("Could not find config file or could not read it.", e);
 		}
 
 		ProgramManager.getInstance().setDevices(readJSON());
 		
 		if(deviceList.isEmpty())
-			throw new ProgramUncofiguredException("The configuration file was parsed, but no devices where configured.");
+			throw new ProgramUnconfiguredException("The configuration file was parsed, but no devices where configured.");
 		
 		ProgramManager.getInstance().getLightManager().lightUpByDevices();
 	}

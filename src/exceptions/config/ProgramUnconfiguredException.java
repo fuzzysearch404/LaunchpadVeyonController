@@ -7,15 +7,15 @@ package exceptions.config;
  * @author Roberts Ziediņš
  *
  */
-public class ProgramUncofiguredException extends ConfigException {
+public class ProgramUnconfiguredException extends ConfigException {
 
 	private static final long serialVersionUID = -1600122038682707050L;
 
-	public ProgramUncofiguredException(String message) {
+	public ProgramUnconfiguredException(String message) {
 		super(message);
 	}
 	
-	public ProgramUncofiguredException(String message, Throwable cause) {
+	public ProgramUnconfiguredException(String message, Throwable cause) {
 		super(message, cause);
 	}
 
