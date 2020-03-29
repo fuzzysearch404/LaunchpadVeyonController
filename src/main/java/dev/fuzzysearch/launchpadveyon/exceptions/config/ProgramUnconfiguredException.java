@@ -1,4 +1,4 @@
-package exceptions.config;
+package dev.fuzzysearch.launchpadveyon.exceptions.config;
 
 /**
  * Class for exception that is thrown if

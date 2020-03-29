@@ -1,9 +1,9 @@
-package main.manager;
+package dev.fuzzysearch.launchpadveyon.main.manager;
 
 import java.util.ArrayList;
 
-import launchpad.control.LaunchpadLightManager;
-import models.veyon.Device;
+import dev.fuzzysearch.launchpadveyon.launchpad.control.LaunchpadLightManager;
+import dev.fuzzysearch.launchpadveyon.models.veyon.Device;
 import net.thecodersbreakfast.lp4j.api.LaunchpadClient;
 import net.thecodersbreakfast.lp4j.midi.MidiLaunchpad;
 

@@ -1,6 +1,6 @@
-package launchpad.listeners;
+package dev.fuzzysearch.launchpadveyon.launchpad.listeners;
 
-import main.manager.ProgramManager;
+import dev.fuzzysearch.launchpadveyon.main.manager.ProgramManager;
 import net.thecodersbreakfast.lp4j.api.BackBufferOperation;
 import net.thecodersbreakfast.lp4j.api.Button;
 import net.thecodersbreakfast.lp4j.api.Color;
