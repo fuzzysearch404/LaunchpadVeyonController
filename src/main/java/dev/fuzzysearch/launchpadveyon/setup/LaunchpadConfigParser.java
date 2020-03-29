@@ -15,7 +15,6 @@ import dev.fuzzysearch.launchpadveyon.exceptions.config.ConfigException;
 import dev.fuzzysearch.launchpadveyon.exceptions.config.ProgramUnconfiguredException;
 import dev.fuzzysearch.launchpadveyon.exceptions.launchpad.OutOfLaunchpadPadBoundsException;
 import dev.fuzzysearch.launchpadveyon.main.manager.ProgramManager;
-import dev.fuzzysearch.launchpadveyon.models.launchpad.LaunchpadPad;
 import dev.fuzzysearch.launchpadveyon.models.veyon.Device;
 import net.thecodersbreakfast.lp4j.api.Launchpad;
 import net.thecodersbreakfast.lp4j.api.Pad;
@@ -169,15 +168,7 @@ public class LaunchpadConfigParser {
 						JSONObject collumn = (JSONObject) objCollumn;
 						String ipAdress = collumn.getString("ip");
 						
-						LaunchpadPad pad;
-						try {
-							pad = new LaunchpadPad(x, y);
-						}
-						catch (OutOfLaunchpadPadBoundsException e) {
-							continue;
-						}
-						
-						Device device = new Device(ipAdress, pad);
+						Device device = new Device(ipAdress, Pad.at(x, y));
 						deviceList.add(device);
 					} else
 						System.err.println("Invalid config collumn: " + key);
