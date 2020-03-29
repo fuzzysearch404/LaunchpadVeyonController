@@ -1,7 +1,7 @@
 package dev.fuzzysearch.launchpadveyon.models.veyon;
 
-import dev.fuzzysearch.launchpadveyon.models.launchpad.LaunchpadPad;
 import net.thecodersbreakfast.lp4j.api.Launchpad;
+import net.thecodersbreakfast.lp4j.api.Pad;
 
 /**
  * This class represents Veyon's devices 
@@ -14,13 +14,13 @@ import net.thecodersbreakfast.lp4j.api.Launchpad;
 public class Device {
 	
 	private String ipAdreess;
-	private LaunchpadPad pad;
+	private Pad pad;
 	
 	public Device(String ipAdress) {
 		this.ipAdreess = ipAdress;
 	}
 
-	public Device(String ipAdreess, LaunchpadPad pad) {
+	public Device(String ipAdreess, Pad pad) {
 		setIpAdreess(ipAdreess);
 		setPad(pad);
 	}
@@ -33,11 +33,11 @@ public class Device {
 		this.ipAdreess = ipAdreess;
 	}
 
-	public LaunchpadPad getPad() {
+	public Pad getPad() {
 		return pad;
 	}
 
-	public void setPad(LaunchpadPad pad) {
+	public void setPad(Pad pad) {
 		this.pad = pad;
 	}
 
