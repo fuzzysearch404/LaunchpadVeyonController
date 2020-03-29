@@ -20,6 +20,9 @@ public final class Configuration {
 	public final static int LAUNCHPAD_PAD_MAX_X = 7;
 	public final static int LAUNCHPAD_PAD_MAX_Y = 7;
 	
+	public final static int LAUNCHPAD_PAD_X_ROWS = LAUNCHPAD_PAD_MAX_X + 1;
+	public final static int LAUNCHPAD_PAD_Y_COLLUMNS = LAUNCHPAD_PAD_MAX_Y + 1;
+	
 	// Configuration files
 	public final static String CONFIG_FILE_DEFAULT_FILE_DIRECTORY = "./files/";
 	public final static String CONFIG_FILE_DEFAULT_FILE_NAME = "Config.json";

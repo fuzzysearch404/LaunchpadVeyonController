@@ -13,7 +13,6 @@ import org.json.JSONObject;
 
 import dev.fuzzysearch.launchpadveyon.exceptions.config.ConfigException;
 import dev.fuzzysearch.launchpadveyon.exceptions.config.ProgramUnconfiguredException;
-import dev.fuzzysearch.launchpadveyon.exceptions.launchpad.OutOfLaunchpadPadBoundsException;
 import dev.fuzzysearch.launchpadveyon.main.manager.ProgramManager;
 import dev.fuzzysearch.launchpadveyon.models.veyon.Device;
 import net.thecodersbreakfast.lp4j.api.Launchpad;
@@ -59,7 +58,7 @@ public class LaunchpadConfigParser {
 			throw new ProgramUnconfiguredException("Could not find config file or could not read it.", e);
 		}
 
-		ProgramManager.getInstance().setDevices(readJSON());
+		ProgramManager.getInstance().setLoadedDevices(readJSON());
 		
 		if(deviceList.isEmpty())
 			throw new ProgramUnconfiguredException("The configuration file was parsed, but no devices where configured.");
