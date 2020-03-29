@@ -1,8 +1,8 @@
-package models.launchpad;
+package dev.fuzzysearch.launchpadveyon.models.launchpad;
 
-import static config.Configuration.*;
+import static dev.fuzzysearch.launchpadveyon.config.Configuration.*;
 
-import exceptions.launchpad.OutOfLaunchpadPadBoundsException;
+import dev.fuzzysearch.launchpadveyon.exceptions.launchpad.OutOfLaunchpadPadBoundsException;
 import net.thecodersbreakfast.lp4j.api.Pad;
 
 /**

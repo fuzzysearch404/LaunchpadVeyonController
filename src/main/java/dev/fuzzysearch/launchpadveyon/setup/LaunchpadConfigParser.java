@@ -1,6 +1,6 @@
-package setup;
+package dev.fuzzysearch.launchpadveyon.setup;
 
-import static config.Configuration.*;
+import static dev.fuzzysearch.launchpadveyon.config.Configuration.*;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -11,12 +11,12 @@ import java.util.Iterator;
 
 import org.json.JSONObject;
 
-import exceptions.config.ConfigException;
-import exceptions.config.ProgramUnconfiguredException;
-import exceptions.launchpad.OutOfLaunchpadPadBoundsException;
-import main.manager.ProgramManager;
-import models.launchpad.LaunchpadPad;
-import models.veyon.Device;
+import dev.fuzzysearch.launchpadveyon.exceptions.config.ConfigException;
+import dev.fuzzysearch.launchpadveyon.exceptions.config.ProgramUnconfiguredException;
+import dev.fuzzysearch.launchpadveyon.exceptions.launchpad.OutOfLaunchpadPadBoundsException;
+import dev.fuzzysearch.launchpadveyon.main.manager.ProgramManager;
+import dev.fuzzysearch.launchpadveyon.models.launchpad.LaunchpadPad;
+import dev.fuzzysearch.launchpadveyon.models.veyon.Device;
 import net.thecodersbreakfast.lp4j.api.Launchpad;
 import net.thecodersbreakfast.lp4j.api.Pad;
 

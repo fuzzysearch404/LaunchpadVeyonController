@@ -1,13 +1,13 @@
-package main;
+package dev.fuzzysearch.launchpadveyon.main;
 
 import javax.sound.midi.MidiUnavailableException;
 
-import exceptions.config.ProgramUnconfiguredException;
-import launchpad.listeners.MainLaunchpadListener;
-import main.manager.ProgramManager;
+import dev.fuzzysearch.launchpadveyon.exceptions.config.ProgramUnconfiguredException;
+import dev.fuzzysearch.launchpadveyon.launchpad.listeners.MainLaunchpadListener;
+import dev.fuzzysearch.launchpadveyon.main.manager.ProgramManager;
 import net.thecodersbreakfast.lp4j.midi.MidiDeviceConfiguration;
 import net.thecodersbreakfast.lp4j.midi.MidiLaunchpad;
-import setup.LaunchpadConfigParser;
+import dev.fuzzysearch.launchpadveyon.setup.LaunchpadConfigParser;
 
 public class MainFacade {
 

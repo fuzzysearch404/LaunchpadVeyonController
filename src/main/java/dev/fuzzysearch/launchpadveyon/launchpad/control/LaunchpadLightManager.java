@@ -1,9 +1,9 @@
-package launchpad.control;
+package dev.fuzzysearch.launchpadveyon.launchpad.control;
 
-import static config.Configuration.COLOR_DEVICE_LOADED;
+import static dev.fuzzysearch.launchpadveyon.config.Configuration.COLOR_DEVICE_LOADED;
 
-import main.manager.ProgramManager;
-import models.veyon.Device;
+import dev.fuzzysearch.launchpadveyon.main.manager.ProgramManager;
+import dev.fuzzysearch.launchpadveyon.models.veyon.Device;
 import net.thecodersbreakfast.lp4j.api.BackBufferOperation;
 import net.thecodersbreakfast.lp4j.api.Launchpad;
 import net.thecodersbreakfast.lp4j.api.Pad;

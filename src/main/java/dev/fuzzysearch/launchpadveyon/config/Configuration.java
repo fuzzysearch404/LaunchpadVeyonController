@@ -1,4 +1,4 @@
-package config;
+package dev.fuzzysearch.launchpadveyon.config;
 
 import net.thecodersbreakfast.lp4j.api.Color;
 
