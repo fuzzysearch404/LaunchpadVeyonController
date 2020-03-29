@@ -2,8 +2,11 @@ package dev.fuzzysearch.launchpadveyon.main.manager;
 
 import java.util.ArrayList;
 
+import static dev.fuzzysearch.launchpadveyon.config.Configuration.*;
+
 import dev.fuzzysearch.launchpadveyon.launchpad.control.LaunchpadLightManager;
 import dev.fuzzysearch.launchpadveyon.models.veyon.Device;
+import dev.fuzzysearch.launchpadveyon.veyon.VeyonActionType;
 import net.thecodersbreakfast.lp4j.api.LaunchpadClient;
 import net.thecodersbreakfast.lp4j.api.Pad;
 import net.thecodersbreakfast.lp4j.midi.MidiLaunchpad;
@@ -17,11 +20,22 @@ import net.thecodersbreakfast.lp4j.midi.MidiLaunchpad;
  */
 public class ProgramManager {
 	
+	// LP4J API
 	private MidiLaunchpad launchpad;
 	private LaunchpadClient launchpadClient;
+	
+	// Launchpad's light management
 	private LaunchpadLightManager lightManager;
+	
+	// Loaded Veyon devices
 	private ArrayList<Device> loadedDevices;
 	private ArrayList<Device> failedDevices;
+	
+	// Current selected action
+	private VeyonActionType currentAction = DEFAULT_VEYON_ACTION_TYPE;
+	
+	// Veyon's process - e.g. active remote screen view
+	private Process activeVeyonProcess;
 	
 	// Singleton
 	private static ProgramManager instance = null;
@@ -37,6 +51,7 @@ public class ProgramManager {
 		this.launchpadClient = this.launchpad.getClient();
 	}
 	
+	// Getters and Setters
 	
 	public MidiLaunchpad getLaunchpad() {
 		return launchpad;
@@ -76,6 +91,46 @@ public class ProgramManager {
 
 	public void setFailedDevices(ArrayList<Device> failedDevices) {
 		this.failedDevices = failedDevices;
+	}
+	
+	public VeyonActionType getCurrentAction() {
+		return currentAction;
+	}
+
+	public void setCurrentAction(VeyonActionType currentAction) {
+		this.currentAction = currentAction;
+	}
+
+	public Process getActiveVeyonProcess() {
+		return activeVeyonProcess;
+	}
+
+	public void setActiveVeyonProcess(Process activeVeyonProcess) {
+		this.activeVeyonProcess = activeVeyonProcess;
+	}
+
+	/**
+	 * Returns {@link Device} mapped by {@link Pad}.
+	 * If the device is not present, returns null.
+	 * 
+	 * @param pad to check
+	 * @return device object
+	 */
+	public Device getDeviceByPad(Pad pad) {
+		if(loadedDevices != null) {
+			for(Device d: loadedDevices) {
+				if(d.getPad().equals(pad))
+					return d;
+			}
+		}
+		if(failedDevices != null) {
+			for(Device d: failedDevices) {
+				if(d.getPad().equals(pad))
+					return d;
+			}
+		}
+		
+		return null;
 	}
 
 	/**
