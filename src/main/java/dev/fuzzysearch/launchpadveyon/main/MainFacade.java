@@ -13,14 +13,16 @@ public class MainFacade {
 
 	public void run() throws MidiUnavailableException {
 		MidiLaunchpad launchpad = new MidiLaunchpad(MidiDeviceConfiguration.autodetect());
-		ProgramManager.getInstance(launchpad);
+		ProgramManager manager = ProgramManager.getInstance(launchpad);
 		
 		// Resets the Launchpad's buffers, so the lights turn off if there were on before.
-		ProgramManager.getInstance().getLaunchpadClient().reset();
+		manager.getLaunchpadClient().reset();
 		
 		initConfiguration();
 		
 		setLaunchpadListeners();
+		
+		manager.getLightManager().lightUpModeSelectButtons();
 	}
 	
 	private void initConfiguration() {

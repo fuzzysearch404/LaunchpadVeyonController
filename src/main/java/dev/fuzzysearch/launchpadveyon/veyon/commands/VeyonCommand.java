@@ -2,7 +2,8 @@ package dev.fuzzysearch.launchpadveyon.veyon.commands;
 
 import dev.fuzzysearch.launchpadveyon.main.manager.ProgramManager;
 import dev.fuzzysearch.launchpadveyon.models.veyon.Device;
-import dev.fuzzysearch.launchpadveyon.utils.ProcessExecutor;
+import dev.fuzzysearch.launchpadveyon.utils.VeyonProcessExecutor;
+import net.thecodersbreakfast.lp4j.api.Pad;
 
 /**
  * An abstract template for Veyon command creation.
@@ -13,15 +14,18 @@ import dev.fuzzysearch.launchpadveyon.utils.ProcessExecutor;
  */
 public abstract class VeyonCommand {
 	
+	protected Pad pad;
 	protected Device device;
-	protected ProcessExecutor processExecutor;
+	protected VeyonProcessExecutor processExecutor;
 	
 	/**
 	 * Constructs the command for specific device.
 	 * 
+	 * @param pad that triggered the command.
 	 * @param device for command's specific context.
 	 */
-	public VeyonCommand(Device device) {
+	public VeyonCommand(Pad pad, Device device) {
+		this.pad = pad;
 		this.device = device;
 		
 		createProcessExecutor();
@@ -41,6 +45,7 @@ public abstract class VeyonCommand {
 	 */
 	public void execute() {
 		destroyOldProcess();
+		ProgramManager.getInstance().setActiveVeyonDevice(device);
 		launchThread();
 	}
 	

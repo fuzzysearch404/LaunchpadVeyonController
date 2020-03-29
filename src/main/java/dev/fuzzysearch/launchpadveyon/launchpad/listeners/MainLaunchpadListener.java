@@ -1,11 +1,8 @@
 package dev.fuzzysearch.launchpadveyon.launchpad.listeners;
 
+import dev.fuzzysearch.launchpadveyon.launchpad.events.LaunchpadButtonEventDispatcher;
 import dev.fuzzysearch.launchpadveyon.launchpad.events.LaunchpadPadEventDispatcher;
-import dev.fuzzysearch.launchpadveyon.main.manager.ProgramManager;
-import net.thecodersbreakfast.lp4j.api.BackBufferOperation;
 import net.thecodersbreakfast.lp4j.api.Button;
-import net.thecodersbreakfast.lp4j.api.Color;
-import net.thecodersbreakfast.lp4j.api.LaunchpadClient;
 import net.thecodersbreakfast.lp4j.api.LaunchpadListenerAdapter;
 import net.thecodersbreakfast.lp4j.api.Pad;
 import net.thecodersbreakfast.lp4j.midi.MidiLaunchpad;
@@ -20,9 +17,10 @@ import net.thecodersbreakfast.lp4j.midi.MidiLaunchpad;
  */
 public class MainLaunchpadListener extends LaunchpadListenerAdapter {
 	
-	private LaunchpadClient client = ProgramManager.getInstance().getLaunchpadClient();
 	private LaunchpadPadEventDispatcher padEventDispatcher 
 		= new LaunchpadPadEventDispatcher();
+	private LaunchpadButtonEventDispatcher buttonEventDispatcher
+		= new LaunchpadButtonEventDispatcher();
 	
 	public MainLaunchpadListener() {
 
@@ -35,8 +33,7 @@ public class MainLaunchpadListener extends LaunchpadListenerAdapter {
     
     @Override
     public void onButtonPressed(Button button, long timestamp) {
-    	System.out.println("Button pressed: " + button);
-    	client.setButtonLight(button, Color.GREEN, BackBufferOperation.COPY);
+    	buttonEventDispatcher.dispatch(button, timestamp);
     }
 
 }

@@ -29,13 +29,13 @@ public class ProgramManager {
 	
 	// Loaded Veyon devices
 	private ArrayList<Device> loadedDevices;
-	private ArrayList<Device> failedDevices;
 	
 	// Current selected action
 	private VeyonActionType currentAction = DEFAULT_VEYON_ACTION_TYPE;
 	
 	// Veyon's process - e.g. active remote screen view
 	private Process activeVeyonProcess;
+	private Device activeVeyonDevice;
 	
 	// Singleton
 	private static ProgramManager instance = null;
@@ -85,14 +85,6 @@ public class ProgramManager {
 		this.loadedDevices = devices;
 	}
 	
-	public ArrayList<Device> getFailedDevices() {
-		return failedDevices;
-	}
-
-	public void setFailedDevices(ArrayList<Device> failedDevices) {
-		this.failedDevices = failedDevices;
-	}
-	
 	public VeyonActionType getCurrentAction() {
 		return currentAction;
 	}
@@ -109,6 +101,14 @@ public class ProgramManager {
 		this.activeVeyonProcess = activeVeyonProcess;
 	}
 
+	public Device getActiveVeyonDevice() {
+		return activeVeyonDevice;
+	}
+
+	public void setActiveVeyonDevice(Device activeVeyonDevice) {
+		this.activeVeyonDevice = activeVeyonDevice;
+	}
+
 	/**
 	 * Returns {@link Device} mapped by {@link Pad}.
 	 * If the device is not present, returns null.
@@ -119,12 +119,6 @@ public class ProgramManager {
 	public Device getDeviceByPad(Pad pad) {
 		if(loadedDevices != null) {
 			for(Device d: loadedDevices) {
-				if(d.getPad().equals(pad))
-					return d;
-			}
-		}
-		if(failedDevices != null) {
-			for(Device d: failedDevices) {
 				if(d.getPad().equals(pad))
 					return d;
 			}
@@ -144,25 +138,6 @@ public class ProgramManager {
 		if(loadedDevices == null) return false;
 		
 		for(Device d: loadedDevices) {
-			Pad devicePad = d.getPad();
-			if(devicePad.getX() == pad.getX() && devicePad.getY() == pad.getY())
-				return true;
-		}
-		
-		return false;
-	}
-	
-	/**
-	 * Checks if any of the failed {@link Device}
-	 * objects are represented on provided {@link Pad} 
-	 * 
-	 * @param pad to check.
-	 * @return true if pad represents a device (device is represented as failed on the pad)
-	 */
-	public boolean padRepresentsFailedDevice(Pad pad) {
-		if(failedDevices == null) return false;
-		
-		for(Device d: failedDevices) {
 			Pad devicePad = d.getPad();
 			if(devicePad.getX() == pad.getX() && devicePad.getY() == pad.getY())
 				return true;
