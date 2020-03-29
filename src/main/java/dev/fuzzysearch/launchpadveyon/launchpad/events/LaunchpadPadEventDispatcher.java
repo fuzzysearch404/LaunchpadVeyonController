@@ -26,7 +26,7 @@ public class LaunchpadPadEventDispatcher {
         // If there is no mapped Device on the Pad, we return
         if(device == null) return;
         
-        VeyonCommand veyonCommand = getVeyonCommand(device);
+        VeyonCommand veyonCommand = getVeyonCommand(pad, device);
         veyonCommand.execute();
 	}
 
@@ -34,8 +34,8 @@ public class LaunchpadPadEventDispatcher {
 		ProgramManager.getInstance().getLightManager().setSelected(pad);
 	}
 	
-	private VeyonCommand getVeyonCommand(Device device) {
-		return VeyonCommandFactory.getVeyonCommand(device);
+	private VeyonCommand getVeyonCommand(Pad pad, Device device) {
+		return VeyonCommandFactory.getVeyonCommand(pad, device);
 	}
 
 }

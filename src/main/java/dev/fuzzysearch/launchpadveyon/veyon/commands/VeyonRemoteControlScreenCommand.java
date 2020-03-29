@@ -1,9 +1,12 @@
 package dev.fuzzysearch.launchpadveyon.veyon.commands;
 
-import static dev.fuzzysearch.launchpadveyon.config.Configuration.*;
+import static dev.fuzzysearch.launchpadveyon.config.Configuration.VEYON_CLI_COMMAND_EXECUTABLE;
+import static dev.fuzzysearch.launchpadveyon.config.Configuration.VEYON_CLI_REMOTEACCESS_CONTROL;
+import static dev.fuzzysearch.launchpadveyon.config.Configuration.VEYON_CLI_REMOTEACCESS_MODULE;
 
 import dev.fuzzysearch.launchpadveyon.models.veyon.Device;
-import dev.fuzzysearch.launchpadveyon.utils.ProcessExecutor;
+import dev.fuzzysearch.launchpadveyon.utils.VeyonProcessExecutor;
+import net.thecodersbreakfast.lp4j.api.Pad;
 
 /**
  * Remote access module {@link VeyonCommand} to launch
@@ -18,13 +21,13 @@ public class VeyonRemoteControlScreenCommand extends VeyonCommand {
 			+ VEYON_CLI_REMOTEACCESS_MODULE + ' '
 			+ VEYON_CLI_REMOTEACCESS_CONTROL + ' ';
 	
-	public VeyonRemoteControlScreenCommand(Device device) {
-		super(device);
+	public VeyonRemoteControlScreenCommand(Pad pad, Device device) {
+		super(pad, device);
 	}
 	
 	@Override
 	protected void createProcessExecutor() {
-		processExecutor = new ProcessExecutor(commandBody + device.getIpAdreess());
+		processExecutor = new VeyonProcessExecutor(commandBody + device.getIpAdreess(), pad);
 	}
 
 }
