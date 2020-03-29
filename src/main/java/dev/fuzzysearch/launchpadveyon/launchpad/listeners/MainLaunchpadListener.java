@@ -1,5 +1,6 @@
 package dev.fuzzysearch.launchpadveyon.launchpad.listeners;
 
+import dev.fuzzysearch.launchpadveyon.launchpad.events.LaunchpadPadEventDispatcher;
 import dev.fuzzysearch.launchpadveyon.main.manager.ProgramManager;
 import net.thecodersbreakfast.lp4j.api.BackBufferOperation;
 import net.thecodersbreakfast.lp4j.api.Button;
@@ -7,10 +8,21 @@ import net.thecodersbreakfast.lp4j.api.Color;
 import net.thecodersbreakfast.lp4j.api.LaunchpadClient;
 import net.thecodersbreakfast.lp4j.api.LaunchpadListenerAdapter;
 import net.thecodersbreakfast.lp4j.api.Pad;
+import net.thecodersbreakfast.lp4j.midi.MidiLaunchpad;
 
+/**
+ * Implements {@link LaunchpadListenerAdapter} that
+ * allows to listen {@link MidiLaunchpad}'s events,
+ * e.g. when {@link Button}s or {@link Pad}s get pressed or released.
+ * 
+ * @author Roberts Ziediņš
+ *
+ */
 public class MainLaunchpadListener extends LaunchpadListenerAdapter {
 	
 	private LaunchpadClient client = ProgramManager.getInstance().getLaunchpadClient();
+	private LaunchpadPadEventDispatcher padEventDispatcher 
+		= new LaunchpadPadEventDispatcher();
 	
 	public MainLaunchpadListener() {
 
@@ -18,8 +30,7 @@ public class MainLaunchpadListener extends LaunchpadListenerAdapter {
 
     @Override
     public void onPadPressed(Pad pad, long timestamp) {
-        System.out.println("Pad pressed : " + pad);
-        ProgramManager.getInstance().getLightManager().setSelected(pad);
+        padEventDispatcher.dispatch(pad, timestamp);
     }
     
     @Override

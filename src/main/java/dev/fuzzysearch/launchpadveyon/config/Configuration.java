@@ -1,5 +1,6 @@
 package dev.fuzzysearch.launchpadveyon.config;
 
+import dev.fuzzysearch.launchpadveyon.veyon.VeyonActionType;
 import net.thecodersbreakfast.lp4j.api.Color;
 
 /**
@@ -36,6 +37,15 @@ public final class Configuration {
 	public final static Color COLOR_DEVICE_LOADED = Color.AMBER;
 	public final static Color COLOR_DEVICE_ACTIVE = Color.GREEN;
 	public final static Color COLOR_DEVICE_FAILED = Color.RED;
+	
+	// Veyon setup
+	public final static VeyonActionType DEFAULT_VEYON_ACTION_TYPE = VeyonActionType.SCREEN_VIEW;
+	
+	public final static String VEYON_CLI_COMMAND_EXECUTABLE = "veyon-cli";
+	
+	public final static String VEYON_CLI_REMOTEACCESS_MODULE = "remoteaccess";
+	public final static String VEYON_CLI_REMOTEACCESS_VIEW = "view";
+	public final static String VEYON_CLI_REMOTEACCESS_CONTROL = "control";
 	
 
 }
