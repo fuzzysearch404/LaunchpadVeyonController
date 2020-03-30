@@ -2,13 +2,16 @@ package dev.fuzzysearch.launchpadveyon.launchpad.control;
 
 import static dev.fuzzysearch.launchpadveyon.config.Configuration.*;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 import dev.fuzzysearch.launchpadveyon.main.manager.ProgramManager;
 import dev.fuzzysearch.launchpadveyon.models.veyon.Device;
+import dev.fuzzysearch.launchpadveyon.utils.VeyonProcessExecutor;
 import dev.fuzzysearch.launchpadveyon.veyon.VeyonActionType;
 import dev.fuzzysearch.launchpadveyon.veyon.commands.VeyonCommand;
 import net.thecodersbreakfast.lp4j.api.BackBufferOperation;
+import net.thecodersbreakfast.lp4j.api.Brightness;
 import net.thecodersbreakfast.lp4j.api.Button;
 import net.thecodersbreakfast.lp4j.api.Color;
 import net.thecodersbreakfast.lp4j.api.Launchpad;
@@ -19,7 +22,7 @@ import net.thecodersbreakfast.lp4j.midi.MidiLaunchpad;
 /**
  * Class for managing {@link MidiLaunchpad}'s lights.
  *
- * @author Roberts ZiediÅ†Å¡
+ * @author Roberts Ziediņš
  *
  */
 public class LaunchpadLightManager {
@@ -27,6 +30,7 @@ public class LaunchpadLightManager {
 	private HashMap<Pad, Color> padsColors;
 	private HashMap<Button, Color> buttonsColors;
 	private Pad selectedPad;
+	private int brightness;
 	
 	public LaunchpadLightManager() {
 		initPadsMap();
@@ -42,10 +46,16 @@ public class LaunchpadLightManager {
 	 * to speed up this process by acquiring {@link LaunchpadClient}
 	 * only once.
 	 */
-	public void lightUpByDevices() {
-		LaunchpadClient client = ProgramManager.getInstance().getLaunchpadClient();
+	public void lightUpPadsByDevices() {
+		ProgramManager manager = ProgramManager.getInstance();
+		LaunchpadClient client = manager.getLaunchpadClient();
+		ArrayList<Device> loadedDevices = manager.getLoadedDevices();
 		
-		for(Device d: ProgramManager.getInstance().getLoadedDevices()) {
+		// Loaded devices are not configurated - cancel.
+		if(loadedDevices == null) 
+			return;
+		
+		for(Device d: loadedDevices) {
 			int x = d.getPad().getX();
 			int y = d.getPad().getY();
 			Pad pad = Pad.at(x, y);
@@ -94,18 +104,31 @@ public class LaunchpadLightManager {
 	 * represents that the selected pad is active.
 	 */
 	public void setSelected(Pad pad) {
+		ProgramManager manager = ProgramManager.getInstance();
+		
+		// First set previous selected pad to old color
 		if(selectedPad != null) {
-			if(ProgramManager.getInstance().padRepresentsLoadedDevice(selectedPad)) {
+			if(manager.padRepresentsLoadedDevice(selectedPad)) {
 				setPadLight(selectedPad, COLOR_DEVICE_LOADED, BackBufferOperation.COPY);
 			}
-			else {
-				setPadLight(selectedPad, COLOR_DEFAULT, BackBufferOperation.COPY);
-			}
+		}
+		// Then set the color of the new selected pad
+		if(manager.padRepresentsLoadedDevice(pad)) {
+			selectedPad = pad;
+			setPadLight(pad, COLOR_DEVICE_ACTIVE, BackBufferOperation.COPY);
 		}
 		
-		selectedPad = pad;
-		setPadLight(pad, COLOR_DEVICE_ACTIVE, BackBufferOperation.COPY);
-		
+	}
+	
+	/**
+	 * Sets {@link #selectedPad} to null.
+	 * This is useful if {@link VeyonProcessExecutor}
+	 * sets the {@link Pad} light as "device failed",
+	 * then the next pressed pad does not clear the
+	 * light color, that represents the error.
+	 */
+	public void removeSelectedPad() {
+		selectedPad = null;
 	}
 	
 	/**
@@ -124,6 +147,52 @@ public class LaunchpadLightManager {
 	public void setButtonLight(Button button, Color color, BackBufferOperation operation) {
 		ProgramManager.getInstance().getLaunchpadClient().setButtonLight(button, color, operation);
 		buttonsColors.replace(button, color);
+	}
+	
+	/**
+	 * Sets the {@link MidiLaunchpad}'s {@link Brightness}
+	 * and registers the value of light intensity
+	 * in this class.
+	 * 
+	 * @param newBrightness - value of {@link Brightness}
+	 */
+	private void setBrigtness(int newBrightness) {
+		if(newBrightness >= Brightness.MAX_VALUE)
+			this.brightness = Brightness.MAX_VALUE;
+		else if(newBrightness <= Brightness.MIN_VALUE)
+			this.brightness = Brightness.MIN_VALUE;
+		else
+			this.brightness = newBrightness;
+		
+		ProgramManager.getInstance().getLaunchpadClient().setBrightness(Brightness.of(brightness));
+	}
+	
+	/**
+	 * Sets the {@link MidiLaunchpad}'s 
+	 * initial {@link Brightness} at the program's 
+	 * startup.
+	 */
+	public void initBrightness() {
+		setBrigtness(DEFAULT_LIGHT_BRIGHTNESS);
+	}
+	
+	
+	/**
+	 * Increments the {@link MidiLaunchpad}'s 
+	 * {@link Brightness} value if possible. 
+	 * Otherwise sets to the max value.
+	 */
+	public void setBrigtnessUp() {
+		setBrigtness(brightness + 1);
+	}
+	
+	/**
+	 * Lowers the {@link MidiLaunchpad}'s 
+	 * {@link Brightness} value if possible. 
+	 * Otherwise sets to the min value.
+	 */
+	public void setBrigtnessDown() {
+		setBrigtness(brightness - 1);
 	}
 	
 	private void initButtonMap() {

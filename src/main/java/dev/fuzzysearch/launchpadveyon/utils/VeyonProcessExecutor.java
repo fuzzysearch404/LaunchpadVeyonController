@@ -90,7 +90,9 @@ public class VeyonProcessExecutor implements Runnable {
 		ProgramManager manager = ProgramManager.getInstance();
 		LaunchpadLightManager lightManager = manager.getLightManager();
 		
+		
 		if(processOutput.equals(VEYON_CLI_FAIL)) {
+			lightManager.removeSelectedPad();
 			
 			lightManager.blinkPad(pad, 
 					COLOR_DEVICE_FAILED, COLOR_DEVICE_LOADED, COLOR_DEVICE_FAILED,

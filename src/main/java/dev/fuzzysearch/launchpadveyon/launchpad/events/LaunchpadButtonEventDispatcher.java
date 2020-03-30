@@ -1,9 +1,6 @@
 package dev.fuzzysearch.launchpadveyon.launchpad.events;
 
-import static dev.fuzzysearch.launchpadveyon.config.Configuration.VEYON_REMOTEACCESS_CONTROL_BUTTON;
-import static dev.fuzzysearch.launchpadveyon.config.Configuration.VEYON_REMOTEACCESS_VIEW_BUTTON;
-import static dev.fuzzysearch.launchpadveyon.config.Configuration.VEYON_REMOTEACCESS_STOP_BUTTON;
-import static dev.fuzzysearch.launchpadveyon.config.Configuration.COLOR_DEVICE_LOADED;
+import static dev.fuzzysearch.launchpadveyon.config.Configuration.*;
 
 import dev.fuzzysearch.launchpadveyon.main.manager.ProgramManager;
 import dev.fuzzysearch.launchpadveyon.models.veyon.Device;
@@ -32,6 +29,7 @@ public class LaunchpadButtonEventDispatcher {
 		
 		switchVeyonModes(button);
 		stopRemoteAccess(button);
+		manageBrightness(button);
 	}
 	
 	/**
@@ -114,8 +112,19 @@ public class LaunchpadButtonEventDispatcher {
 				process.destroy();
 			
 			// Finally set Pad light back to loaded.
-			Pad pad = manager.getActiveVeyonDevice().getPad();
-			manager.getLightManager().setPadLight(pad, COLOR_DEVICE_LOADED, BackBufferOperation.COPY);
+			Device activeDevice = manager.getActiveVeyonDevice();
+			if(activeDevice != null) {
+				Pad pad = activeDevice.getPad();
+				manager.getLightManager().setPadLight(pad, COLOR_DEVICE_LOADED, BackBufferOperation.COPY);
+			}
+		}
+	}
+	
+	private void manageBrightness(Button button) {
+		if(button.equals(LAUNCHPAD_BRIGHTNESS_UP))
+			ProgramManager.getInstance().getLightManager().setBrigtnessUp();
+		else if(button.equals(LAUNCHPAD_BRIGHTNESS_DOWN)) {
+			ProgramManager.getInstance().getLightManager().setBrigtnessDown();
 		}
 	}
 }

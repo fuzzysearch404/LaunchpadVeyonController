@@ -62,8 +62,6 @@ public class LaunchpadConfigParser {
 		
 		if(deviceList.isEmpty())
 			throw new ProgramUnconfiguredException("The configuration file was parsed, but no devices where configured.");
-		
-		ProgramManager.getInstance().getLightManager().lightUpByDevices();
 	}
 
 	/**
