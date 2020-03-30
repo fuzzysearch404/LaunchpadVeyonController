@@ -5,7 +5,6 @@ import static dev.fuzzysearch.launchpadveyon.config.Configuration.*;
 import dev.fuzzysearch.launchpadveyon.main.manager.ProgramManager;
 import dev.fuzzysearch.launchpadveyon.models.veyon.Device;
 import dev.fuzzysearch.launchpadveyon.veyon.VeyonActionType;
-import dev.fuzzysearch.launchpadveyon.veyon.commands.VeyonCommand;
 import dev.fuzzysearch.launchpadveyon.veyon.commands.VeyonCommandFactory;
 import dev.fuzzysearch.launchpadveyon.veyon.commands.VeyonRemoteControlScreenCommand;
 import dev.fuzzysearch.launchpadveyon.veyon.commands.VeyonViewScreenCommand;
@@ -27,22 +26,25 @@ public class LaunchpadButtonEventDispatcher {
 	public void dispatch(Button button, long timestamp) {
 		System.out.println("[" + timestamp + "] Pad pressed event : " + button);
 		
-		switchVeyonModes(button);
-		stopRemoteAccess(button);
-		manageBrightness(button);
-	}
-	
-	/**
-	 * Switches between {@link VeyonCommand} types
-	 * to be executed.
-	 * 
-	 * @param button to check if it is mapped for a command.
-	 */
-	private void switchVeyonModes(Button button) {
+		 /* Switches between VeyonCommand types
+		 * to be executed.
+		 */
 		if(button.equals(VEYON_REMOTEACCESS_VIEW_BUTTON))
 			switchToRemoteAccessView();
 		else if(button.equals(VEYON_REMOTEACCESS_CONTROL_BUTTON))
 			switchToRemoteAccessControl();
+		
+		// Stop current remote access button
+		else if(button.equals(VEYON_REMOTEACCESS_STOP_BUTTON)) {
+			stopRemoteAccess();
+		}
+		
+		// Brightness buttons
+		else if(button.equals(LAUNCHPAD_BRIGHTNESS_UP))
+			ProgramManager.getInstance().getLightManager().setBrigtnessUp();
+		else if(button.equals(LAUNCHPAD_BRIGHTNESS_DOWN)) {
+			ProgramManager.getInstance().getLightManager().setBrigtnessDown();
+		}
 	}
 	
 	/**
@@ -99,32 +101,21 @@ public class LaunchpadButtonEventDispatcher {
 	
 	/**
 	 * Kills the current active Veyon process.
-	 * 
-	 * @param button to check if it is mapped for this operation.
 	 */
-	private void stopRemoteAccess(Button button) {
-		if(button.equals(VEYON_REMOTEACCESS_STOP_BUTTON)) {
-			ProgramManager manager = ProgramManager.getInstance();
+	private void stopRemoteAccess() {
+		ProgramManager manager = ProgramManager.getInstance();
 			
-			// Destroy the Veyon process.
-			Process process = manager.getActiveVeyonProcess();
-			if(process != null)
-				process.destroy();
+		// Destroy the Veyon process.
+		Process process = manager.getActiveVeyonProcess();
+		if(process != null)
+			process.destroy();
 			
-			// Finally set Pad light back to loaded.
-			Device activeDevice = manager.getActiveVeyonDevice();
-			if(activeDevice != null) {
-				Pad pad = activeDevice.getPad();
-				manager.getLightManager().setPadLight(pad, COLOR_DEVICE_LOADED, BackBufferOperation.COPY);
-			}
+		// Finally set Pad light back to loaded.
+		Device activeDevice = manager.getActiveVeyonDevice();
+		if(activeDevice != null) {
+			Pad pad = activeDevice.getPad();
+			manager.getLightManager().setPadLight(pad, COLOR_DEVICE_LOADED, BackBufferOperation.COPY);
 		}
 	}
-	
-	private void manageBrightness(Button button) {
-		if(button.equals(LAUNCHPAD_BRIGHTNESS_UP))
-			ProgramManager.getInstance().getLightManager().setBrigtnessUp();
-		else if(button.equals(LAUNCHPAD_BRIGHTNESS_DOWN)) {
-			ProgramManager.getInstance().getLightManager().setBrigtnessDown();
-		}
-	}
+
 }
