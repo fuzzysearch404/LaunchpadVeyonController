@@ -44,13 +44,18 @@ public final class Configuration {
 	public final static Color COLOR_ACTION_CONTEXT_STOP = Color.of(2, 0);
 	
 	// Launchpad interface settings
-	public final static int DEFAULT_ERROR_BLINK_MILLISECONDS = 440;
-	public final static int DEFAULT_ERROR_BLINK_TIMES = 4;
+	public final static int DEFAULT_LIGHT_BRIGHTNESS = 13;
+	
+	public final static int DEFAULT_ERROR_BLINK_MILLISECONDS = 350;
+	public final static int DEFAULT_ERROR_BLINK_TIMES = 3;
 	
 	// Launchpad button mappings
 	public final static Button VEYON_REMOTEACCESS_VIEW_BUTTON = Button.USER_1;
 	public final static Button VEYON_REMOTEACCESS_CONTROL_BUTTON = Button.USER_2;
 	public final static Button VEYON_REMOTEACCESS_STOP_BUTTON = Button.STOP;
+	
+	public final static Button LAUNCHPAD_BRIGHTNESS_UP = Button.UP;
+	public final static Button LAUNCHPAD_BRIGHTNESS_DOWN = Button.DOWN;
 	
 	// Veyon setup
 	public final static VeyonActionType DEFAULT_VEYON_ACTION_TYPE = VeyonActionType.SCREEN_VIEW;

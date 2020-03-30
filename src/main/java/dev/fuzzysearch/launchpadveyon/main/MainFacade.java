@@ -3,6 +3,7 @@ package dev.fuzzysearch.launchpadveyon.main;
 import javax.sound.midi.MidiUnavailableException;
 
 import dev.fuzzysearch.launchpadveyon.exceptions.config.ProgramUnconfiguredException;
+import dev.fuzzysearch.launchpadveyon.launchpad.control.LaunchpadLightManager;
 import dev.fuzzysearch.launchpadveyon.launchpad.listeners.MainLaunchpadListener;
 import dev.fuzzysearch.launchpadveyon.main.manager.ProgramManager;
 import net.thecodersbreakfast.lp4j.midi.MidiDeviceConfiguration;
@@ -14,6 +15,7 @@ public class MainFacade {
 	public void run() throws MidiUnavailableException {
 		MidiLaunchpad launchpad = new MidiLaunchpad(MidiDeviceConfiguration.autodetect());
 		ProgramManager manager = ProgramManager.getInstance(launchpad);
+		LaunchpadLightManager lightManager = manager.getLightManager();
 		
 		// Resets the Launchpad's buffers, so the lights turn off if there were on before.
 		manager.getLaunchpadClient().reset();
@@ -22,7 +24,9 @@ public class MainFacade {
 		
 		setLaunchpadListeners();
 		
-		manager.getLightManager().lightUpModeSelectButtons();
+		lightManager.lightUpModeSelectButtons();
+		lightManager.lightUpPadsByDevices();
+		lightManager.initBrightness();
 	}
 	
 	private void initConfiguration() {
