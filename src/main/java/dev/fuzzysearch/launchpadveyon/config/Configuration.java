@@ -15,60 +15,200 @@ import net.thecodersbreakfast.lp4j.api.Color;
  */
 public final class Configuration {
 	
-	// Launchpad 
-	public final static int LAUNCHPAD_PAD_MIN_X = 0;
-	public final static int LAUNCHPAD_PAD_MIN_Y = 0;
-	
-	public final static int LAUNCHPAD_PAD_MAX_X = 7;
-	public final static int LAUNCHPAD_PAD_MAX_Y = 7;
-	
-	public final static int LAUNCHPAD_PAD_X_ROWS = LAUNCHPAD_PAD_MAX_X + 1;
-	public final static int LAUNCHPAD_PAD_Y_COLLUMNS = LAUNCHPAD_PAD_MAX_Y + 1;
-	
-	// Configuration files
+	/*
+	 * ###########################################################################
+	 * ###########################################################################
+	 *                           CONFIGURATION FILES
+	 * ###########################################################################
+	 * ###########################################################################
+	 *
+	 * Description: Settings related to user configuration files.
+	 */
+
+	// Default directory for the configuration file
 	public final static String CONFIG_FILE_DEFAULT_FILE_DIRECTORY = "./files/";
+	// Default file name for the configuration file
 	public final static String CONFIG_FILE_DEFAULT_FILE_NAME = "Config.json";
 	
+	// Default full path for the configuration file
 	public final static String CONFIG_FILE_DEFAULT_FULL_FILE_PATH = 
 			CONFIG_FILE_DEFAULT_FILE_DIRECTORY + CONFIG_FILE_DEFAULT_FILE_NAME;
 	
-	// Launchpad interface colors
+	
+	/*
+	 * ###########################################################################
+	 * ###########################################################################
+	 *                          	   LAUNCHPAD
+	 * ###########################################################################
+	 * ###########################################################################
+	 */
+	
+	/*
+	 * ###########################################################################
+	 *                          	    LAYOUT
+	 * ###########################################################################
+	 * Description: Settings related to Launchpad's layout.
+	 * 
+	 * 
+	 *                  Top buttons
+	 * 	     +---+---+---+---+---+---+---+---+ 
+	 *       |   |   |   |   |   |   |   |	 |
+	 *       +---+---+---+---+---+---+---+---+ 
+	 *         
+	 *                     Pads
+	 *         0   1   2   3   4   5   6   7   X ->
+	 *       +---+---+---+---+---+---+---+---+  +---+
+	 *     0 |   |   |   |   |   |   |   |   |  | 	|
+	 *       +---+---+---+---+---+---+---+---+  +---+
+	 *     1 |   |   |   |   |   |   |   |   |  | 	|
+	 *       +---+---+---+---+---+---+---+---+  +---+
+	 *     2 |   |   |   |   |   |   |   |   |  | 	|
+	 *       +---+---+---+---+---+---+---+---+  +---+
+	 *     3 |   |   |   |   |   |   |   |   |  | 	|
+	 *       +---+---+---+---+---+---+---+---+  +---+
+	 *     4 |   |   |   |   |   |   |   |   |  | 	|
+	 *       +---+---+---+---+---+---+---+---+  +---+
+	 *     5 |   |   |   |   |   |   |   |   |  | 	|
+	 *       +---+---+---+---+---+---+---+---+  +---+
+	 *     6 |   |   |   |   |   |   |   |   |  | 	|
+	 *       +---+---+---+---+---+---+---+---+  +---+
+	 *     7 |   |   |   |   |   |   |   |   |  | 	|
+	 *       +---+---+---+---+---+---+---+---+  +---+
+	 *     Y                             Right side buttons  
+	 *     |
+	 *     ˅ 
+	 */
+	
+	
+	// Lowest X index of a pad
+	public final static int LAUNCHPAD_PAD_MIN_X = 0;
+	// Lowest X index of a pad
+	public final static int LAUNCHPAD_PAD_MIN_Y = 0;
+	
+	// Highest X index of a pad
+	public final static int LAUNCHPAD_PAD_MAX_X = 7;
+	// Highest Y index of a pad
+	public final static int LAUNCHPAD_PAD_MAX_Y = 7;
+	
+	// Total rows
+	public final static int LAUNCHPAD_PAD_X_ROWS = LAUNCHPAD_PAD_MAX_X + 1;
+	// Total columns
+	public final static int LAUNCHPAD_PAD_Y_COLLUMNS = LAUNCHPAD_PAD_MAX_Y + 1;
+	
+	/*
+	 * ###########################################################################
+	 *                        COLOR AND LIGHTING SETTINGS
+	 * ###########################################################################
+	 * 
+	 * Description: Settings for program's context visualization on the Launchpad.
+	 */ 
+	
+	// Black color (no color)
 	public final static Color COLOR_DEFAULT = Color.BLACK;
 	
+	// DEVICE PADS
+	
+	// Shows that the Veyon device is loaded on the Launchpad
 	public final static Color COLOR_DEVICE_LOADED = Color.AMBER;
+	// Shows that the Veyon device is currently selected
 	public final static Color COLOR_DEVICE_ACTIVE = Color.GREEN;
+	// Shows that the Veyon device was previously not accessible
 	public final static Color COLOR_DEVICE_FAILED = Color.RED;
 	
+	// MENU BUTTONS CONTEXT
+	
+	// Shows that the action is not selected
 	public final static Color COLOR_ACTION_CONTEXT_INACTIVE = Color.ORANGE;
+	// Shows that the action is selected
 	public final static Color COLOR_ACTION_CONTEXT_ACTIVE = Color.GREEN;
+	// Color for remote access stop button
 	public final static Color COLOR_ACTION_CONTEXT_STOP = Color.of(2, 0);
 	
-	// Launchpad interface settings
+	// BRIGHTNESS
+	
+	// Default Launchpad's brightness intensity
 	public final static int DEFAULT_LIGHT_BRIGHTNESS = 13;
 	
+	// Default value for the error indication blinking delay (min. - 200)
 	public final static int DEFAULT_ERROR_BLINK_MILLISECONDS = 350;
+	// Default value for the error indication blinking iterations (min. - 1)
 	public final static int DEFAULT_ERROR_BLINK_TIMES = 3;
 	
-	// Launchpad button mappings
+	/*
+	 * ###########################################################################
+	 *                        CONTEXT BUTTON MAPPINGS
+	 * ###########################################################################
+	 * 
+	 * Description: Settings for Launchpad's button mappings for certain contexts.
+	 */ 
+	
+	// VEYON REMOTE ACCESS
+	
+	// Button for switching to "view" mode
 	public final static Button VEYON_REMOTEACCESS_VIEW_BUTTON = Button.USER_1;
+	// Button for switching to "control" mode
 	public final static Button VEYON_REMOTEACCESS_CONTROL_BUTTON = Button.USER_2;
+	// Button for stopping current remote access
 	public final static Button VEYON_REMOTEACCESS_STOP_BUTTON = Button.STOP;
 	
+	// BRIGHTNESS 
+	
+	// Button for increasing light brightness on the Launchpad
 	public final static Button LAUNCHPAD_BRIGHTNESS_UP = Button.UP;
+	// Button for decreasing light brightness on the Launchpad
 	public final static Button LAUNCHPAD_BRIGHTNESS_DOWN = Button.DOWN;
 	
-	// Veyon setup
+	/*
+	 * ###########################################################################
+	 * ###########################################################################
+	 *                                 VEYON
+	 * ###########################################################################
+	 * ###########################################################################
+	 *
+	 * Description: Settings related to program's integration with Veyon.
+	 */
+	
+	// Default command context type
 	public final static VeyonActionType DEFAULT_VEYON_ACTION_TYPE = VeyonActionType.SCREEN_VIEW;
 	
-	// Veyon CLI commands setup
+	/*
+	 * ###########################################################################
+	 *                       		CLI COMMNADS
+	 * ###########################################################################
+	 * 
+	 * Description: Settings for defining Veyon's command line interface commands.
+	 */ 
+	
+	// Main executable name
 	public final static String VEYON_CLI_COMMAND_EXECUTABLE = "veyon-cli";
 	
+	// Help module
+	public final static String VEYON_CLI_HELP = "help";
+	
+	// Remote access module
 	public final static String VEYON_CLI_REMOTEACCESS_MODULE = "remoteaccess";
+	// Remote access view mode - to view a remote computer's screen
 	public final static String VEYON_CLI_REMOTEACCESS_VIEW = "view";
+	// Remote access control mode - to control a remote computer's screen
 	public final static String VEYON_CLI_REMOTEACCESS_CONTROL = "control";
 	
-	// Veyon CLI common command output texts
+	/*
+	 * ###########################################################################
+	 *                           COMMNON COMMAND OUTPUTS
+	 * ###########################################################################
+	 * 
+	 * Description: Defines what Veyon's command interface commonly returns
+	 * when the commands are executed.
+	 */
+	
+	/*
+	 *  This is what the help command's output usually contains, 
+	 *  it is used to check if Veyon's CLI is available on the current environment
+	 */
+	public final static String VEYON_CLI_HELP_SUCCESSFUL_CONTAINS = "Available modules:";
+	// Output if the process failed
 	public final static String VEYON_CLI_FAIL = "[FAIL]";
+	// Output if the process was successful
 	public final static String VEYON_CLI_OK = "[OK]";
 	
 

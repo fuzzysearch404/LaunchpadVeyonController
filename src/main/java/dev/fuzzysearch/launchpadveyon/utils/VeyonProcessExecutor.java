@@ -18,6 +18,8 @@ import net.thecodersbreakfast.lp4j.midi.MidiLaunchpad;
  * Includes {@link CountDownLatch} to make sure
  * that {@link Process} is only accessible 
  * after it is created.
+ * After the execution manages {@link MidiLaunchpad}'s
+ * lights to visualize the results.
  *
  * @author Roberts Ziediņš
 */
@@ -57,7 +59,6 @@ public class VeyonProcessExecutor implements Runnable {
 		String fullOutput = "";
 		
 		while ((line=buf.readLine()) != null) {
-			System.out.println(line);
 			fullOutput += line;
 		}
 
