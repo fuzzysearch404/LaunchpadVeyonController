@@ -76,7 +76,9 @@ public class LaunchpadConfigParser {
 	 * 
 	 * row_number (1-7):
 	 * 		collumn_number (1-7):
-	 * 			-ip: The IP address of the device.
+	 * 			-ip: The IP address
+	 * 			(and optionally the TCP port) 
+	 * 			or name of the device.
 	 * 
 	 * Configuration file example:
 	 * 

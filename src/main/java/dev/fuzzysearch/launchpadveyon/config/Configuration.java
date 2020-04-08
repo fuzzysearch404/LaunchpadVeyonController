@@ -173,7 +173,7 @@ public final class Configuration {
 	
 	/*
 	 * ###########################################################################
-	 *                       		CLI COMMNADS
+	 *                               CLI COMMNADS
 	 * ###########################################################################
 	 * 
 	 * Description: Settings for defining Veyon's command line interface commands.
