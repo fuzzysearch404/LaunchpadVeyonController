@@ -1,4 +1,4 @@
-package dev.fuzzysearch.launchpadveyon.utils;
+package dev.fuzzysearch.launchpadveyon.veyon.utils;
 
 import static dev.fuzzysearch.launchpadveyon.config.Configuration.*;
 
@@ -96,14 +96,14 @@ public class VeyonProcessExecutor implements Runnable {
 			lightManager.removeSelectedPad();
 			
 			lightManager.blinkPad(pad, 
-					COLOR_DEVICE_FAILED, COLOR_DEVICE_LOADED, COLOR_DEVICE_FAILED,
+					PHYSICAL_LP_COLOR_DEVICE_FAILED, PHYSICAL_LP_COLOR_DEVICE_LOADED, PHYSICAL_LP_COLOR_DEVICE_FAILED,
 					DEFAULT_ERROR_BLINK_TIMES, DEFAULT_ERROR_BLINK_MILLISECONDS);
 		
-			lightManager.setPadLight(pad, COLOR_DEVICE_FAILED, BackBufferOperation.COPY);
+			lightManager.setPadLight(pad, PHYSICAL_LP_COLOR_DEVICE_FAILED, BackBufferOperation.COPY);
 		}
 		else if(processOutput.equals(VEYON_CLI_OK)) {
 			manager.getLightManager().setPadLight(
-					pad, COLOR_DEVICE_LOADED, BackBufferOperation.COPY);
+					pad, PHYSICAL_LP_COLOR_DEVICE_LOADED, BackBufferOperation.COPY);
 		}
 	}
 	

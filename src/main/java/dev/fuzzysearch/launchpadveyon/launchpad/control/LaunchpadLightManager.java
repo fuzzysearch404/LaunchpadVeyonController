@@ -6,10 +6,10 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import dev.fuzzysearch.launchpadveyon.main.manager.ProgramManager;
-import dev.fuzzysearch.launchpadveyon.models.veyon.Device;
-import dev.fuzzysearch.launchpadveyon.utils.VeyonProcessExecutor;
 import dev.fuzzysearch.launchpadveyon.veyon.VeyonActionType;
 import dev.fuzzysearch.launchpadveyon.veyon.commands.VeyonCommand;
+import dev.fuzzysearch.launchpadveyon.veyon.models.Device;
+import dev.fuzzysearch.launchpadveyon.veyon.utils.VeyonProcessExecutor;
 import net.thecodersbreakfast.lp4j.api.BackBufferOperation;
 import net.thecodersbreakfast.lp4j.api.Brightness;
 import net.thecodersbreakfast.lp4j.api.Button;
@@ -60,8 +60,8 @@ public class LaunchpadLightManager {
 			int y = d.getPad().getY();
 			Pad pad = Pad.at(x, y);
 			
-			client.setPadLight(pad, COLOR_DEVICE_LOADED, BackBufferOperation.COPY);
-			padsColors.replace(pad, COLOR_DEVICE_LOADED);
+			client.setPadLight(pad, PHYSICAL_LP_COLOR_DEVICE_LOADED, BackBufferOperation.COPY);
+			padsColors.replace(pad, PHYSICAL_LP_COLOR_DEVICE_LOADED);
 		}
 		
 	}
@@ -70,32 +70,32 @@ public class LaunchpadLightManager {
 	 * Lights up {@link Button} lights on {@link Launchpad}
 	 * that are indicating switching between {@link VeyonCommand}s.
 	 */
-	public void lightUpModeSelectButtons() {
+	public void lightUpContextSwitchButtons() {
 		ProgramManager manager = ProgramManager.getInstance();
 		LaunchpadClient client = manager.getLaunchpadClient();
 		VeyonActionType activeType = manager.getCurrentAction();
 		
 		if(activeType.equals(VeyonActionType.SCREEN_VIEW)) {
-			client.setButtonLight(VEYON_REMOTEACCESS_VIEW_BUTTON, COLOR_ACTION_CONTEXT_ACTIVE
+			client.setButtonLight(VEYON_REMOTEACCESS_VIEW_BUTTON, PHYSICAL_LP_COLOR_ACTION_CONTEXT_ACTIVE
 					,BackBufferOperation.COPY);
-			buttonsColors.replace(VEYON_REMOTEACCESS_VIEW_BUTTON, COLOR_ACTION_CONTEXT_ACTIVE);
+			buttonsColors.replace(VEYON_REMOTEACCESS_VIEW_BUTTON, PHYSICAL_LP_COLOR_ACTION_CONTEXT_ACTIVE);
 			
 			client.setButtonLight(VEYON_REMOTEACCESS_CONTROL_BUTTON, 
-					COLOR_ACTION_CONTEXT_INACTIVE, BackBufferOperation.COPY);
-			buttonsColors.replace(VEYON_REMOTEACCESS_CONTROL_BUTTON, COLOR_ACTION_CONTEXT_INACTIVE);
+					PHYSICAL_LP_COLOR_ACTION_CONTEXT_INACTIVE, BackBufferOperation.COPY);
+			buttonsColors.replace(VEYON_REMOTEACCESS_CONTROL_BUTTON, PHYSICAL_LP_COLOR_ACTION_CONTEXT_INACTIVE);
 		} 
 		else if(activeType.equals(VeyonActionType.SCREEN_CONTROL)) {
 			client.setButtonLight(VEYON_REMOTEACCESS_CONTROL_BUTTON, 
-					COLOR_ACTION_CONTEXT_ACTIVE, BackBufferOperation.COPY);
-			buttonsColors.replace(VEYON_REMOTEACCESS_CONTROL_BUTTON, COLOR_ACTION_CONTEXT_ACTIVE);
+					PHYSICAL_LP_COLOR_ACTION_CONTEXT_ACTIVE, BackBufferOperation.COPY);
+			buttonsColors.replace(VEYON_REMOTEACCESS_CONTROL_BUTTON, PHYSICAL_LP_COLOR_ACTION_CONTEXT_ACTIVE);
 			
-			client.setButtonLight(VEYON_REMOTEACCESS_VIEW_BUTTON, COLOR_ACTION_CONTEXT_INACTIVE
+			client.setButtonLight(VEYON_REMOTEACCESS_VIEW_BUTTON, PHYSICAL_LP_COLOR_ACTION_CONTEXT_INACTIVE
 					,BackBufferOperation.COPY);
-			buttonsColors.replace(VEYON_REMOTEACCESS_VIEW_BUTTON, COLOR_ACTION_CONTEXT_INACTIVE);
+			buttonsColors.replace(VEYON_REMOTEACCESS_VIEW_BUTTON, PHYSICAL_LP_COLOR_ACTION_CONTEXT_INACTIVE);
 		}
 		
-		client.setButtonLight(VEYON_REMOTEACCESS_STOP_BUTTON, COLOR_ACTION_CONTEXT_STOP, BackBufferOperation.COPY);
-		buttonsColors.replace(VEYON_REMOTEACCESS_STOP_BUTTON, COLOR_ACTION_CONTEXT_STOP);
+		client.setButtonLight(VEYON_REMOTEACCESS_STOP_BUTTON, PHYSICAL_LP_COLOR_ACTION_CONTEXT_STOP, BackBufferOperation.COPY);
+		buttonsColors.replace(VEYON_REMOTEACCESS_STOP_BUTTON, PHYSICAL_LP_COLOR_ACTION_CONTEXT_STOP);
 		
 	}
 	
@@ -109,13 +109,13 @@ public class LaunchpadLightManager {
 		// First set previous selected pad to old color
 		if(selectedPad != null) {
 			if(manager.padRepresentsLoadedDevice(selectedPad)) {
-				setPadLight(selectedPad, COLOR_DEVICE_LOADED, BackBufferOperation.COPY);
+				setPadLight(selectedPad, PHYSICAL_LP_COLOR_DEVICE_LOADED, BackBufferOperation.COPY);
 			}
 		}
 		// Then set the color of the new selected pad
 		if(manager.padRepresentsLoadedDevice(pad)) {
 			selectedPad = pad;
-			setPadLight(pad, COLOR_DEVICE_ACTIVE, BackBufferOperation.COPY);
+			setPadLight(pad, PHYSICAL_LP_COLOR_DEVICE_ACTIVE, BackBufferOperation.COPY);
 		}
 		
 	}
@@ -173,7 +173,7 @@ public class LaunchpadLightManager {
 	 * startup.
 	 */
 	public void initBrightness() {
-		setBrigtness(DEFAULT_LIGHT_BRIGHTNESS);
+		setBrigtness(PHYSICAL_LP_DEFAULT_LIGHT_BRIGHTNESS);
 	}
 	
 	
@@ -198,9 +198,9 @@ public class LaunchpadLightManager {
 	private void initButtonMap() {
 		buttonsColors = new HashMap<Button, Color>(2);
 		
-		buttonsColors.put(VEYON_REMOTEACCESS_VIEW_BUTTON, COLOR_DEFAULT);
-		buttonsColors.put(VEYON_REMOTEACCESS_CONTROL_BUTTON, COLOR_DEFAULT);
-		buttonsColors.put(VEYON_REMOTEACCESS_STOP_BUTTON, COLOR_DEFAULT);
+		buttonsColors.put(VEYON_REMOTEACCESS_VIEW_BUTTON, PHYSICAL_LP_COLOR_DEFAULT);
+		buttonsColors.put(VEYON_REMOTEACCESS_CONTROL_BUTTON, PHYSICAL_LP_COLOR_DEFAULT);
+		buttonsColors.put(VEYON_REMOTEACCESS_STOP_BUTTON, PHYSICAL_LP_COLOR_DEFAULT);
 	}
 	
 	private void initPadsMap() {
@@ -208,7 +208,7 @@ public class LaunchpadLightManager {
 		
 		for(int x = 0; x < LAUNCHPAD_PAD_X_ROWS; x++) {
 			for(int y = 0; y < LAUNCHPAD_PAD_Y_COLLUMNS; y++) {
-				padsColors.put(Pad.at(x, y), COLOR_DEFAULT);
+				padsColors.put(Pad.at(x, y), PHYSICAL_LP_COLOR_DEFAULT);
 			}
 		}
 	}

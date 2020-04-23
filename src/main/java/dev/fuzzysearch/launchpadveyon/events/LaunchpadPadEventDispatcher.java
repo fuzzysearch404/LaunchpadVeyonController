@@ -1,9 +1,9 @@
-package dev.fuzzysearch.launchpadveyon.launchpad.events;
+package dev.fuzzysearch.launchpadveyon.events;
 
 import dev.fuzzysearch.launchpadveyon.main.manager.ProgramManager;
-import dev.fuzzysearch.launchpadveyon.models.veyon.Device;
 import dev.fuzzysearch.launchpadveyon.veyon.commands.VeyonCommand;
 import dev.fuzzysearch.launchpadveyon.veyon.commands.VeyonCommandFactory;
+import dev.fuzzysearch.launchpadveyon.veyon.models.Device;
 import net.thecodersbreakfast.lp4j.api.Launchpad;
 import net.thecodersbreakfast.lp4j.api.Pad;
 
@@ -17,8 +17,8 @@ import net.thecodersbreakfast.lp4j.api.Pad;
  */
 public class LaunchpadPadEventDispatcher {
 	
-	public void dispatch(Pad pad, long timestamp) {
-		System.out.println("[" + timestamp + "] Pad pressed event : " + pad);
+	public void dispatch(Pad pad, String launchpadName) {
+		System.out.println("[" + launchpadName + "] Pad pressed event : " + pad);
         
 		manageLights(pad);
         

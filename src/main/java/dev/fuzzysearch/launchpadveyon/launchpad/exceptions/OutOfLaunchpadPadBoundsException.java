@@ -1,4 +1,4 @@
-package dev.fuzzysearch.launchpadveyon.exceptions.launchpad;
+package dev.fuzzysearch.launchpadveyon.launchpad.exceptions;
 
 import net.thecodersbreakfast.lp4j.api.Launchpad;
 import net.thecodersbreakfast.lp4j.api.LaunchpadException;

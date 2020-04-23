@@ -1,6 +1,7 @@
 package dev.fuzzysearch.launchpadveyon.config;
 
 import dev.fuzzysearch.launchpadveyon.veyon.VeyonActionType;
+import javafx.scene.paint.Paint;
 import net.thecodersbreakfast.lp4j.api.Button;
 import net.thecodersbreakfast.lp4j.api.Color;
 
@@ -38,7 +39,7 @@ public final class Configuration {
 	/*
 	 * ###########################################################################
 	 * ###########################################################################
-	 *                          	   LAUNCHPAD
+	 *                          	  LAUNCHPAD
 	 * ###########################################################################
 	 * ###########################################################################
 	 */
@@ -97,37 +98,63 @@ public final class Configuration {
 	
 	/*
 	 * ###########################################################################
-	 *                        COLOR AND LIGHTING SETTINGS
+	 *               PHYSICAL LAUNCHPAD - COLOR AND LIGHTING SETTINGS
 	 * ###########################################################################
 	 * 
-	 * Description: Settings for program's context visualization on the Launchpad.
+	 * Description: Settings for program's context visualization on the physical Launchpad.
 	 */ 
 	
 	// Black color (no color)
-	public final static Color COLOR_DEFAULT = Color.BLACK;
+	public final static Color PHYSICAL_LP_COLOR_DEFAULT = Color.BLACK;
 	
 	// DEVICE PADS
 	
 	// Shows that the Veyon device is loaded on the Launchpad
-	public final static Color COLOR_DEVICE_LOADED = Color.AMBER;
+	public final static Color PHYSICAL_LP_COLOR_DEVICE_LOADED = Color.AMBER;
 	// Shows that the Veyon device is currently selected
-	public final static Color COLOR_DEVICE_ACTIVE = Color.GREEN;
+	public final static Color PHYSICAL_LP_COLOR_DEVICE_ACTIVE = Color.GREEN;
 	// Shows that the Veyon device was previously not accessible
-	public final static Color COLOR_DEVICE_FAILED = Color.RED;
+	public final static Color PHYSICAL_LP_COLOR_DEVICE_FAILED = Color.RED;
 	
 	// MENU BUTTONS CONTEXT
 	
 	// Shows that the action is not selected
-	public final static Color COLOR_ACTION_CONTEXT_INACTIVE = Color.ORANGE;
+	public final static Color PHYSICAL_LP_COLOR_ACTION_CONTEXT_INACTIVE = Color.ORANGE;
 	// Shows that the action is selected
-	public final static Color COLOR_ACTION_CONTEXT_ACTIVE = Color.GREEN;
+	public final static Color PHYSICAL_LP_COLOR_ACTION_CONTEXT_ACTIVE = Color.GREEN;
 	// Color for remote access stop button
-	public final static Color COLOR_ACTION_CONTEXT_STOP = Color.of(2, 0);
+	public final static Color PHYSICAL_LP_COLOR_ACTION_CONTEXT_STOP = Color.of(2, 0);
 	
 	// BRIGHTNESS
 	
 	// Default Launchpad's brightness intensity
-	public final static int DEFAULT_LIGHT_BRIGHTNESS = 13;
+	public final static int PHYSICAL_LP_DEFAULT_LIGHT_BRIGHTNESS = 13;
+	
+	/*
+	 * ###########################################################################
+	 *                       VIRTUAL LAUNCHPAD - COLOR SETTINGS
+	 * ###########################################################################
+	 * 
+	 * Description: Settings for program's context visualization on the virtual Launchpad.
+	 */
+	
+	// Blank color (no color)
+	public final static Paint VIRTUAL_LP_COLOR_DEFAULT = Paint.valueOf("#a4a4a4");
+	
+	// DEVICE PADS
+	
+	// Shows that the Veyon device is loaded on the Launchpad
+	public final static Paint VIRTUAL_LP_COLOR_DEVICE_LOADED = Paint.valueOf("#fadb2a");
+	// Shows that the action is selected
+	public final static Paint VIRTUAL_LP_COLOR_ACTION_CONTEXT_ACTIVE = Paint.valueOf("#00d11f");
+	
+	/*
+	 * ###########################################################################
+	 *                      		PAD BLINKING SETTINGS
+	 * ###########################################################################
+	 * 
+	 * Description: Settings for pad blinking rates.
+	 */
 	
 	// Default value for the error indication blinking delay (min. - 200)
 	public final static int DEFAULT_ERROR_BLINK_MILLISECONDS = 350;
@@ -210,6 +237,14 @@ public final class Configuration {
 	public final static String VEYON_CLI_FAIL = "[FAIL]";
 	// Output if the process was successful
 	public final static String VEYON_CLI_OK = "[OK]";
+	
+	/*
+	 * ###########################################################################
+	 * ###########################################################################
+	 *                         	   GRAPHICAL INTERFACE
+	 * ###########################################################################
+	 * ###########################################################################
+	 */
 	
 
 }

@@ -4,8 +4,8 @@ import static dev.fuzzysearch.launchpadveyon.config.Configuration.VEYON_CLI_COMM
 import static dev.fuzzysearch.launchpadveyon.config.Configuration.VEYON_CLI_REMOTEACCESS_MODULE;
 import static dev.fuzzysearch.launchpadveyon.config.Configuration.VEYON_CLI_REMOTEACCESS_VIEW;
 
-import dev.fuzzysearch.launchpadveyon.models.veyon.Device;
-import dev.fuzzysearch.launchpadveyon.utils.VeyonProcessExecutor;
+import dev.fuzzysearch.launchpadveyon.veyon.models.Device;
+import dev.fuzzysearch.launchpadveyon.veyon.utils.VeyonProcessExecutor;
 import net.thecodersbreakfast.lp4j.api.Pad;
 
 /**

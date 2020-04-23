@@ -1,13 +1,13 @@
-package dev.fuzzysearch.launchpadveyon.launchpad.events;
+package dev.fuzzysearch.launchpadveyon.events;
 
 import static dev.fuzzysearch.launchpadveyon.config.Configuration.*;
 
 import dev.fuzzysearch.launchpadveyon.main.manager.ProgramManager;
-import dev.fuzzysearch.launchpadveyon.models.veyon.Device;
 import dev.fuzzysearch.launchpadveyon.veyon.VeyonActionType;
 import dev.fuzzysearch.launchpadveyon.veyon.commands.VeyonCommandFactory;
 import dev.fuzzysearch.launchpadveyon.veyon.commands.VeyonRemoteControlScreenCommand;
 import dev.fuzzysearch.launchpadveyon.veyon.commands.VeyonViewScreenCommand;
+import dev.fuzzysearch.launchpadveyon.veyon.models.Device;
 import net.thecodersbreakfast.lp4j.api.BackBufferOperation;
 import net.thecodersbreakfast.lp4j.api.Button;
 import net.thecodersbreakfast.lp4j.api.Launchpad;
@@ -70,7 +70,7 @@ public class LaunchpadButtonEventDispatcher {
 		else
 			manager.setCurrentAction(VeyonActionType.SCREEN_VIEW);
 		
-		manager.getLightManager().lightUpModeSelectButtons();
+		manager.getLightManager().lightUpContextSwitchButtons();
 	}
 	
 	/**
@@ -96,7 +96,7 @@ public class LaunchpadButtonEventDispatcher {
 		else
 			manager.setCurrentAction(VeyonActionType.SCREEN_CONTROL);
 		
-		manager.getLightManager().lightUpModeSelectButtons();
+		manager.getLightManager().lightUpContextSwitchButtons();
 	}
 	
 	/**
@@ -114,7 +114,7 @@ public class LaunchpadButtonEventDispatcher {
 		Device activeDevice = manager.getActiveVeyonDevice();
 		if(activeDevice != null) {
 			Pad pad = activeDevice.getPad();
-			manager.getLightManager().setPadLight(pad, COLOR_DEVICE_LOADED, BackBufferOperation.COPY);
+			manager.getLightManager().setPadLight(pad, PHYSICAL_LP_COLOR_DEVICE_LOADED, BackBufferOperation.COPY);
 		}
 	}
 

@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+
+<VBox prefHeight="600.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dev.fuzzysearch.launchpadveyon.app.controllers.VirtualLaunchpadController">
+  <children>
+    <MenuBar style="-fx-background-color: #c9c9c9;" VBox.vgrow="NEVER">
+      <menus>
+        <Menu mnemonicParsing="false" text="File">
+          <items>
+            <MenuItem mnemonicParsing="false" text="Preferences…" />
+            <MenuItem mnemonicParsing="false" text="Quit" />
+          </items>
+        </Menu>
+        <Menu mnemonicParsing="false" text="Help">
+          <items>
+            <MenuItem mnemonicParsing="false" text="About MyHelloApp" />
+          </items>
+        </Menu>
+      </menus>
+    </MenuBar>
+    <AnchorPane id="mainContainer" fx:id="mainContainer" maxHeight="-1.0" maxWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0" style="-fx-background-color: #e3e3e3;" VBox.vgrow="ALWAYS">
+      <children>
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#414243" height="459.0" layoutX="50.0" layoutY="36.0" stroke="BLACK" strokeLineCap="ROUND" strokeLineJoin="ROUND" strokeType="OUTSIDE" strokeWidth="5.0" width="491.0" />
+            <Rectangle id="p00" fx:id="p00" arcHeight="5.0" arcWidth="5.0" fill="#a4a4a4" height="35.0" layoutX="62.0" layoutY="152.0" onMouseClicked="#launchpadPadPressedEvent" stroke="BLACK" strokeLineCap="ROUND" strokeLineJoin="ROUND" strokeType="OUTSIDE" width="35.0" />
+            <Rectangle id="p10" fx:id="p10" arcHeight="5.0" arcWidth="5.0" fill="#a4a4a4" height="35.0" layoutX="102.0" layoutY="152.0" onMouseClicked="#launchpadPadPressedEvent" stroke="BLACK" strokeLineCap="ROUND" strokeLineJoin="ROUND" strokeType="OUTSIDE" width="35.0" />
+            <Rectangle id="p20" fx:id="p20" arcHeight="5.0" arcWidth="5.0" fill="#a4a4a4" height="35.0" layoutX="142.0" layoutY="152.0" onMouseClicked="#launchpadPadPressedEvent" stroke="BLACK" strokeLineJoin="ROUND" strokeMiterLimit="100.0" strokeType="OUTSIDE" strokeWidth="2.0" width="35.0" />
+            <Rectangle id="p30" fx:id="p30" arcHeight="5.0" arcWidth="5.0" fill="#a4a4a4" height="35.0" layoutX="182.0" layoutY="152.0" onMouseClicked="#launchpadPadPressedEvent" stroke="BLACK" strokeLineCap="ROUND" strokeLineJoin="ROUND" strokeType="OUTSIDE" width="35.0" />
+            <Rectangle id="p40" fx:id="p40" arcHeight="5.0" arcWidth="5.0" fill="#a4a4a4" height="35.0" layoutX="222.0" layoutY="152.0" onMouseClicked="#launchpadPadPressedEvent" stroke="BLACK" strokeLineCap="ROUND" strokeLineJoin="ROUND" strokeType="OUTSIDE" width="35.0" />
+            <Rectangle id="p50" fx:id="p50" arcHeight="5.0" arcWidth="5.0" fill="#a4a4a4" height="35.0" layoutX="262.0" layoutY="152.0" onMouseClicked="#launchpadPadPressedEvent" stroke="BLACK" strokeLineCap="ROUND" strokeLineJoin="ROUND" strokeType="OUTSIDE" width="35.0" />
+            <Rectangle id="p60" fx:id="p60" arcHeight="5.0" arcWidth="5.0" fill="#a4a4a4" height="35.0" layoutX="302.0" layoutY="152.0" onMouseClicked="#launchpadPadPressedEvent" stroke="BLACK" strokeLineCap="ROUND" strokeLineJoin="ROUND" strokeType="OUTSIDE" width="35.0" />
+            <Rectangle id="p70" fx:id="p70" arcHeight="5.0" arcWidth="5.0" fill="#a4a4a4" height="35.0" layoutX="342.0" layoutY="152.0" onMouseClicked="#launchpadPadPressedEvent" stroke="BLACK" strokeLineCap="ROUND" strokeLineJoin="ROUND" strokeType="OUTSIDE" width="35.0" />
+            <Rectangle id="p01" fx:id="p01" arcHeight="5.0" arcWidth="5.0" fill="#a4a4a4" height="35.0" layoutX="62.0" layoutY="192.0" onMouseClicked="#launchpadPadPressedEvent" stroke="BLACK" strokeLineCap="ROUND" strokeLineJoin="ROUND" strokeType="OUTSIDE" width="35.0" />
+            <Rectangle id="p11" fx:id="p11" arcHeight="5.0" arcWidth="5.0" fill="#a4a4a4" height="35.0" layoutX="102.0" layoutY="192.0" onMouseClicked="#launchpadPadPressedEvent" stroke="BLACK" strokeLineCap="ROUND" strokeLineJoin="ROUND" strokeType="OUTSIDE" width="35.0" />
+            <Rectangle id="p21" fx:id="p21" arcHeight="5.0" arcWidth="5.0" fill="#a4a4a4" height="35.0" layoutX="142.0" layoutY="192.0" onMouseClicked="#launchpadPadPressedEvent" stroke="BLACK" strokeLineCap="ROUND" strokeLineJoin="ROUND" strokeType="OUTSIDE" width="35.0" />
+            <Rectangle id="p31" fx:id="p31" arcHeight="5.0" arcWidth="5.0" fill="#a4a4a4" height="35.0" layoutX="182.0" layoutY="192.0" onMouseClicked="#launchpadPadPressedEvent" stroke="BLACK" strokeLineCap="ROUND" strokeLineJoin="ROUND" strokeType="OUTSIDE" width="35.0" />
+            <Rectangle id="p41" fx:id="p41" arcHeight="5.0" arcWidth="5.0" fill="#a4a4a4" height="35.0" layoutX="222.0" layoutY="192.0" onMouseClicked="#launchpadPadPressedEvent" stroke="BLACK" strokeLineCap="ROUND" strokeLineJoin="ROUND" strokeType="OUTSIDE" width="35.0" />
+            <Rectangle id="p51" fx:id="p51" arcHeight="5.0" arcWidth="5.0" fill="#a4a4a4" height="35.0" layoutX="262.0" layoutY="192.0" onMouseClicked="#launchpadPadPressedEvent" stroke="BLACK" strokeLineCap="ROUND" strokeLineJoin="ROUND" strokeType="OUTSIDE" width="35.0" />
+            <Rectangle id="p61" fx:id="p61" arcHeight="5.0" arcWidth="5.0" fill="#a4a4a4" height="35.0" layoutX="302.0" layoutY="192.0" onMouseClicked="#launchpadPadPressedEvent" stroke="BLACK" strokeLineCap="ROUND" strokeLineJoin="ROUND" strokeType="OUTSIDE" width="35.0" />
+            <Rectangle id="p71" fx:id="p71" arcHeight="5.0" arcWidth="5.0" fill="#a4a4a4" height="35.0" layoutX="342.0" layoutY="192.0" onMouseClicked="#launchpadPadPressedEvent" stroke="BLACK" strokeLineCap="ROUND" strokeLineJoin="ROUND" strokeType="OUTSIDE" width="35.0" />
+            <Rectangle id="p02" fx:id="p02" arcHeight="5.0" arcWidth="5.0" fill="#a4a4a4" height="35.0" layoutX="62.0" layoutY="232.0" onMouseClicked="#launchpadPadPressedEvent" stroke="BLACK" strokeLineCap="ROUND" strokeLineJoin="ROUND" strokeType="OUTSIDE" width="35.0" />
+            <Rectangle id="p12" fx:id="p12" arcHeight="5.0" arcWidth="5.0" fill="#a4a4a4" height="35.0" layoutX="102.0" layoutY="232.0" onMouseClicked="#launchpadPadPressedEvent" stroke="BLACK" strokeLineCap="ROUND" strokeLineJoin="ROUND" strokeType="OUTSIDE" width="35.0" />
+            <Rectangle id="p22" fx:id="p22" arcHeight="5.0" arcWidth="5.0" fill="#a4a4a4" height="35.0" layoutX="142.0" layoutY="232.0" onMouseClicked="#launchpadPadPressedEvent" stroke="BLACK" strokeLineCap="ROUND" strokeLineJoin="ROUND" strokeType="OUTSIDE" width="35.0" />
+            <Rectangle id="p32" fx:id="p32" arcHeight="5.0" arcWidth="5.0" fill="#a4a4a4" height="35.0" layoutX="182.0" layoutY="232.0" onMouseClicked="#launchpadPadPressedEvent" stroke="BLACK" strokeLineCap="ROUND" strokeLineJoin="ROUND" strokeType="OUTSIDE" width="35.0" />
+            <Rectangle id="p42" fx:id="p42" arcHeight="5.0" arcWidth="5.0" fill="#a4a4a4" height="35.0" layoutX="222.0" layoutY="232.0" onMouseClicked="#launchpadPadPressedEvent" stroke="BLACK" strokeLineCap="ROUND" strokeLineJoin="ROUND" strokeType="OUTSIDE" width="35.0" />
+            <Rectangle id="p52" fx:id="p52" arcHeight="5.0" arcWidth="5.0" fill="#a4a4a4" height="35.0" layoutX="262.0" layoutY="232.0" onMouseClicked="#launchpadPadPressedEvent" stroke="BLACK" strokeLineCap="ROUND" strokeLineJoin="ROUND" strokeType="OUTSIDE" width="35.0" />
+            <Rectangle id="p62" fx:id="p62" arcHeight="5.0" arcWidth="5.0" fill="#a4a4a4" height="35.0" layoutX="302.0" layoutY="232.0" onMouseClicked="#launchpadPadPressedEvent" stroke="BLACK" strokeLineCap="ROUND" strokeLineJoin="ROUND" strokeType="OUTSIDE" width="35.0" />
+            <Rectangle id="p72" fx:id="p72" arcHeight="5.0" arcWidth="5.0" fill="#a4a4a4" height="35.0" layoutX="342.0" layoutY="232.0" onMouseClicked="#launchpadPadPressedEvent" stroke="BLACK" strokeLineCap="ROUND" strokeLineJoin="ROUND" strokeType="OUTSIDE" width="35.0" />
+            <Rectangle id="p03" fx:id="p03" arcHeight="5.0" arcWidth="5.0" fill="#a4a4a4" height="35.0" layoutX="62.0" layoutY="272.0" onMouseClicked="#launchpadPadPressedEvent" stroke="BLACK" strokeLineCap="ROUND" strokeLineJoin="ROUND" strokeType="OUTSIDE" width="35.0" />
+            <Rectangle id="p13" fx:id="p13" arcHeight="5.0" arcWidth="5.0" fill="#a4a4a4" height="35.0" layoutX="102.0" layoutY="272.0" onMouseClicked="#launchpadPadPressedEvent" stroke="BLACK" strokeLineCap="ROUND" strokeLineJoin="ROUND" strokeType="OUTSIDE" width="35.0" />
+            <Rectangle id="p23" fx:id="p23" arcHeight="5.0" arcWidth="5.0" fill="#a4a4a4" height="35.0" layoutX="142.0" layoutY="272.0" onMouseClicked="#launchpadPadPressedEvent" stroke="BLACK" strokeLineCap="ROUND" strokeLineJoin="ROUND" strokeType="OUTSIDE" width="35.0" />
+            <Rectangle id="p33" fx:id="p33" arcHeight="5.0" arcWidth="5.0" fill="#a4a4a4" height="35.0" layoutX="182.0" layoutY="272.0" onMouseClicked="#launchpadPadPressedEvent" stroke="BLACK" strokeLineCap="ROUND" strokeLineJoin="ROUND" strokeType="OUTSIDE" width="35.0" />
+            <Rectangle id="p43" fx:id="p43" arcHeight="5.0" arcWidth="5.0" fill="#a4a4a4" height="35.0" layoutX="222.0" layoutY="272.0" onMouseClicked="#launchpadPadPressedEvent" stroke="BLACK" strokeLineCap="ROUND" strokeLineJoin="ROUND" strokeType="OUTSIDE" width="35.0" />
+            <Rectangle id="p53" fx:id="p53" arcHeight="5.0" arcWidth="5.0" fill="#a4a4a4" height="35.0" layoutX="262.0" layoutY="272.0" onMouseClicked="#launchpadPadPressedEvent" stroke="BLACK" strokeLineCap="ROUND" strokeLineJoin="ROUND" strokeType="OUTSIDE" width="35.0" />
+            <Rectangle id="p63" fx:id="p63" arcHeight="5.0" arcWidth="5.0" fill="#a4a4a4" height="35.0" layoutX="302.0" layoutY="272.0" onMouseClicked="#launchpadPadPressedEvent" stroke="BLACK" strokeLineCap="ROUND" strokeLineJoin="ROUND" strokeType="OUTSIDE" width="35.0" />
+            <Rectangle id="p73" fx:id="p73" arcHeight="5.0" arcWidth="5.0" fill="#a4a4a4" height="35.0" layoutX="342.0" layoutY="272.0" onMouseClicked="#launchpadPadPressedEvent" stroke="BLACK" strokeLineCap="ROUND" strokeLineJoin="ROUND" strokeType="OUTSIDE" width="35.0" />
+            <Rectangle id="p04" fx:id="p04" arcHeight="5.0" arcWidth="5.0" fill="#a4a4a4" height="35.0" layoutX="62.0" layoutY="312.0" onMouseClicked="#launchpadPadPressedEvent" stroke="BLACK" strokeLineCap="ROUND" strokeLineJoin="ROUND" strokeType="OUTSIDE" width="35.0" />
+            <Rectangle id="p14" fx:id="p14" arcHeight="5.0" arcWidth="5.0" fill="#a4a4a4" height="35.0" layoutX="102.0" layoutY="312.0" onMouseClicked="#launchpadPadPressedEvent" stroke="BLACK" strokeLineCap="ROUND" strokeLineJoin="ROUND" strokeType="OUTSIDE" width="35.0" />
+            <Rectangle id="p24" fx:id="p24" arcHeight="5.0" arcWidth="5.0" fill="#a4a4a4" height="35.0" layoutX="142.0" layoutY="312.0" onMouseClicked="#launchpadPadPressedEvent" stroke="BLACK" strokeLineCap="ROUND" strokeLineJoin="ROUND" strokeType="OUTSIDE" width="35.0" />
+            <Rectangle id="p34" fx:id="p34" arcHeight="5.0" arcWidth="5.0" fill="#a4a4a4" height="35.0" layoutX="182.0" layoutY="312.0" onMouseClicked="#launchpadPadPressedEvent" stroke="BLACK" strokeLineCap="ROUND" strokeLineJoin="ROUND" strokeType="OUTSIDE" width="35.0" />
+            <Rectangle id="p44" fx:id="p44" arcHeight="5.0" arcWidth="5.0" fill="#a4a4a4" height="35.0" layoutX="222.0" layoutY="312.0" onMouseClicked="#launchpadPadPressedEvent" stroke="BLACK" strokeLineCap="ROUND" strokeLineJoin="ROUND" strokeType="OUTSIDE" width="35.0" />
+            <Rectangle id="p54" fx:id="p54" arcHeight="5.0" arcWidth="5.0" fill="#a4a4a4" height="35.0" layoutX="262.0" layoutY="312.0" onMouseClicked="#launchpadPadPressedEvent" stroke="BLACK" strokeLineCap="ROUND" strokeLineJoin="ROUND" strokeType="OUTSIDE" width="35.0" />
+            <Rectangle id="p64" fx:id="p64" arcHeight="5.0" arcWidth="5.0" fill="#a4a4a4" height="35.0" layoutX="302.0" layoutY="312.0" onMouseClicked="#launchpadPadPressedEvent" stroke="BLACK" strokeLineCap="ROUND" strokeLineJoin="ROUND" strokeType="OUTSIDE" width="35.0" />
+            <Rectangle id="p74" fx:id="p74" arcHeight="5.0" arcWidth="5.0" fill="#a4a4a4" height="35.0" layoutX="342.0" layoutY="312.0" onMouseClicked="#launchpadPadPressedEvent" stroke="BLACK" strokeLineCap="ROUND" strokeLineJoin="ROUND" strokeType="OUTSIDE" width="35.0" />
+            <Rectangle id="p05" fx:id="p05" arcHeight="5.0" arcWidth="5.0" fill="#a4a4a4" height="35.0" layoutX="62.0" layoutY="352.0" onMouseClicked="#launchpadPadPressedEvent" stroke="BLACK" strokeLineCap="ROUND" strokeLineJoin="ROUND" strokeType="OUTSIDE" width="35.0" />
+            <Rectangle id="p15" fx:id="p15" arcHeight="5.0" arcWidth="5.0" fill="#a4a4a4" height="35.0" layoutX="102.0" layoutY="352.0" onMouseClicked="#launchpadPadPressedEvent" stroke="BLACK" strokeLineCap="ROUND" strokeLineJoin="ROUND" strokeType="OUTSIDE" width="35.0" />
+            <Rectangle id="p25" fx:id="p25" arcHeight="5.0" arcWidth="5.0" fill="#a4a4a4" height="35.0" layoutX="142.0" layoutY="352.0" onMouseClicked="#launchpadPadPressedEvent" stroke="BLACK" strokeLineCap="ROUND" strokeLineJoin="ROUND" strokeType="OUTSIDE" width="35.0" />
+            <Rectangle id="p35" fx:id="p35" arcHeight="5.0" arcWidth="5.0" fill="#a4a4a4" height="35.0" layoutX="182.0" layoutY="352.0" onMouseClicked="#launchpadPadPressedEvent" stroke="BLACK" strokeLineCap="ROUND" strokeLineJoin="ROUND" strokeType="OUTSIDE" width="35.0" />
+            <Rectangle id="p45" fx:id="p45" arcHeight="5.0" arcWidth="5.0" fill="#a4a4a4" height="35.0" layoutX="222.0" layoutY="352.0" onMouseClicked="#launchpadPadPressedEvent" stroke="BLACK" strokeLineCap="ROUND" strokeLineJoin="ROUND" strokeType="OUTSIDE" width="35.0" />
+            <Rectangle id="p55" fx:id="p55" arcHeight="5.0" arcWidth="5.0" fill="#a4a4a4" height="35.0" layoutX="262.0" layoutY="352.0" onMouseClicked="#launchpadPadPressedEvent" stroke="BLACK" strokeLineCap="ROUND" strokeLineJoin="ROUND" strokeType="OUTSIDE" width="35.0" />
+            <Rectangle id="p65" fx:id="p65" arcHeight="5.0" arcWidth="5.0" fill="#a4a4a4" height="35.0" layoutX="302.0" layoutY="352.0" onMouseClicked="#launchpadPadPressedEvent" stroke="BLACK" strokeLineCap="ROUND" strokeLineJoin="ROUND" strokeType="OUTSIDE" width="35.0" />
+            <Rectangle id="p75" fx:id="p75" arcHeight="5.0" arcWidth="5.0" fill="#a4a4a4" height="35.0" layoutX="342.0" layoutY="352.0" onMouseClicked="#launchpadPadPressedEvent" stroke="BLACK" strokeLineCap="ROUND" strokeLineJoin="ROUND" strokeType="OUTSIDE" width="35.0" />
+            <Rectangle id="p06" fx:id="p06" arcHeight="5.0" arcWidth="5.0" fill="#a4a4a4" height="35.0" layoutX="62.0" layoutY="392.0" onMouseClicked="#launchpadPadPressedEvent" stroke="BLACK" strokeLineCap="ROUND" strokeLineJoin="ROUND" strokeType="OUTSIDE" width="35.0" />
+            <Rectangle id="p16" fx:id="p16" arcHeight="5.0" arcWidth="5.0" fill="#a4a4a4" height="35.0" layoutX="102.0" layoutY="392.0" onMouseClicked="#launchpadPadPressedEvent" stroke="BLACK" strokeLineCap="ROUND" strokeLineJoin="ROUND" strokeType="OUTSIDE" width="35.0" />
+            <Rectangle id="p26" fx:id="p26" arcHeight="5.0" arcWidth="5.0" fill="#a4a4a4" height="35.0" layoutX="142.0" layoutY="392.0" onMouseClicked="#launchpadPadPressedEvent" stroke="BLACK" strokeLineCap="ROUND" strokeLineJoin="ROUND" strokeType="OUTSIDE" width="35.0" />
+            <Rectangle id="p36" fx:id="p36" arcHeight="5.0" arcWidth="5.0" fill="#a4a4a4" height="35.0" layoutX="182.0" layoutY="392.0" onMouseClicked="#launchpadPadPressedEvent" stroke="BLACK" strokeLineCap="ROUND" strokeLineJoin="ROUND" strokeType="OUTSIDE" width="35.0" />
+            <Rectangle id="p46" fx:id="p46" arcHeight="5.0" arcWidth="5.0" fill="#a4a4a4" height="35.0" layoutX="222.0" layoutY="392.0" onMouseClicked="#launchpadPadPressedEvent" stroke="BLACK" strokeLineCap="ROUND" strokeLineJoin="ROUND" strokeType="OUTSIDE" width="35.0" />
+            <Rectangle id="p56" fx:id="p56" arcHeight="5.0" arcWidth="5.0" fill="#a4a4a4" height="35.0" layoutX="262.0" layoutY="392.0" onMouseClicked="#launchpadPadPressedEvent" stroke="BLACK" strokeLineCap="ROUND" strokeLineJoin="ROUND" strokeType="OUTSIDE" width="35.0" />
+            <Rectangle id="p66" fx:id="p66" arcHeight="5.0" arcWidth="5.0" fill="#a4a4a4" height="35.0" layoutX="302.0" layoutY="392.0" onMouseClicked="#launchpadPadPressedEvent" stroke="BLACK" strokeLineCap="ROUND" strokeLineJoin="ROUND" strokeType="OUTSIDE" width="35.0" />
+            <Rectangle id="p76" fx:id="p76" arcHeight="5.0" arcWidth="5.0" fill="#a4a4a4" height="35.0" layoutX="342.0" layoutY="392.0" onMouseClicked="#launchpadPadPressedEvent" stroke="BLACK" strokeLineCap="ROUND" strokeLineJoin="ROUND" strokeType="OUTSIDE" width="35.0" />
+            <Rectangle id="p07" fx:id="p07" arcHeight="5.0" arcWidth="5.0" fill="#a4a4a4" height="35.0" layoutX="62.0" layoutY="432.0" onMouseClicked="#launchpadPadPressedEvent" stroke="BLACK" strokeLineCap="ROUND" strokeLineJoin="ROUND" strokeType="OUTSIDE" width="35.0" />
+            <Rectangle id="p17" fx:id="p17" arcHeight="5.0" arcWidth="5.0" fill="#a4a4a4" height="35.0" layoutX="102.0" layoutY="432.0" onMouseClicked="#launchpadPadPressedEvent" stroke="BLACK" strokeLineCap="ROUND" strokeLineJoin="ROUND" strokeType="OUTSIDE" width="35.0" />
+            <Rectangle id="p27" fx:id="p27" arcHeight="5.0" arcWidth="5.0" fill="#a4a4a4" height="35.0" layoutX="142.0" layoutY="432.0" onMouseClicked="#launchpadPadPressedEvent" stroke="BLACK" strokeLineCap="ROUND" strokeLineJoin="ROUND" strokeType="OUTSIDE" width="35.0" />
+            <Rectangle id="p37" fx:id="p37" arcHeight="5.0" arcWidth="5.0" fill="#a4a4a4" height="35.0" layoutX="182.0" layoutY="432.0" onMouseClicked="#launchpadPadPressedEvent" stroke="BLACK" strokeLineCap="ROUND" strokeLineJoin="ROUND" strokeType="OUTSIDE" width="35.0" />
+            <Rectangle id="p47" fx:id="p47" arcHeight="5.0" arcWidth="5.0" fill="#a4a4a4" height="35.0" layoutX="222.0" layoutY="432.0" onMouseClicked="#launchpadPadPressedEvent" stroke="BLACK" strokeLineCap="ROUND" strokeLineJoin="ROUND" strokeType="OUTSIDE" width="35.0" />
+            <Rectangle id="p57" fx:id="p57" arcHeight="5.0" arcWidth="5.0" fill="#a4a4a4" height="35.0" layoutX="262.0" layoutY="432.0" onMouseClicked="#launchpadPadPressedEvent" stroke="BLACK" strokeLineCap="ROUND" strokeLineJoin="ROUND" strokeType="OUTSIDE" width="35.0" />
+            <Rectangle id="p67" fx:id="p67" arcHeight="5.0" arcWidth="5.0" fill="#a4a4a4" height="35.0" layoutX="302.0" layoutY="432.0" onMouseClicked="#launchpadPadPressedEvent" stroke="BLACK" strokeLineCap="ROUND" strokeLineJoin="ROUND" strokeType="OUTSIDE" width="35.0" />
+            <Rectangle id="p77" fx:id="p77" arcHeight="5.0" arcWidth="5.0" fill="#a4a4a4" height="35.0" layoutX="342.0" layoutY="432.0" onMouseClicked="#launchpadPadPressedEvent" stroke="BLACK" strokeLineCap="ROUND" strokeLineJoin="ROUND" strokeType="OUTSIDE" width="35.0" />
+            <Circle fill="#a4a4a4" layoutX="80.0" layoutY="130.0" radius="15.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="2.0" />
+            <Circle fill="#a4a4a4" layoutX="120.0" layoutY="130.0" radius="15.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="2.0" />
+            <Circle fill="#a4a4a4" layoutX="160.0" layoutY="130.0" radius="15.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="2.0" />
+            <Circle fill="#a4a4a4" layoutX="200.0" layoutY="130.0" radius="15.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="2.0" />
+            <Circle fill="#a4a4a4" layoutX="240.0" layoutY="130.0" radius="15.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="2.0" />
+            <Circle fill="#a4a4a4" layoutX="280.0" layoutY="130.0" radius="15.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="2.0" />
+            <Circle fill="#a4a4a4" layoutX="320.0" layoutY="130.0" radius="15.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="2.0" />
+            <Circle fill="#a4a4a4" layoutX="360.0" layoutY="130.0" radius="15.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="2.0" />
+            <Circle fill="#a4a4a4" layoutX="400.0" layoutY="170.0" radius="15.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="2.0" />
+            <Circle fill="#a4a4a4" layoutX="400.0" layoutY="210.0" radius="15.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="2.0" />
+            <Circle fill="#a4a4a4" layoutX="400.0" layoutY="250.0" radius="15.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="2.0" />
+            <Circle fill="#a4a4a4" layoutX="400.0" layoutY="293.0" radius="15.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="2.0" />
+            <Circle fill="#a4a4a4" layoutX="400.0" layoutY="330.0" radius="15.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="2.0" />
+            <Circle fill="#a4a4a4" layoutX="400.0" layoutY="370.0" radius="15.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="2.0" />
+            <Circle fill="#a4a4a4" layoutX="400.0" layoutY="410.0" radius="15.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="2.0" />
+            <Circle fill="#a4a4a4" layoutX="400.0" layoutY="450.0" radius="15.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="2.0" />
+            <Label layoutX="262.0" layoutY="85.0" text="View" textFill="WHITE">
+               <font>
+                  <Font name="Impact" size="18.0" />
+               </font>
+            </Label>
+            <Label layoutX="302.0" layoutY="85.0" text="Control" textFill="WHITE">
+               <font>
+                  <Font name="Impact" size="18.0" />
+               </font>
+            </Label>
+            <Label layoutX="425.0" layoutY="318.0" prefHeight="25.0" prefWidth="43.0" text="Stop" textFill="WHITE">
+               <font>
+                  <Font name="Impact" size="19.0" />
+               </font>
+            </Label>
+      </children>
+    </AnchorPane>
+  </children>
+</VBox>
