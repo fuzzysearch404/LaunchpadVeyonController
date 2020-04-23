@@ -1,4 +1,4 @@
-package dev.fuzzysearch.launchpadveyon.models.veyon;
+package dev.fuzzysearch.launchpadveyon.veyon.models;
 
 import net.thecodersbreakfast.lp4j.api.Launchpad;
 import net.thecodersbreakfast.lp4j.api.Pad;

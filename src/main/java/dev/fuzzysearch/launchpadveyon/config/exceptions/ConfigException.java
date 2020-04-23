@@ -1,10 +1,10 @@
-package dev.fuzzysearch.launchpadveyon.exceptions.config;
+package dev.fuzzysearch.launchpadveyon.config.exceptions;
 
-import dev.fuzzysearch.launchpadveyon.setup.LaunchpadConfigParser;
+import dev.fuzzysearch.launchpadveyon.config.ConfigurationFileParser;
 
 /**
  * Exception that is thrown when invalid configuration
- * that cannot be parsed by {@link LaunchpadConfigParser}
+ * that cannot be parsed by {@link ConfigurationFileParser}
  * is provided in cofiguration files.
  * 
  * @author Roberts Ziediņš

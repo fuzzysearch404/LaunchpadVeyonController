@@ -10,41 +10,57 @@ import java.io.InputStreamReader;
 
 import javax.sound.midi.MidiUnavailableException;
 
-import dev.fuzzysearch.launchpadveyon.exceptions.config.ProgramUnconfiguredException;
-import dev.fuzzysearch.launchpadveyon.exceptions.config.VeyonUnavailableException;
+import dev.fuzzysearch.launchpadveyon.config.ConfigurationFileParser;
+import dev.fuzzysearch.launchpadveyon.config.exceptions.ProgramUnconfiguredException;
+import dev.fuzzysearch.launchpadveyon.config.exceptions.VeyonUnavailableException;
 import dev.fuzzysearch.launchpadveyon.launchpad.control.LaunchpadLightManager;
 import dev.fuzzysearch.launchpadveyon.launchpad.listeners.MainLaunchpadListener;
 import dev.fuzzysearch.launchpadveyon.main.manager.ProgramManager;
+import net.thecodersbreakfast.lp4j.api.LaunchpadException;
 import net.thecodersbreakfast.lp4j.midi.MidiDeviceConfiguration;
 import net.thecodersbreakfast.lp4j.midi.MidiLaunchpad;
-import dev.fuzzysearch.launchpadveyon.setup.LaunchpadConfigParser;
 
 public class MainFacade {
 
-	public void run() throws MidiUnavailableException, VeyonUnavailableException {
+	public void run() throws VeyonUnavailableException {
 		if(!ensureVeyonisAvailable())
 			throw new VeyonUnavailableException("This system's environment"
 					+ "does not have Veyon CLI available");
 		
-		MidiLaunchpad launchpad = new MidiLaunchpad(MidiDeviceConfiguration.autodetect());
-		ProgramManager manager = ProgramManager.getInstance(launchpad);
+		System.out.println("[Init]: Creating ProgramManager...");
+		ProgramManager manager = ProgramManager.getInstance();
+
+		System.out.println("[Init]: Detecting and setting up physical Launchpad...");
+		try {
+			MidiLaunchpad launchpad = new MidiLaunchpad(MidiDeviceConfiguration.autodetect());
+			manager.setLaunchpad(launchpad);
+			manager.setLaunchpadClient(launchpad.getClient());
+			
+			setLaunchpadListeners();
+			
+			System.out.println("[Init]: Physical Launchpad detected");
+			manager.setLaunchpadConnected(true);
+			
+			// Resets the Launchpad's buffers, so the lights turn off if there were on before.
+			manager.getLaunchpadClient().reset();
+		} catch(MidiUnavailableException | LaunchpadException e) {
+			System.err.println("Unable to detect the physical Launchpad. "
+					+ "Entering virtual Launchpad only mode...");
+		}
+		
 		LaunchpadLightManager lightManager = manager.getLightManager();
 		
-		// Resets the Launchpad's buffers, so the lights turn off if there were on before.
-		manager.getLaunchpadClient().reset();
-		
+		System.out.println("[Init]: Reading the configuration and preparing the data...");
 		initConfiguration();
-		
-		setLaunchpadListeners();
 
-		lightManager.lightUpModeSelectButtons();
+		lightManager.lightUpContextSwitchButtons();
 		lightManager.lightUpPadsByDevices();
 		lightManager.initBrightness();
 	}
 	
 	private void initConfiguration() {
 		try {
-			new LaunchpadConfigParser();
+			new ConfigurationFileParser();
 		} catch (ProgramUnconfiguredException e) {
 			// Skip the configuration, but keep program alive...
 			e.printStackTrace();

@@ -1,8 +1,8 @@
 package dev.fuzzysearch.launchpadveyon.veyon.commands;
 
 import dev.fuzzysearch.launchpadveyon.main.manager.ProgramManager;
-import dev.fuzzysearch.launchpadveyon.models.veyon.Device;
-import dev.fuzzysearch.launchpadveyon.utils.VeyonProcessExecutor;
+import dev.fuzzysearch.launchpadveyon.veyon.models.Device;
+import dev.fuzzysearch.launchpadveyon.veyon.utils.VeyonProcessExecutor;
 import net.thecodersbreakfast.lp4j.api.Pad;
 
 /**

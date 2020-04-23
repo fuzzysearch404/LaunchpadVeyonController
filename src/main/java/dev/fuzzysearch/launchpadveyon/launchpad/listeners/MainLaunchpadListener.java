@@ -1,7 +1,8 @@
 package dev.fuzzysearch.launchpadveyon.launchpad.listeners;
 
-import dev.fuzzysearch.launchpadveyon.launchpad.events.LaunchpadButtonEventDispatcher;
-import dev.fuzzysearch.launchpadveyon.launchpad.events.LaunchpadPadEventDispatcher;
+import dev.fuzzysearch.launchpadveyon.events.LaunchpadButtonEventDispatcher;
+import dev.fuzzysearch.launchpadveyon.events.LaunchpadPadEventDispatcher;
+import dev.fuzzysearch.launchpadveyon.main.manager.ProgramManager;
 import net.thecodersbreakfast.lp4j.api.Button;
 import net.thecodersbreakfast.lp4j.api.LaunchpadListenerAdapter;
 import net.thecodersbreakfast.lp4j.api.Pad;
@@ -17,18 +18,14 @@ import net.thecodersbreakfast.lp4j.midi.MidiLaunchpad;
  */
 public class MainLaunchpadListener extends LaunchpadListenerAdapter {
 	
-	private LaunchpadPadEventDispatcher padEventDispatcher 
-		= new LaunchpadPadEventDispatcher();
-	private LaunchpadButtonEventDispatcher buttonEventDispatcher
-		= new LaunchpadButtonEventDispatcher();
-	
-	public MainLaunchpadListener() {
-
-	}
+	private LaunchpadPadEventDispatcher padEventDispatcher = 
+			ProgramManager.getInstance().getPadEventDispatcher();
+	private LaunchpadButtonEventDispatcher buttonEventDispatcher =
+			ProgramManager.getInstance().getButtonEventDispatcher();
 
     @Override
     public void onPadPressed(Pad pad, long timestamp) {
-        padEventDispatcher.dispatch(pad, timestamp);
+        padEventDispatcher.dispatch(pad, "PHYSICAL LAUNCHPAD");
     }
     
     @Override

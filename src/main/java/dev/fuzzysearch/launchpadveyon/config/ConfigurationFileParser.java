@@ -1,4 +1,4 @@
-package dev.fuzzysearch.launchpadveyon.setup;
+package dev.fuzzysearch.launchpadveyon.config;
 
 import static dev.fuzzysearch.launchpadveyon.config.Configuration.*;
 
@@ -11,10 +11,10 @@ import java.util.Iterator;
 
 import org.json.JSONObject;
 
-import dev.fuzzysearch.launchpadveyon.exceptions.config.ConfigException;
-import dev.fuzzysearch.launchpadveyon.exceptions.config.ProgramUnconfiguredException;
+import dev.fuzzysearch.launchpadveyon.config.exceptions.ConfigException;
+import dev.fuzzysearch.launchpadveyon.config.exceptions.ProgramUnconfiguredException;
 import dev.fuzzysearch.launchpadveyon.main.manager.ProgramManager;
-import dev.fuzzysearch.launchpadveyon.models.veyon.Device;
+import dev.fuzzysearch.launchpadveyon.veyon.models.Device;
 import net.thecodersbreakfast.lp4j.api.Launchpad;
 import net.thecodersbreakfast.lp4j.api.Pad;
 
@@ -25,19 +25,19 @@ import net.thecodersbreakfast.lp4j.api.Pad;
  * @author Roberts ZiediÅ†Å¡
  *
  */
-public class LaunchpadConfigParser {
+public class ConfigurationFileParser {
 
 	private ArrayList<Device> deviceList = new ArrayList<Device>();
 	private String strPath;
 	private String json;
 
-	public LaunchpadConfigParser() throws ProgramUnconfiguredException {
+	public ConfigurationFileParser() throws ProgramUnconfiguredException {
 		this.strPath = CONFIG_FILE_DEFAULT_FULL_FILE_PATH;
 
 		configure();
 	}
 	
-	public LaunchpadConfigParser(String pathToConfig)
+	public ConfigurationFileParser(String pathToConfig)
 			throws ProgramUnconfiguredException {
 		this.strPath = pathToConfig;
 
@@ -61,7 +61,7 @@ public class LaunchpadConfigParser {
 		ProgramManager.getInstance().setLoadedDevices(readJSON());
 		
 		if(deviceList.isEmpty())
-			throw new ProgramUnconfiguredException("The configuration file was parsed, but no devices where configured.");
+			throw new ProgramUnconfiguredException("The configuration file was parsed, but no devices were configured.");
 	}
 
 	/**

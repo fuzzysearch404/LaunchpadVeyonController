@@ -4,9 +4,11 @@ import java.util.ArrayList;
 
 import static dev.fuzzysearch.launchpadveyon.config.Configuration.*;
 
+import dev.fuzzysearch.launchpadveyon.events.LaunchpadButtonEventDispatcher;
+import dev.fuzzysearch.launchpadveyon.events.LaunchpadPadEventDispatcher;
 import dev.fuzzysearch.launchpadveyon.launchpad.control.LaunchpadLightManager;
-import dev.fuzzysearch.launchpadveyon.models.veyon.Device;
 import dev.fuzzysearch.launchpadveyon.veyon.VeyonActionType;
+import dev.fuzzysearch.launchpadveyon.veyon.models.Device;
 import net.thecodersbreakfast.lp4j.api.LaunchpadClient;
 import net.thecodersbreakfast.lp4j.api.Pad;
 import net.thecodersbreakfast.lp4j.midi.MidiLaunchpad;
@@ -20,9 +22,18 @@ import net.thecodersbreakfast.lp4j.midi.MidiLaunchpad;
  */
 public class ProgramManager {
 	
+	/* Determines if the program is running just with the virtual Launchpad
+	* if physical Launchpad is not available.
+	*/
+	private boolean launchpadConnected = false;
+	
 	// LP4J API
 	private MidiLaunchpad launchpad;
 	private LaunchpadClient launchpadClient;
+	
+	// Event dispatchers
+	private LaunchpadPadEventDispatcher padEventDispatcher = new LaunchpadPadEventDispatcher();
+	private LaunchpadButtonEventDispatcher buttonEventDispatcher = new LaunchpadButtonEventDispatcher();
 	
 	// Launchpad's light management
 	private LaunchpadLightManager lightManager;
@@ -45,13 +56,15 @@ public class ProgramManager {
 		this.lightManager = new LaunchpadLightManager();
 	}
 	
-	private ProgramManager(MidiLaunchpad launchpad) {
-		this.lightManager = new LaunchpadLightManager();
-		this.launchpad = launchpad;
-		this.launchpadClient = this.launchpad.getClient();
-	}
-	
 	// Getters and Setters
+	
+	public boolean isLaunchpadConnected() {
+		return launchpadConnected;
+	}
+
+	public void setLaunchpadConnected(boolean launchpadConnected) {
+		this.launchpadConnected = launchpadConnected;
+	}
 	
 	public MidiLaunchpad getLaunchpad() {
 		return launchpad;
@@ -67,6 +80,22 @@ public class ProgramManager {
 
 	public void setLaunchpadClient(LaunchpadClient launchpadClient) {
 		this.launchpadClient = launchpadClient;
+	}
+
+	public LaunchpadPadEventDispatcher getPadEventDispatcher() {
+		return padEventDispatcher;
+	}
+
+	public void setPadEventDispatcher(LaunchpadPadEventDispatcher padEventDispatcher) {
+		this.padEventDispatcher = padEventDispatcher;
+	}
+
+	public LaunchpadButtonEventDispatcher getButtonEventDispatcher() {
+		return buttonEventDispatcher;
+	}
+
+	public void setButtonEventDispatcher(LaunchpadButtonEventDispatcher buttonEventDispatcher) {
+		this.buttonEventDispatcher = buttonEventDispatcher;
 	}
 
 	public LaunchpadLightManager getLightManager() {
@@ -150,13 +179,6 @@ public class ProgramManager {
 	public static ProgramManager getInstance() { 
         if (instance == null) 
             instance = new ProgramManager(); 
-  
-        return instance; 
-    }
-	
-	public static ProgramManager getInstance(MidiLaunchpad launchpad) { 
-        if (instance == null) 
-            instance = new ProgramManager(launchpad); 
   
         return instance; 
     }
