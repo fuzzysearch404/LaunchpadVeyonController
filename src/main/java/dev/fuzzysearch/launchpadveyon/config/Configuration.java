@@ -1,5 +1,7 @@
 package dev.fuzzysearch.launchpadveyon.config;
 
+import dev.fuzzysearch.launchpadveyon.lights.ColorType;
+import dev.fuzzysearch.launchpadveyon.lights.LaunchpadColor;
 import dev.fuzzysearch.launchpadveyon.veyon.VeyonActionType;
 import javafx.scene.paint.Paint;
 import net.thecodersbreakfast.lp4j.api.Button;
@@ -98,32 +100,39 @@ public final class Configuration {
 	
 	/*
 	 * ###########################################################################
-	 *               PHYSICAL LAUNCHPAD - COLOR AND LIGHTING SETTINGS
+	 *                         COLOR AND LIGHTING SETTINGS
 	 * ###########################################################################
 	 * 
-	 * Description: Settings for program's context visualization on the physical Launchpad.
+	 * Description: Settings for program's context visualization on both Launchpads.
 	 */ 
 	
 	// Black color (no color)
-	public final static Color PHYSICAL_LP_COLOR_DEFAULT = Color.BLACK;
+	public final static LaunchpadColor LP_COLOR_DEFAULT = 
+			new LaunchpadColor(ColorType.DEFAULT, Color.BLACK, Paint.valueOf("#a4a4a4"));
 	
 	// DEVICE PADS
 	
 	// Shows that the Veyon device is loaded on the Launchpad
-	public final static Color PHYSICAL_LP_COLOR_DEVICE_LOADED = Color.AMBER;
+	public final static LaunchpadColor LP_COLOR_DEVICE_LOADED = 
+			new LaunchpadColor(ColorType.DEVICE_LOADED, Color.AMBER, Paint.valueOf("#fadb2a"));
 	// Shows that the Veyon device is currently selected
-	public final static Color PHYSICAL_LP_COLOR_DEVICE_ACTIVE = Color.GREEN;
+	public final static LaunchpadColor LP_COLOR_DEVICE_ACTIVE =
+			new LaunchpadColor(ColorType.DEVICE_ACTIVE, Color.GREEN, Paint.valueOf("#00d11f"));
 	// Shows that the Veyon device was previously not accessible
-	public final static Color PHYSICAL_LP_COLOR_DEVICE_FAILED = Color.RED;
+	public final static LaunchpadColor LP_COLOR_DEVICE_FAILED =
+			new LaunchpadColor(ColorType.DEVICE_FAILED, Color.RED, Paint.valueOf("#f72d2d"));
 	
 	// MENU BUTTONS CONTEXT
 	
 	// Shows that the action is not selected
-	public final static Color PHYSICAL_LP_COLOR_ACTION_CONTEXT_INACTIVE = Color.ORANGE;
+	public final static LaunchpadColor LP_COLOR_ACTION_CONTEXT_INACTIVE = 
+			new LaunchpadColor(ColorType.CONTEXT_INACTIVE, Color.ORANGE, Paint.valueOf("#fca821"));
 	// Shows that the action is selected
-	public final static Color PHYSICAL_LP_COLOR_ACTION_CONTEXT_ACTIVE = Color.GREEN;
+	public final static LaunchpadColor LP_COLOR_ACTION_CONTEXT_ACTIVE =
+			new LaunchpadColor(ColorType.CONTEXT_ACTIVE, Color.GREEN, Paint.valueOf("#00d11f"));
 	// Color for remote access stop button
-	public final static Color PHYSICAL_LP_COLOR_ACTION_CONTEXT_STOP = Color.of(2, 0);
+	public final static LaunchpadColor LP_COLOR_ACTION_CONTEXT_STOP =
+			new LaunchpadColor(ColorType.CONTEXT_STOP, Color.of(2, 0), Paint.valueOf("#d60f26"));
 	
 	// BRIGHTNESS
 	
@@ -132,25 +141,7 @@ public final class Configuration {
 	
 	/*
 	 * ###########################################################################
-	 *                       VIRTUAL LAUNCHPAD - COLOR SETTINGS
-	 * ###########################################################################
-	 * 
-	 * Description: Settings for program's context visualization on the virtual Launchpad.
-	 */
-	
-	// Blank color (no color)
-	public final static Paint VIRTUAL_LP_COLOR_DEFAULT = Paint.valueOf("#a4a4a4");
-	
-	// DEVICE PADS
-	
-	// Shows that the Veyon device is loaded on the Launchpad
-	public final static Paint VIRTUAL_LP_COLOR_DEVICE_LOADED = Paint.valueOf("#fadb2a");
-	// Shows that the action is selected
-	public final static Paint VIRTUAL_LP_COLOR_ACTION_CONTEXT_ACTIVE = Paint.valueOf("#00d11f");
-	
-	/*
-	 * ###########################################################################
-	 *                      		PAD BLINKING SETTINGS
+	 *                      	  PAD BLINKING SETTINGS
 	 * ###########################################################################
 	 * 
 	 * Description: Settings for pad blinking rates.
@@ -163,7 +154,7 @@ public final class Configuration {
 	
 	/*
 	 * ###########################################################################
-	 *                        CONTEXT BUTTON MAPPINGS
+	 *                            CONTEXT BUTTON MAPPINGS
 	 * ###########################################################################
 	 * 
 	 * Description: Settings for Launchpad's button mappings for certain contexts.
@@ -246,5 +237,19 @@ public final class Configuration {
 	 * ###########################################################################
 	 */
 	
+	/*
+	 * ###########################################################################
+	 *                           		FXML FILES
+	 * ###########################################################################
+	 * 
+	 * Description: Defines where the FXML files for JavaFX are
+	 * stored on the system.
+	 */
+	
+	// The root directory for the files
+	public final static String GUI_FXML_ROOT_DIR = "./scenes/";
+	
+	// Main - Virtual Launchpad Scene FXML file.
+	public final static String GUI_MAIN_FXML_PATH = GUI_FXML_ROOT_DIR + "main.fxml";
 
 }

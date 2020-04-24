@@ -7,7 +7,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.concurrent.CountDownLatch;
 
-import dev.fuzzysearch.launchpadveyon.launchpad.control.LaunchpadLightManager;
+import dev.fuzzysearch.launchpadveyon.lights.LaunchpadLightManager;
 import dev.fuzzysearch.launchpadveyon.main.manager.ProgramManager;
 import net.thecodersbreakfast.lp4j.api.BackBufferOperation;
 import net.thecodersbreakfast.lp4j.api.Pad;
@@ -96,14 +96,14 @@ public class VeyonProcessExecutor implements Runnable {
 			lightManager.removeSelectedPad();
 			
 			lightManager.blinkPad(pad, 
-					PHYSICAL_LP_COLOR_DEVICE_FAILED, PHYSICAL_LP_COLOR_DEVICE_LOADED, PHYSICAL_LP_COLOR_DEVICE_FAILED,
+					LP_COLOR_DEVICE_FAILED, LP_COLOR_DEVICE_LOADED, LP_COLOR_DEVICE_FAILED,
 					DEFAULT_ERROR_BLINK_TIMES, DEFAULT_ERROR_BLINK_MILLISECONDS);
 		
-			lightManager.setPadLight(pad, PHYSICAL_LP_COLOR_DEVICE_FAILED, BackBufferOperation.COPY);
+			lightManager.setPadLight(pad, LP_COLOR_DEVICE_FAILED, BackBufferOperation.COPY);
 		}
 		else if(processOutput.equals(VEYON_CLI_OK)) {
 			manager.getLightManager().setPadLight(
-					pad, PHYSICAL_LP_COLOR_DEVICE_LOADED, BackBufferOperation.COPY);
+					pad, LP_COLOR_DEVICE_LOADED, BackBufferOperation.COPY);
 		}
 	}
 	

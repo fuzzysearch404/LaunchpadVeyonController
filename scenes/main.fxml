@@ -32,7 +32,7 @@
             <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#414243" height="459.0" layoutX="50.0" layoutY="36.0" stroke="BLACK" strokeLineCap="ROUND" strokeLineJoin="ROUND" strokeType="OUTSIDE" strokeWidth="5.0" width="491.0" />
             <Rectangle id="p00" fx:id="p00" arcHeight="5.0" arcWidth="5.0" fill="#a4a4a4" height="35.0" layoutX="62.0" layoutY="152.0" onMouseClicked="#launchpadPadPressedEvent" stroke="BLACK" strokeLineCap="ROUND" strokeLineJoin="ROUND" strokeType="OUTSIDE" width="35.0" />
             <Rectangle id="p10" fx:id="p10" arcHeight="5.0" arcWidth="5.0" fill="#a4a4a4" height="35.0" layoutX="102.0" layoutY="152.0" onMouseClicked="#launchpadPadPressedEvent" stroke="BLACK" strokeLineCap="ROUND" strokeLineJoin="ROUND" strokeType="OUTSIDE" width="35.0" />
-            <Rectangle id="p20" fx:id="p20" arcHeight="5.0" arcWidth="5.0" fill="#a4a4a4" height="35.0" layoutX="142.0" layoutY="152.0" onMouseClicked="#launchpadPadPressedEvent" stroke="BLACK" strokeLineJoin="ROUND" strokeMiterLimit="100.0" strokeType="OUTSIDE" strokeWidth="2.0" width="35.0" />
+            <Rectangle id="p20" fx:id="p20" arcHeight="5.0" arcWidth="5.0" fill="#a4a4a4" height="35.0" layoutX="142.0" layoutY="152.0" onMouseClicked="#launchpadPadPressedEvent" stroke="BLACK" strokeLineJoin="ROUND" strokeMiterLimit="100.0" strokeType="OUTSIDE" width="35.0" />
             <Rectangle id="p30" fx:id="p30" arcHeight="5.0" arcWidth="5.0" fill="#a4a4a4" height="35.0" layoutX="182.0" layoutY="152.0" onMouseClicked="#launchpadPadPressedEvent" stroke="BLACK" strokeLineCap="ROUND" strokeLineJoin="ROUND" strokeType="OUTSIDE" width="35.0" />
             <Rectangle id="p40" fx:id="p40" arcHeight="5.0" arcWidth="5.0" fill="#a4a4a4" height="35.0" layoutX="222.0" layoutY="152.0" onMouseClicked="#launchpadPadPressedEvent" stroke="BLACK" strokeLineCap="ROUND" strokeLineJoin="ROUND" strokeType="OUTSIDE" width="35.0" />
             <Rectangle id="p50" fx:id="p50" arcHeight="5.0" arcWidth="5.0" fill="#a4a4a4" height="35.0" layoutX="262.0" layoutY="152.0" onMouseClicked="#launchpadPadPressedEvent" stroke="BLACK" strokeLineCap="ROUND" strokeLineJoin="ROUND" strokeType="OUTSIDE" width="35.0" />
@@ -94,19 +94,19 @@
             <Rectangle id="p57" fx:id="p57" arcHeight="5.0" arcWidth="5.0" fill="#a4a4a4" height="35.0" layoutX="262.0" layoutY="432.0" onMouseClicked="#launchpadPadPressedEvent" stroke="BLACK" strokeLineCap="ROUND" strokeLineJoin="ROUND" strokeType="OUTSIDE" width="35.0" />
             <Rectangle id="p67" fx:id="p67" arcHeight="5.0" arcWidth="5.0" fill="#a4a4a4" height="35.0" layoutX="302.0" layoutY="432.0" onMouseClicked="#launchpadPadPressedEvent" stroke="BLACK" strokeLineCap="ROUND" strokeLineJoin="ROUND" strokeType="OUTSIDE" width="35.0" />
             <Rectangle id="p77" fx:id="p77" arcHeight="5.0" arcWidth="5.0" fill="#a4a4a4" height="35.0" layoutX="342.0" layoutY="432.0" onMouseClicked="#launchpadPadPressedEvent" stroke="BLACK" strokeLineCap="ROUND" strokeLineJoin="ROUND" strokeType="OUTSIDE" width="35.0" />
-            <Circle fill="#a4a4a4" layoutX="80.0" layoutY="130.0" radius="15.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="2.0" />
-            <Circle fill="#a4a4a4" layoutX="120.0" layoutY="130.0" radius="15.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="2.0" />
+            <Circle id="up" fx:id="up" fill="#a4a4a4" layoutX="80.0" layoutY="130.0" onMouseClicked="#launchpadButtonPressedEvent" radius="15.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="2.0" />
+            <Circle id="down" fx:id="down" fill="#a4a4a4" layoutX="120.0" layoutY="130.0" onMouseClicked="#launchpadButtonPressedEvent" radius="15.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="2.0" />
             <Circle fill="#a4a4a4" layoutX="160.0" layoutY="130.0" radius="15.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="2.0" />
             <Circle fill="#a4a4a4" layoutX="200.0" layoutY="130.0" radius="15.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="2.0" />
             <Circle fill="#a4a4a4" layoutX="240.0" layoutY="130.0" radius="15.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="2.0" />
-            <Circle fill="#a4a4a4" layoutX="280.0" layoutY="130.0" radius="15.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="2.0" />
-            <Circle fill="#a4a4a4" layoutX="320.0" layoutY="130.0" radius="15.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="2.0" />
+            <Circle id="user1" fx:id="user1" fill="#a4a4a4" layoutX="280.0" layoutY="130.0" onMouseClicked="#launchpadButtonPressedEvent" radius="15.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="2.0" />
+            <Circle id="user2" fx:id="user2" fill="#a4a4a4" layoutX="320.0" layoutY="130.0" onMouseClicked="#launchpadButtonPressedEvent" radius="15.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="2.0" />
             <Circle fill="#a4a4a4" layoutX="360.0" layoutY="130.0" radius="15.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="2.0" />
             <Circle fill="#a4a4a4" layoutX="400.0" layoutY="170.0" radius="15.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="2.0" />
             <Circle fill="#a4a4a4" layoutX="400.0" layoutY="210.0" radius="15.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="2.0" />
             <Circle fill="#a4a4a4" layoutX="400.0" layoutY="250.0" radius="15.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="2.0" />
             <Circle fill="#a4a4a4" layoutX="400.0" layoutY="293.0" radius="15.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="2.0" />
-            <Circle fill="#a4a4a4" layoutX="400.0" layoutY="330.0" radius="15.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="2.0" />
+            <Circle id="stop" fx:id="stop" fill="#a4a4a4" layoutX="400.0" layoutY="330.0" onMouseClicked="#launchpadButtonPressedEvent" radius="15.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="2.0" />
             <Circle fill="#a4a4a4" layoutX="400.0" layoutY="370.0" radius="15.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="2.0" />
             <Circle fill="#a4a4a4" layoutX="400.0" layoutY="410.0" radius="15.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="2.0" />
             <Circle fill="#a4a4a4" layoutX="400.0" layoutY="450.0" radius="15.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="2.0" />
