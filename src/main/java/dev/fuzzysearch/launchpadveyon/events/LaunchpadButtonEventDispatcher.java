@@ -106,9 +106,7 @@ public class LaunchpadButtonEventDispatcher {
 		ProgramManager manager = ProgramManager.getInstance();
 			
 		// Destroy the Veyon process.
-		Process process = manager.getActiveVeyonProcess();
-		if(process != null)
-			process.destroy();
+		manager.destroyCurrentVeyonProcess();
 			
 		// Finally set Pad light back to loaded.
 		Device activeDevice = manager.getActiveVeyonDevice();
