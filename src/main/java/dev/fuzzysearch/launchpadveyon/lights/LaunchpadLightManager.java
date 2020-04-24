@@ -205,7 +205,7 @@ public class LaunchpadLightManager {
 				setPadLight(selectedPad, LP_COLOR_DEVICE_LOADED, BackBufferOperation.COPY);
 			else if(padRepresentsDevice)
 				setPadLight(selectedPad, LP_COLOR_DEVICE_EDIT, BackBufferOperation.COPY);
-			else
+			else if(isEditMode)
 				setPadLight(selectedPad, LP_COLOR_DEVICE_ADD, BackBufferOperation.COPY);
 		}
 		// Then set the color of the new selected pad
