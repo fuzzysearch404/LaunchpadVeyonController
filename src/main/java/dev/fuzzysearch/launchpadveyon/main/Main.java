@@ -1,7 +1,6 @@
 package dev.fuzzysearch.launchpadveyon.main;
 
 import java.io.FileInputStream;
-import java.io.IOException;
 
 import dev.fuzzysearch.launchpadveyon.config.exceptions.VeyonUnavailableException;
 import dev.fuzzysearch.launchpadveyon.lights.LaunchpadLightManager;
@@ -11,8 +10,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-import net.thecodersbreakfast.lp4j.api.Launchpad;
-import net.thecodersbreakfast.lp4j.api.LaunchpadClient;
 
 import static dev.fuzzysearch.launchpadveyon.config.Configuration.GUI_MAIN_FXML_PATH;
 
@@ -24,6 +21,7 @@ public class Main extends Application {
 			app.run();
 		} catch (VeyonUnavailableException e) {
 			e.printStackTrace();
+			return;
 		}
 		
 		System.out.println("[Init]: Starting JavaFX");
@@ -49,25 +47,9 @@ public class Main extends Application {
 		lightManager.initBrightness();
 	}
 	
-	/**
-	 * Clears and closes the physical Launchpad
-	 * if it was previously active.
-	 */
 	@Override
 	public void stop() {
-		LaunchpadClient launchpadClient = ProgramManager.getInstance().getLaunchpadClient();
-		if(launchpadClient != null)
-			launchpadClient.reset();
-		
-		Launchpad physicalLaunchpad = ProgramManager.getInstance().getMidiLaunchpad();
-		if(physicalLaunchpad != null) {
-			try {
-				physicalLaunchpad.close();
-			} catch (IOException e) {
-				e.printStackTrace();
-				// To not keep the program alive if Launchpad closing failed.
-				System.exit(1); 
-			}
-		}
+		ProgramManager.getInstance().shutdownProgram();
 	}
+	
 }
