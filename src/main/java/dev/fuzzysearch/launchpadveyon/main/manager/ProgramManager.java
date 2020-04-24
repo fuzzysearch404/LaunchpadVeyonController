@@ -199,7 +199,21 @@ public class ProgramManager {
 		return false;
 	}
 	
+	/**
+	 * Destroys the current Veyon process,
+	 * if it exists.
+	 */
+	public void destroyCurrentVeyonProcess() {
+    	if(activeVeyonProcess != null)
+    		activeVeyonProcess.destroy();
+	}
 
+	/**
+	 * Creates or returns a single existing
+	 * instance of this class.
+	 * 
+	 * @return {@link ProgramManager}
+	 */
 	public static ProgramManager getInstance() { 
         if (instance == null) 
             instance = new ProgramManager(); 

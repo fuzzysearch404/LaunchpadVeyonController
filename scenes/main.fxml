@@ -126,6 +126,16 @@
                   <Font name="Impact" size="19.0" />
                </font>
             </Label>
+            <Label layoutX="76.0" layoutY="86.0" text="+" textFill="WHITE">
+               <font>
+                  <Font name="Impact" size="16.0" />
+               </font>
+            </Label>
+            <Label layoutX="116.0" layoutY="86.0" text="-" textFill="WHITE">
+               <font>
+                  <Font name="Impact" size="16.0" />
+               </font>
+            </Label>
       </children>
     </AnchorPane>
   </children>

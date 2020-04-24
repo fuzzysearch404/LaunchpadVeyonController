@@ -214,8 +214,10 @@ public class VirtualLaunchpadController {
 		ProgramManager manager = ProgramManager.getInstance();
 		manager.setEditMode((manager.isEditMode())? false: true);
 		
-		if(manager.isEditMode())
+		if(manager.isEditMode()) {
+			manager.destroyCurrentVeyonProcess();
 			manager.getLightManager().lightUpPadsForConfiguration();
+		}
 		else
 			manager.getLightManager().lightUpPadsByDevices();
 	}
