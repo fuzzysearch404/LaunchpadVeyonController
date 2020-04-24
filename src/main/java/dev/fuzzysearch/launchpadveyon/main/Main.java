@@ -1,6 +1,7 @@
 package dev.fuzzysearch.launchpadveyon.main;
 
 import java.io.FileInputStream;
+import java.io.IOException;
 
 import dev.fuzzysearch.launchpadveyon.config.exceptions.VeyonUnavailableException;
 import dev.fuzzysearch.launchpadveyon.main.manager.ProgramManager;
@@ -9,6 +10,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import net.thecodersbreakfast.lp4j.api.Launchpad;
 import net.thecodersbreakfast.lp4j.api.LaunchpadClient;
 
 public class Main extends Application {
@@ -36,12 +38,24 @@ public class Main extends Application {
 	}
 	
 	/**
-	 * Finalizes the 
+	 * Clears and closes the physical Launchpad
+	 * if it was previously active.
 	 */
 	@Override
 	public void stop() {
 		LaunchpadClient launchpadClient = ProgramManager.getInstance().getLaunchpadClient();
 		if(launchpadClient != null)
 			launchpadClient.reset();
+		
+		Launchpad physicalLaunchpad = ProgramManager.getInstance().getMidiLaunchpad();
+		if(physicalLaunchpad != null) {
+			try {
+				physicalLaunchpad.close();
+			} catch (IOException e) {
+				e.printStackTrace();
+				// To not keep the program alive if Launchpad closing failed.
+				System.exit(1); 
+			}
+		}
 	}
 }

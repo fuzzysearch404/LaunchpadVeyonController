@@ -28,7 +28,7 @@ public class ProgramManager {
 	private boolean launchpadConnected = false;
 	
 	// LP4J API
-	private MidiLaunchpad launchpad;
+	private MidiLaunchpad midiLaunchpad;
 	private LaunchpadClient launchpadClient;
 	
 	// Event dispatchers
@@ -66,12 +66,12 @@ public class ProgramManager {
 		this.launchpadConnected = launchpadConnected;
 	}
 	
-	public MidiLaunchpad getLaunchpad() {
-		return launchpad;
+	public MidiLaunchpad getMidiLaunchpad() {
+		return midiLaunchpad;
 	}
 
-	public void setLaunchpad(MidiLaunchpad launchpad) {
-		this.launchpad = launchpad;
+	public void setMidiLaunchpad(MidiLaunchpad launchpad) {
+		this.midiLaunchpad = launchpad;
 	}
 
 	public LaunchpadClient getLaunchpadClient() {
