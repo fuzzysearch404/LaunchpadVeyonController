@@ -23,8 +23,8 @@ import net.thecodersbreakfast.lp4j.api.Pad;
  */
 public class LaunchpadButtonEventDispatcher {
 	
-	public void dispatch(Button button, long timestamp) {
-		System.out.println("[" + timestamp + "] Pad pressed event : " + button);
+	public void dispatch(Button button, String launchpadName) {
+		System.out.println("[" + launchpadName + "] Button pressed event : " + button);
 		
 		 /* Switches between VeyonCommand types
 		 * to be executed.
@@ -114,7 +114,7 @@ public class LaunchpadButtonEventDispatcher {
 		Device activeDevice = manager.getActiveVeyonDevice();
 		if(activeDevice != null) {
 			Pad pad = activeDevice.getPad();
-			manager.getLightManager().setPadLight(pad, PHYSICAL_LP_COLOR_DEVICE_LOADED, BackBufferOperation.COPY);
+			manager.getLightManager().setPadLight(pad, LP_COLOR_DEVICE_LOADED, BackBufferOperation.COPY);
 		}
 	}
 

@@ -4,6 +4,7 @@ import java.io.FileInputStream;
 import java.io.IOException;
 
 import dev.fuzzysearch.launchpadveyon.config.exceptions.VeyonUnavailableException;
+import dev.fuzzysearch.launchpadveyon.lights.LaunchpadLightManager;
 import dev.fuzzysearch.launchpadveyon.main.manager.ProgramManager;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -12,6 +13,8 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import net.thecodersbreakfast.lp4j.api.Launchpad;
 import net.thecodersbreakfast.lp4j.api.LaunchpadClient;
+
+import static dev.fuzzysearch.launchpadveyon.config.Configuration.GUI_MAIN_FXML_PATH;
 
 public class Main extends Application {
 
@@ -23,18 +26,27 @@ public class Main extends Application {
 			e.printStackTrace();
 		}
 		
+		System.out.println("[Init]: Starting JavaFX");
 		launch(args);
 	}
 
 	@Override
 	public void start(Stage primary) throws Exception {
-		String fxmlDocPath = "./scenes/test.fxml";
-		FileInputStream fxmlStream = new FileInputStream(fxmlDocPath);
+		FileInputStream fxmlStream = new FileInputStream(GUI_MAIN_FXML_PATH);
 		FXMLLoader loader = new FXMLLoader();
 		VBox root = loader.load(fxmlStream);
+		ProgramManager.getInstance().setVirtualLaunchpadController(loader.getController());
 		primary.setScene(new Scene(root));
         primary.show();
 
+        /** We could not do this before, because the VirtualLaunchpadController did not exist before
+         *  and it is required for the light manager.
+         */
+        System.out.println("[Init]: Lighting up Launchpads");
+        LaunchpadLightManager lightManager = ProgramManager.getInstance().getLightManager();
+        lightManager.lightUpContextSwitchButtons();
+		lightManager.lightUpPadsByDevices();
+		lightManager.initBrightness();
 	}
 	
 	/**

@@ -13,7 +13,6 @@ import javax.sound.midi.MidiUnavailableException;
 import dev.fuzzysearch.launchpadveyon.config.ConfigurationFileParser;
 import dev.fuzzysearch.launchpadveyon.config.exceptions.ProgramUnconfiguredException;
 import dev.fuzzysearch.launchpadveyon.config.exceptions.VeyonUnavailableException;
-import dev.fuzzysearch.launchpadveyon.launchpad.control.LaunchpadLightManager;
 import dev.fuzzysearch.launchpadveyon.launchpad.listeners.MainLaunchpadListener;
 import dev.fuzzysearch.launchpadveyon.main.manager.ProgramManager;
 import net.thecodersbreakfast.lp4j.api.LaunchpadException;
@@ -27,10 +26,10 @@ public class MainFacade {
 			throw new VeyonUnavailableException("This system's environment"
 					+ "does not have Veyon CLI available");
 		
-		System.out.println("[Init]: Creating ProgramManager...");
+		System.out.println("[Init]: Creating ProgramManager");
 		ProgramManager manager = ProgramManager.getInstance();
 
-		System.out.println("[Init]: Detecting and setting up physical Launchpad...");
+		System.out.println("[Init]: Detecting and setting up physical Launchpad");
 		try {
 			MidiLaunchpad launchpad = new MidiLaunchpad(MidiDeviceConfiguration.autodetect());
 			manager.setMidiLaunchpad(launchpad);
@@ -48,14 +47,8 @@ public class MainFacade {
 					+ "Entering virtual Launchpad only mode...");
 		}
 		
-		LaunchpadLightManager lightManager = manager.getLightManager();
-		
-		System.out.println("[Init]: Reading the configuration and preparing the data...");
+		System.out.println("[Init]: Reading the configuration and preparing the data");
 		initConfiguration();
-
-		lightManager.lightUpContextSwitchButtons();
-		lightManager.lightUpPadsByDevices();
-		lightManager.initBrightness();
 	}
 	
 	private void initConfiguration() {

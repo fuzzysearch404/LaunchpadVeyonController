@@ -7,9 +7,10 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.Shape;
+import net.thecodersbreakfast.lp4j.api.Button;
 import net.thecodersbreakfast.lp4j.api.Launchpad;
 import net.thecodersbreakfast.lp4j.api.Pad;
-
+import dev.fuzzysearch.launchpadveyon.events.LaunchpadButtonEventDispatcher;
 import dev.fuzzysearch.launchpadveyon.events.LaunchpadPadEventDispatcher;
 
 /**
@@ -25,6 +26,8 @@ public class VirtualLaunchpadController {
 	private AnchorPane mainContainer;
 	private LaunchpadPadEventDispatcher padDispatcher = 
 			ProgramManager.getInstance().getPadEventDispatcher();
+	private LaunchpadButtonEventDispatcher buttonDispatcher = 
+			ProgramManager.getInstance().getButtonEventDispatcher();
 	
 	/**
 	 * This event is fired whenever a Pad
@@ -38,6 +41,20 @@ public class VirtualLaunchpadController {
 		Pad pad = decodePadID(node.getId());
 		
 		padDispatcher.dispatch(pad, "VIRTUAL LAUNCHPAD");
+	}
+	
+	/**
+	 * This event is fired whenever a Button
+	 * is pressed on the virtual Launchpad.
+	 * 
+	 * @param m - {@link MouseEvent} mouse event payload
+	 */
+	@FXML
+	protected void launchpadButtonPressedEvent(MouseEvent m) {
+		Node node = (Node) m.getSource();
+		Button button = decodeButtonID(node.getId());
+		
+		buttonDispatcher.dispatch(button, "VIRTUAL LAUNCHPAD");
 	}
 	
 	/**
@@ -84,6 +101,58 @@ public class VirtualLaunchpadController {
 	}
 	
 	/**
+	 * Converts  FXML {@link Node} ID
+	 * to {@link Launchpad}'s {@link Button} object.
+	 * 
+	 * @param id - ID to decode
+	 * @return {@link Button} the matching button
+	 * 
+	 * @see #decodeButtonID(String)
+	 */
+	public static Button decodeButtonID(String id) {
+		switch (id) {
+		case "user1":
+			return Button.USER_1;
+		case "user2":
+			return Button.USER_2;
+		case "stop":
+			return Button.STOP;
+		case "up":
+			return Button.UP;
+		case "down":
+			return Button.DOWN;
+		default:
+			throw new IllegalArgumentException("Unexpected value: " + id);
+		}
+	}
+	
+	/**
+	 * Converts {@link Launchpad}'s {@link Button}
+	 * to FXML {@link Node} object ID.
+	 * 
+	 * @param button - {@link Button} to encode
+	 * @return {@link String} - the generated ID
+	 * 
+	 * @see #encodeButtonID(Button)
+	 */
+	public static String encodeButtonID(Button button) {
+		switch (button) {
+		case USER_1:
+			return "user1";
+		case USER_2:
+			return "user2";
+		case STOP:
+			return "stop";
+		case UP:
+			return "up";
+		case DOWN:
+			return "down";
+		default:
+			throw new IllegalArgumentException("Unexpected value: " + button);
+		}
+	}
+	
+	/**
 	 * Sets a color for a certain pad on the
 	 * virtual Launchpad.
 	 * 
@@ -94,6 +163,44 @@ public class VirtualLaunchpadController {
 	 */
 	public void setPadColor(String id, Paint color) {
 		Shape shape = (Shape) mainContainer.lookup('#' + id);
+		if(shape != null) shape.setFill(color);
+	}
+	
+	/**
+	 * Sets a color for a certain pad on the
+	 * virtual Launchpad.
+	 * 
+	 * @param pad - {@link Pad} the desired pad
+	 * @param color - {@link Paint} of the desired paint
+	 */
+	public void setPadColor(Pad pad, Paint color) {
+		Shape shape = (Shape) mainContainer.lookup('#' + encodePadID(pad));
+		if(shape != null) shape.setFill(color);
+	}
+	
+	/**
+	 * Sets a color for a certain button on the
+	 * virtual Launchpad.
+	 * 
+	 * @param id - ID of the desired button
+	 * @param color - {@link Paint} of the desired paint
+	 * 
+	 * @see #encodeButtonID(Pad) Button ID generation
+	 */
+	public void setButtonColor(String id, Paint color) {
+		Shape shape = (Shape) mainContainer.lookup('#' + id);
+		if(shape != null) shape.setFill(color);
+	}
+	
+	/**
+	 * Sets a color for a certain button on the
+	 * virtual Launchpad.
+	 * 
+	 * @param pad - {@link Button} the desired button
+	 * @param color - {@link Paint} of the desired paint
+	 */
+	public void setButtonColor(Button button, Paint color) {
+		Shape shape = (Shape) mainContainer.lookup('#' + encodeButtonID(button));
 		if(shape != null) shape.setFill(color);
 	}
 

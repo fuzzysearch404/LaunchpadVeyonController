@@ -30,7 +30,7 @@ public class MainLaunchpadListener extends LaunchpadListenerAdapter {
     
     @Override
     public void onButtonPressed(Button button, long timestamp) {
-    	buttonEventDispatcher.dispatch(button, timestamp);
+    	buttonEventDispatcher.dispatch(button, "PHYSICAL LAUNCHPAD");
     }
 
 }

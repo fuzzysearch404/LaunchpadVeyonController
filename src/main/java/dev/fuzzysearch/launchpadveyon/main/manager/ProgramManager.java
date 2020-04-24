@@ -4,9 +4,10 @@ import java.util.ArrayList;
 
 import static dev.fuzzysearch.launchpadveyon.config.Configuration.*;
 
+import dev.fuzzysearch.launchpadveyon.app.controllers.VirtualLaunchpadController;
 import dev.fuzzysearch.launchpadveyon.events.LaunchpadButtonEventDispatcher;
 import dev.fuzzysearch.launchpadveyon.events.LaunchpadPadEventDispatcher;
-import dev.fuzzysearch.launchpadveyon.launchpad.control.LaunchpadLightManager;
+import dev.fuzzysearch.launchpadveyon.lights.LaunchpadLightManager;
 import dev.fuzzysearch.launchpadveyon.veyon.VeyonActionType;
 import dev.fuzzysearch.launchpadveyon.veyon.models.Device;
 import net.thecodersbreakfast.lp4j.api.LaunchpadClient;
@@ -30,6 +31,9 @@ public class ProgramManager {
 	// LP4J API
 	private MidiLaunchpad midiLaunchpad;
 	private LaunchpadClient launchpadClient;
+	
+	// Virtual Launchpad Controller
+	private VirtualLaunchpadController virtualLaunchpadController;
 	
 	// Event dispatchers
 	private LaunchpadPadEventDispatcher padEventDispatcher = new LaunchpadPadEventDispatcher();
@@ -80,6 +84,14 @@ public class ProgramManager {
 
 	public void setLaunchpadClient(LaunchpadClient launchpadClient) {
 		this.launchpadClient = launchpadClient;
+	}
+
+	public VirtualLaunchpadController getVirtualLaunchpadController() {
+		return virtualLaunchpadController;
+	}
+
+	public void setVirtualLaunchpadController(VirtualLaunchpadController virtualLaunchpadController) {
+		this.virtualLaunchpadController = virtualLaunchpadController;
 	}
 
 	public LaunchpadPadEventDispatcher getPadEventDispatcher() {
