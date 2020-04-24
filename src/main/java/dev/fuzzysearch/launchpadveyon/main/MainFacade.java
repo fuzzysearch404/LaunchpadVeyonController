@@ -33,7 +33,7 @@ public class MainFacade {
 		System.out.println("[Init]: Detecting and setting up physical Launchpad...");
 		try {
 			MidiLaunchpad launchpad = new MidiLaunchpad(MidiDeviceConfiguration.autodetect());
-			manager.setLaunchpad(launchpad);
+			manager.setMidiLaunchpad(launchpad);
 			manager.setLaunchpadClient(launchpad.getClient());
 			
 			setLaunchpadListeners();
@@ -68,7 +68,7 @@ public class MainFacade {
 	}
 	
 	private void setLaunchpadListeners() {
-		ProgramManager.getInstance().getLaunchpad().setListener(new MainLaunchpadListener());
+		ProgramManager.getInstance().getMidiLaunchpad().setListener(new MainLaunchpadListener());
 	}
 	
 	/**
