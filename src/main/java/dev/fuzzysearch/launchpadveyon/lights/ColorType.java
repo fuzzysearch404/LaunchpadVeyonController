@@ -18,6 +18,14 @@ public enum ColorType {
 	 */
 	DEVICE_FAILED,
 	/**
+	 * Shows that the used Pads are being edited
+	 */
+	DEVICE_EDIT,
+	/**
+	 * Shows that the empty Pads are being edited
+	 */
+	DEVICE_ADD,
+	/**
 	 * Shows that the action is not selected.
 	 */
 	CONTEXT_INACTIVE,

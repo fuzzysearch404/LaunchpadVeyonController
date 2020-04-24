@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.CheckMenuItem?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
@@ -10,14 +11,14 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<VBox prefHeight="600.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dev.fuzzysearch.launchpadveyon.app.controllers.VirtualLaunchpadController">
+<VBox prefHeight="560.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dev.fuzzysearch.launchpadveyon.app.controllers.VirtualLaunchpadController">
   <children>
     <MenuBar style="-fx-background-color: #c9c9c9;" VBox.vgrow="NEVER">
       <menus>
         <Menu mnemonicParsing="false" text="File">
           <items>
-            <MenuItem mnemonicParsing="false" text="Preferences…" />
-            <MenuItem mnemonicParsing="false" text="Quit" />
+                  <CheckMenuItem mnemonicParsing="false" onAction="#configurationModeEvent" onMenuValidation="#configurationModeEvent" text="Configure Pads" />
+            <MenuItem mnemonicParsing="false" onAction="#appExitEvent" text="Quit" />
           </items>
         </Menu>
         <Menu mnemonicParsing="false" text="Help">

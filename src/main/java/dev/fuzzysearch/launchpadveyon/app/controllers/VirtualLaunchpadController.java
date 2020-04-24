@@ -203,5 +203,31 @@ public class VirtualLaunchpadController {
 		Shape shape = (Shape) mainContainer.lookup('#' + encodeButtonID(button));
 		if(shape != null) shape.setFill(color);
 	}
+	
+	/**
+	 * This event is fired whenever user
+	 * clicks the menu button that
+	 * enables/disables the edit mode.
+	 */
+	@FXML
+	protected void configurationModeEvent() {
+		ProgramManager manager = ProgramManager.getInstance();
+		manager.setEditMode((manager.isEditMode())? false: true);
+		
+		if(manager.isEditMode())
+			manager.getLightManager().lightUpPadsForConfiguration();
+		else
+			manager.getLightManager().lightUpPadsByDevices();
+	}
+	
+	/**
+	 * This event is fired whenever user
+	 * clicks the menu button that
+	 * quits the program.
+	 */
+	@FXML
+	protected void appExitEvent() {
+		ProgramManager.getInstance().shutdownProgram();
+	}
 
 }

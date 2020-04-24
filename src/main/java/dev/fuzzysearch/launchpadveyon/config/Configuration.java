@@ -121,6 +121,12 @@ public final class Configuration {
 	// Shows that the Veyon device was previously not accessible
 	public final static LaunchpadColor LP_COLOR_DEVICE_FAILED =
 			new LaunchpadColor(ColorType.DEVICE_FAILED, Color.RED, Paint.valueOf("#f72d2d"));
+	// Shows that the used Pads are being edited
+	public final static LaunchpadColor LP_COLOR_DEVICE_EDIT =
+			new LaunchpadColor(ColorType.DEVICE_EDIT, Color.RED, Paint.valueOf("#f72d2d"));
+	// Shows that the empty Pads are being edited
+	public final static LaunchpadColor LP_COLOR_DEVICE_ADD =
+			new LaunchpadColor(ColorType.DEVICE_ADD, Color.BLACK, Paint.valueOf("#26d7ff"));
 	
 	// MENU BUTTONS CONTEXT
 	

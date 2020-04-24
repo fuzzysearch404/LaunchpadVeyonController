@@ -22,6 +22,7 @@ import net.thecodersbreakfast.lp4j.midi.MidiLaunchpad;
 public class MainFacade {
 
 	public void run() throws VeyonUnavailableException {
+		System.out.println("[Init]: Checking Veyon availability on this system");
 		if(!ensureVeyonisAvailable())
 			throw new VeyonUnavailableException("This system's environment"
 					+ "does not have Veyon CLI available");

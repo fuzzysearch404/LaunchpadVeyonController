@@ -1,5 +1,6 @@
 package dev.fuzzysearch.launchpadveyon.main.manager;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 import static dev.fuzzysearch.launchpadveyon.config.Configuration.*;
@@ -45,12 +46,15 @@ public class ProgramManager {
 	// Loaded Veyon devices
 	private ArrayList<Device> loadedDevices;
 	
-	// Current selected action
+	// Current selected Veyon action
 	private VeyonActionType currentAction = DEFAULT_VEYON_ACTION_TYPE;
 	
 	// Veyon's process - e.g. active remote screen view
 	private Process activeVeyonProcess;
 	private Device activeVeyonDevice;
+	
+	// If currently the program is in configuration mode
+	private boolean editMode = false;
 	
 	// Singleton
 	private static ProgramManager instance = null;
@@ -150,6 +154,14 @@ public class ProgramManager {
 		this.activeVeyonDevice = activeVeyonDevice;
 	}
 
+	public boolean isEditMode() {
+		return editMode;
+	}
+
+	public void setEditMode(boolean editMode) {
+		this.editMode = editMode;
+	}
+
 	/**
 	 * Returns {@link Device} mapped by {@link Pad}.
 	 * If the device is not present, returns null.
@@ -194,5 +206,25 @@ public class ProgramManager {
   
         return instance; 
     }
+	
+	/**
+	 * Clears and closes the physical Launchpad
+	 * if it was previously active.
+	 * At the very end shuts down the program.
+	 */
+	public void shutdownProgram() {
+		if(launchpadClient != null)
+			launchpadClient.reset();
+
+		if(midiLaunchpad != null) {
+			try {
+				midiLaunchpad.close();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+		
+		System.exit(1);
+	}
 
 }

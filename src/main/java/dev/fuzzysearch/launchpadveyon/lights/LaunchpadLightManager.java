@@ -7,20 +7,22 @@ import static dev.fuzzysearch.launchpadveyon.config.Configuration.LP_COLOR_ACTIO
 import static dev.fuzzysearch.launchpadveyon.config.Configuration.LP_COLOR_ACTION_CONTEXT_STOP;
 import static dev.fuzzysearch.launchpadveyon.config.Configuration.LP_COLOR_DEFAULT;
 import static dev.fuzzysearch.launchpadveyon.config.Configuration.LP_COLOR_DEVICE_ACTIVE;
+import static dev.fuzzysearch.launchpadveyon.config.Configuration.LP_COLOR_DEVICE_ADD;
+import static dev.fuzzysearch.launchpadveyon.config.Configuration.LP_COLOR_DEVICE_EDIT;
+import static dev.fuzzysearch.launchpadveyon.config.Configuration.LP_COLOR_DEVICE_FAILED;
 import static dev.fuzzysearch.launchpadveyon.config.Configuration.LP_COLOR_DEVICE_LOADED;
 import static dev.fuzzysearch.launchpadveyon.config.Configuration.PHYSICAL_LP_DEFAULT_LIGHT_BRIGHTNESS;
 import static dev.fuzzysearch.launchpadveyon.config.Configuration.VEYON_REMOTEACCESS_CONTROL_BUTTON;
 import static dev.fuzzysearch.launchpadveyon.config.Configuration.VEYON_REMOTEACCESS_STOP_BUTTON;
 import static dev.fuzzysearch.launchpadveyon.config.Configuration.VEYON_REMOTEACCESS_VIEW_BUTTON;
 
-import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map.Entry;
 
 import dev.fuzzysearch.launchpadveyon.app.controllers.VirtualLaunchpadController;
 import dev.fuzzysearch.launchpadveyon.main.manager.ProgramManager;
 import dev.fuzzysearch.launchpadveyon.veyon.VeyonActionType;
 import dev.fuzzysearch.launchpadveyon.veyon.commands.VeyonCommand;
-import dev.fuzzysearch.launchpadveyon.veyon.models.Device;
 import dev.fuzzysearch.launchpadveyon.veyon.utils.VeyonProcessExecutor;
 import javafx.scene.paint.Paint;
 import net.thecodersbreakfast.lp4j.api.BackBufferOperation;
@@ -63,23 +65,66 @@ public class LaunchpadLightManager {
 		ProgramManager manager = ProgramManager.getInstance();
 		LaunchpadClient midiLaunchpadClient = manager.getLaunchpadClient();
 		VirtualLaunchpadController virtualLaunchpadController = manager.getVirtualLaunchpadController();
-		ArrayList<Device> loadedDevices = manager.getLoadedDevices();
-		
-		// Loaded devices are not configurated - cancel.
-		if(loadedDevices == null) 
-			return;
 		
 		Paint deviceLoadedPaint = LP_COLOR_DEVICE_LOADED.getVirtualLaunchpadColor();
+		Paint emptyPaint = LP_COLOR_DEFAULT.getVirtualLaunchpadColor();
+		Color deviceLoadedColor = LP_COLOR_DEVICE_LOADED.getMidiLaunchpadColor();
+		Color emptyColor = LP_COLOR_DEFAULT.getMidiLaunchpadColor();
 		
-		for(Device d: loadedDevices) {
-			Pad pad = d.getPad();
-			
-			if(manager.isLaunchpadConnected())
-				midiLaunchpadClient.setPadLight(pad, LP_COLOR_DEVICE_LOADED.getMidiLaunchpadColor(), BackBufferOperation.COPY);
-			
-			virtualLaunchpadController.setPadColor(pad, deviceLoadedPaint);
-			
-			padsColors.replace(pad, LP_COLOR_DEVICE_LOADED);
+		for(Entry<Pad, LaunchpadColor> e: padsColors.entrySet()) {
+			Pad pad = e.getKey();
+			if(manager.padRepresentsLoadedDevice(pad)) {
+				if(manager.isLaunchpadConnected())
+					midiLaunchpadClient.setPadLight(pad, deviceLoadedColor, BackBufferOperation.COPY);
+				
+				virtualLaunchpadController.setPadColor(pad, deviceLoadedPaint);
+				
+				padsColors.replace(pad, LP_COLOR_DEVICE_LOADED);
+			}
+			else {
+				if(manager.isLaunchpadConnected())
+					midiLaunchpadClient.setPadLight(pad, emptyColor, BackBufferOperation.COPY);
+				
+				virtualLaunchpadController.setPadColor(pad, emptyPaint);
+				
+				padsColors.replace(pad, LP_COLOR_DEFAULT);
+			}
+		}
+		
+	}
+	
+	/**
+	 * Lights up {@link Pad} lights on {@link Launchpad} 
+	 * according to list of devices at the {@link ProgramManager}.
+	 */
+	public void lightUpPadsForConfiguration() {
+		ProgramManager manager = ProgramManager.getInstance();
+		LaunchpadClient midiLaunchpadClient = manager.getLaunchpadClient();
+		VirtualLaunchpadController virtualLaunchpadController = manager.getVirtualLaunchpadController();
+		
+		Paint deviceEditPaint = LP_COLOR_DEVICE_EDIT.getVirtualLaunchpadColor();
+		Paint deviceAddPaint = LP_COLOR_DEVICE_ADD.getVirtualLaunchpadColor();
+		Color deviceEditColor = LP_COLOR_DEVICE_EDIT.getMidiLaunchpadColor();
+		Color deviceAddColor = LP_COLOR_DEVICE_ADD.getMidiLaunchpadColor();
+		
+		for(Entry<Pad, LaunchpadColor> e: padsColors.entrySet()) {
+			Pad pad = e.getKey();
+			if(manager.padRepresentsLoadedDevice(pad)) {
+				if(manager.isLaunchpadConnected())
+					midiLaunchpadClient.setPadLight(pad, deviceEditColor, BackBufferOperation.COPY);
+				
+				virtualLaunchpadController.setPadColor(pad, deviceEditPaint);
+				
+				padsColors.replace(pad, LP_COLOR_DEVICE_FAILED);
+			}
+			else {
+				if(manager.isLaunchpadConnected())
+					midiLaunchpadClient.setPadLight(pad, deviceAddColor, BackBufferOperation.COPY);
+				
+				virtualLaunchpadController.setPadColor(pad, deviceAddPaint);
+				
+				padsColors.replace(pad, LP_COLOR_DEVICE_LOADED);
+			}
 		}
 		
 	}
@@ -151,14 +196,20 @@ public class LaunchpadLightManager {
 	public void setSelected(Pad pad) {
 		ProgramManager manager = ProgramManager.getInstance();
 		
+		boolean isEditMode = manager.isEditMode();
+		
 		// First set previous selected pad to old color
 		if(selectedPad != null) {
-			if(manager.padRepresentsLoadedDevice(selectedPad)) {
+			boolean padRepresentsDevice = manager.padRepresentsLoadedDevice(selectedPad);
+			if(!isEditMode && padRepresentsDevice)
 				setPadLight(selectedPad, LP_COLOR_DEVICE_LOADED, BackBufferOperation.COPY);
-			}
+			else if(padRepresentsDevice)
+				setPadLight(selectedPad, LP_COLOR_DEVICE_EDIT, BackBufferOperation.COPY);
+			else
+				setPadLight(selectedPad, LP_COLOR_DEVICE_ADD, BackBufferOperation.COPY);
 		}
 		// Then set the color of the new selected pad
-		if(manager.padRepresentsLoadedDevice(pad)) {
+		if(manager.isEditMode() || manager.padRepresentsLoadedDevice(pad)) {
 			selectedPad = pad;
 			setPadLight(pad, LP_COLOR_DEVICE_ACTIVE, BackBufferOperation.COPY);
 		}
