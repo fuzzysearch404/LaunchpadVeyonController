@@ -96,7 +96,7 @@ public final class Configuration {
 	// Total rows
 	public final static int LAUNCHPAD_PAD_X_ROWS = LAUNCHPAD_PAD_MAX_X + 1;
 	// Total columns
-	public final static int LAUNCHPAD_PAD_Y_COLLUMNS = LAUNCHPAD_PAD_MAX_Y + 1;
+	public final static int LAUNCHPAD_PAD_Y_COLUMNS = LAUNCHPAD_PAD_MAX_Y + 1;
 	
 	/*
 	 * ###########################################################################

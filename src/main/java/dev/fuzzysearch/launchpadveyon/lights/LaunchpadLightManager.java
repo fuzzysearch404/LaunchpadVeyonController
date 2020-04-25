@@ -1,7 +1,7 @@
 package dev.fuzzysearch.launchpadveyon.lights;
 
 import static dev.fuzzysearch.launchpadveyon.config.Configuration.LAUNCHPAD_PAD_X_ROWS;
-import static dev.fuzzysearch.launchpadveyon.config.Configuration.LAUNCHPAD_PAD_Y_COLLUMNS;
+import static dev.fuzzysearch.launchpadveyon.config.Configuration.LAUNCHPAD_PAD_Y_COLUMNS;
 import static dev.fuzzysearch.launchpadveyon.config.Configuration.LP_COLOR_ACTION_CONTEXT_ACTIVE;
 import static dev.fuzzysearch.launchpadveyon.config.Configuration.LP_COLOR_ACTION_CONTEXT_INACTIVE;
 import static dev.fuzzysearch.launchpadveyon.config.Configuration.LP_COLOR_ACTION_CONTEXT_STOP;
@@ -308,10 +308,10 @@ public class LaunchpadLightManager {
 	}
 	
 	private void initPadsMap() {
-		padsColors = new HashMap<Pad, LaunchpadColor>(LAUNCHPAD_PAD_X_ROWS * LAUNCHPAD_PAD_Y_COLLUMNS);
+		padsColors = new HashMap<Pad, LaunchpadColor>(LAUNCHPAD_PAD_X_ROWS * LAUNCHPAD_PAD_Y_COLUMNS);
 		
 		for(int x = 0; x < LAUNCHPAD_PAD_X_ROWS; x++) {
-			for(int y = 0; y < LAUNCHPAD_PAD_Y_COLLUMNS; y++) {
+			for(int y = 0; y < LAUNCHPAD_PAD_Y_COLUMNS; y++) {
 				padsColors.put(Pad.at(x, y), LP_COLOR_DEFAULT);
 			}
 		}
