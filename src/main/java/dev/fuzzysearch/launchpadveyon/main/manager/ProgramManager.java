@@ -11,6 +11,7 @@ import dev.fuzzysearch.launchpadveyon.events.LaunchpadPadEventDispatcher;
 import dev.fuzzysearch.launchpadveyon.lights.LaunchpadLightManager;
 import dev.fuzzysearch.launchpadveyon.veyon.VeyonActionType;
 import dev.fuzzysearch.launchpadveyon.veyon.models.Device;
+import javafx.stage.Stage;
 import net.thecodersbreakfast.lp4j.api.LaunchpadClient;
 import net.thecodersbreakfast.lp4j.api.Pad;
 import net.thecodersbreakfast.lp4j.midi.MidiLaunchpad;
@@ -55,6 +56,9 @@ public class ProgramManager {
 	
 	// If currently the program is in configuration mode
 	private boolean editMode = false;
+	
+	// Single instance of any JavaFX popup window
+	private Stage popupStage;
 	
 	// Singleton
 	private static ProgramManager instance = null;
@@ -160,6 +164,24 @@ public class ProgramManager {
 
 	public void setEditMode(boolean editMode) {
 		this.editMode = editMode;
+	}
+
+	public Stage getPopupStage() {
+		return popupStage;
+	}
+	
+	/**
+	 * Can be called to close the current popup
+	 * window. (if it exists)
+	 */
+	public void closePopupStage() {
+		if(popupStage != null)
+			popupStage.close();
+	}
+
+	public void setPopupStage(Stage popupStage) {
+		closePopupStage();
+		this.popupStage = popupStage;
 	}
 
 	/**

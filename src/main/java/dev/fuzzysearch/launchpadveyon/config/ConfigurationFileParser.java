@@ -2,6 +2,8 @@ package dev.fuzzysearch.launchpadveyon.config;
 
 import static dev.fuzzysearch.launchpadveyon.config.Configuration.*;
 
+import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -9,6 +11,7 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Iterator;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import dev.fuzzysearch.launchpadveyon.config.exceptions.ConfigException;
@@ -30,38 +33,43 @@ public class ConfigurationFileParser {
 	private ArrayList<Device> deviceList = new ArrayList<Device>();
 	private String strPath;
 	private String json;
+	private JSONObject jsonObj;
 
 	public ConfigurationFileParser() throws ProgramUnconfiguredException {
 		this.strPath = CONFIG_FILE_DEFAULT_FULL_FILE_PATH;
 
-		configure();
+		try {
+			readConfigurationFile();
+		} catch (IOException e) {
+			System.out.println("[Init]: Could not find config file, creating a new one");
+			createNewConfigurationFile();
+		}
 	}
 	
 	public ConfigurationFileParser(String pathToConfig)
 			throws ProgramUnconfiguredException {
 		this.strPath = pathToConfig;
-
-		configure();
 	}
 
 	/**
 	 * The main method of this class that executes
 	 * all the configuration phases.
 	 * 
-	 * @throws ProgramUnconfiguredException if the
-	 * configuration failed.
+	 * @throws ConfigException - if the passed JSON is
+	 * invalid or corrupted
 	 */
-	private void configure() throws ProgramUnconfiguredException {
-		try {
-			readConfigurationFile();
-		} catch (IOException e) {
-			throw new ProgramUnconfiguredException("Could not find config file or could not read it.", e);
-		}
-
+	public void configure() throws ConfigException {
 		ProgramManager.getInstance().setLoadedDevices(readJSON());
-		
-		if(deviceList.isEmpty())
-			throw new ProgramUnconfiguredException("The configuration file was parsed, but no devices were configured.");
+	}
+	
+	private void createJSONObject() throws ConfigException {
+		try {
+			jsonObj = new JSONObject(json);
+		}
+		catch (JSONException e) {
+			e.printStackTrace();
+			throw new ConfigException("Could not create JSON object", e);
+		}
 	}
 
 	/**
@@ -129,8 +137,8 @@ public class ConfigurationFileParser {
 	 * 
 	 * @return the loaded {@link Device} objects.
 	 */
-	private ArrayList<Device> readJSON() {
-		JSONObject jsonObj = new JSONObject(json);
+	private ArrayList<Device> readJSON() throws ConfigException{
+		createJSONObject();
 		Iterator<String> rowKeys = jsonObj.keys();
 
 		// Rows
@@ -220,6 +228,104 @@ public class ConfigurationFileParser {
 	private void readConfigurationFile() throws IOException {
 		Path path = Paths.get(strPath);
 		json = Files.readString(path);
+	}
+	
+	/**
+	 * Creates a new blank configuration file.
+	 * 
+	 * @throws ProgramUnconfiguredException if I/O operations failed
+	 * for any reason.
+	 */
+	private void createNewConfigurationFile() throws ProgramUnconfiguredException {
+		File file = new File(CONFIG_FILE_DEFAULT_FULL_FILE_PATH);
+		try {
+			file.createNewFile();
+			FileOutputStream output = new FileOutputStream(file);
+			output.write("{}".getBytes());
+			output.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+			throw new ProgramUnconfiguredException("Failed to createa new config file", e);
+		}
+		this.json = "{}";
+	}
+	
+	private void dumpJSONToConfigurationFile() throws IOException {
+		File file = new File(CONFIG_FILE_DEFAULT_FULL_FILE_PATH);
+		FileOutputStream output = new FileOutputStream(file);
+		output.write(jsonObj.toString().getBytes());
+		output.close();
+	}
+	
+	/**
+	 * Saves a new Veyon device to the configuration file.
+	 * 
+	 * @param pad - pad that represents the device
+	 * @parm ip - device connection credentials
+	 *
+	 * @throws IOException - if any I/O exception occurred
+	 * @throws ConfigException - if the old config file is invalid
+	 */
+	public void addNewDevice(Pad pad, String ip) throws IOException, ConfigException {
+		createJSONObject();
+		
+		if(jsonObj == null)
+			return;
+		
+		JSONObject ipAddress = new JSONObject();
+		ipAddress.put("ip", ip);
+		
+		Object oldObjCollumn = null;
+		try {
+			oldObjCollumn = jsonObj.get("" + pad.getY());
+		}
+		catch(JSONException e) {}
+		
+		if(oldObjCollumn instanceof JSONObject) {
+			JSONObject oldCollumn = (JSONObject) oldObjCollumn;
+			oldCollumn.put("" + pad.getX(), ipAddress);
+			jsonObj.put("" + pad.getY(), oldCollumn);
+		}
+		else {
+			JSONObject collumn = new JSONObject();
+			collumn.put("" + pad.getX(), ipAddress);
+			jsonObj.put("" + pad.getY(), collumn);
+		}
+		
+		dumpJSONToConfigurationFile();
+		readConfigurationFile();
+		configure();
+	}
+	
+	/**
+	 * Deletes Veyon device from the configuration file.
+	 *
+	 * @param pad - {@link} that holds the unwanted device
+	 * 
+	 * @throws IOException - if any I/O exception occurred
+	 * @throws ConfigException - if the old config file is invalid
+	 */
+	public void deleteDevice(Pad pad) throws IOException, ConfigException {
+		createJSONObject();
+		
+		if(jsonObj == null)
+			return;
+		
+		Object oldObjCollumn = null;
+		try {
+			oldObjCollumn = jsonObj.get("" + pad.getY());
+		}
+		catch(JSONException e) {}
+		if(oldObjCollumn instanceof JSONObject) {
+			JSONObject oldCollumn = (JSONObject) oldObjCollumn;
+			oldCollumn.remove("" + pad.getX());
+		}
+		else
+			return;
+		
+		dumpJSONToConfigurationFile();
+		readConfigurationFile();
+		configure();
 	}
 
 }
