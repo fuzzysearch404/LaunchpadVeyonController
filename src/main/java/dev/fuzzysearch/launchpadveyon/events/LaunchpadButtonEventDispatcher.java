@@ -110,7 +110,7 @@ public class LaunchpadButtonEventDispatcher {
 			
 		// Finally set Pad light back to loaded.
 		Device activeDevice = manager.getActiveVeyonDevice();
-		if(activeDevice != null) {
+		if(activeDevice != null && !manager.isEditMode()) {
 			Pad pad = activeDevice.getPad();
 			manager.getLightManager().setPadLight(pad, LP_COLOR_DEVICE_LOADED, BackBufferOperation.COPY);
 		}

@@ -218,8 +218,10 @@ public class VirtualLaunchpadController {
 			manager.destroyCurrentVeyonProcess();
 			manager.getLightManager().lightUpPadsForConfiguration();
 		}
-		else
+		else {
+			manager.closePopupStage();
 			manager.getLightManager().lightUpPadsByDevices();
+		}
 	}
 	
 	/**

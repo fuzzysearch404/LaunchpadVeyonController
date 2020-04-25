@@ -1,9 +1,11 @@
 package dev.fuzzysearch.launchpadveyon.events;
 
+import dev.fuzzysearch.launchpadveyon.config.PadEditor;
 import dev.fuzzysearch.launchpadveyon.main.manager.ProgramManager;
 import dev.fuzzysearch.launchpadveyon.veyon.commands.VeyonCommand;
 import dev.fuzzysearch.launchpadveyon.veyon.commands.VeyonCommandFactory;
 import dev.fuzzysearch.launchpadveyon.veyon.models.Device;
+import javafx.application.Platform;
 import net.thecodersbreakfast.lp4j.api.Launchpad;
 import net.thecodersbreakfast.lp4j.api.Pad;
 
@@ -25,6 +27,11 @@ public class LaunchpadPadEventDispatcher {
 		ProgramManager manager = ProgramManager.getInstance();
         Device device = manager.getDeviceByPad(pad);
         
+        if(manager.isEditMode()) {
+        	editPad(pad, device);
+        	return;
+        }
+        
         /* If there is no mapped Device on the Pad, we
          * destroy the active process, if there is one
          * and return.
@@ -44,6 +51,16 @@ public class LaunchpadPadEventDispatcher {
 	
 	private VeyonCommand getVeyonCommand(Pad pad, Device device) {
 		return VeyonCommandFactory.getVeyonCommand(pad, device);
+	}
+	
+	private void editPad(Pad pad, Device device) {
+		Platform.runLater(new Runnable(){
+
+			@Override
+			public void run() {
+				new PadEditor(device, pad);
+			}
+		});	
 	}
 
 }

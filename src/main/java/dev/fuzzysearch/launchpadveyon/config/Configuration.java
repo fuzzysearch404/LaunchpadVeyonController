@@ -31,7 +31,7 @@ public final class Configuration {
 	// Default directory for the configuration file
 	public final static String CONFIG_FILE_DEFAULT_FILE_DIRECTORY = "./files/";
 	// Default file name for the configuration file
-	public final static String CONFIG_FILE_DEFAULT_FILE_NAME = "Config.json";
+	public final static String CONFIG_FILE_DEFAULT_FILE_NAME = "config.json";
 	
 	// Default full path for the configuration file
 	public final static String CONFIG_FILE_DEFAULT_FULL_FILE_PATH = 
@@ -251,7 +251,10 @@ public final class Configuration {
 	 * Description: Defines various JavaFX settings.
 	 */
 	
+	// Main stage title
 	public final static String GUI_MAIN_TITLE = "Launchpad Veyon Controller";
+	// Pad configuration stage title
+	public final static String GUI_EDIT_PAD_TITLE = "Add/Edit Pad";
 	
 	/*
 	 * ###########################################################################
@@ -267,5 +270,7 @@ public final class Configuration {
 	
 	// Main - Virtual Launchpad Scene FXML file.
 	public final static String GUI_MAIN_FXML_PATH = GUI_FXML_ROOT_DIR + "main.fxml";
+	// Pad add/edit scene FXML file.
+	public final static String GUI_EDIT_PAD_FXML_PATH = GUI_FXML_ROOT_DIR + "edit-device.fxml";
 
 }

@@ -11,6 +11,7 @@ import java.io.InputStreamReader;
 import javax.sound.midi.MidiUnavailableException;
 
 import dev.fuzzysearch.launchpadveyon.config.ConfigurationFileParser;
+import dev.fuzzysearch.launchpadveyon.config.exceptions.ConfigException;
 import dev.fuzzysearch.launchpadveyon.config.exceptions.ProgramUnconfiguredException;
 import dev.fuzzysearch.launchpadveyon.config.exceptions.VeyonUnavailableException;
 import dev.fuzzysearch.launchpadveyon.launchpad.listeners.MainLaunchpadListener;
@@ -20,6 +21,10 @@ import net.thecodersbreakfast.lp4j.midi.MidiDeviceConfiguration;
 import net.thecodersbreakfast.lp4j.midi.MidiLaunchpad;
 
 public class MainFacade {
+	
+	boolean noPhysicalLaunchpad = false;
+	boolean noConfigurationFile = false;
+	boolean invalidConfiguration = false;
 
 	public void run() throws VeyonUnavailableException {
 		System.out.println("[Init]: Checking Veyon availability on this system");
@@ -44,6 +49,7 @@ public class MainFacade {
 			// Resets the Launchpad's buffers, so the lights turn off if there were on before.
 			manager.getLaunchpadClient().reset();
 		} catch(MidiUnavailableException | LaunchpadException e) {
+			noPhysicalLaunchpad = true;
 			System.err.println("Unable to detect the physical Launchpad. "
 					+ "Entering virtual Launchpad only mode...");
 		}
@@ -54,9 +60,18 @@ public class MainFacade {
 	
 	private void initConfiguration() {
 		try {
-			new ConfigurationFileParser();
-		} catch (ProgramUnconfiguredException e) {
-			// Skip the configuration, but keep program alive...
+			ConfigurationFileParser configParser = new ConfigurationFileParser();
+			configParser.configure();
+		
+		}
+		// Skip the configuration, but keep program alive...
+		catch (ProgramUnconfiguredException e) {
+			noConfigurationFile = true;
+			
+			e.printStackTrace();
+		} catch (ConfigException e) {
+			invalidConfiguration = true;
+			
 			e.printStackTrace();
 		}
 	}
