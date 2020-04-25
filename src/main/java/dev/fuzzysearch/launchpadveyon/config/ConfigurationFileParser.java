@@ -83,7 +83,7 @@ public class ConfigurationFileParser {
 	 * with this structure:
 	 * 
 	 * row_number (1-7):
-	 * 		collumn_number (1-7):
+	 * 		column_number (1-7):
 	 * 			-ip: The IP address
 	 * 			(and optionally the TCP port) 
 	 * 			or name of the device.
@@ -107,8 +107,8 @@ public class ConfigurationFileParser {
 	 * }
 	 * 
 	 * This will load data for Launchpad's
-	 * row 1 collumns 1 and 2 and row 3
-	 * collum 6. (indexes start from 0)
+	 * row 1 columns 1 and 2 and row 3
+	 * column 6. (indexes start from 0)
 	 
     	    +---+---+---+---+---+---+---+---+ 
 	        |   |   |   |   |   |   |   |   |
@@ -148,7 +148,7 @@ public class ConfigurationFileParser {
 
 			if (objRow instanceof JSONObject) {
 				JSONObject row = (JSONObject) objRow;
-				Iterator<String> collumnKeys = row.keys();
+				Iterator<String> columnKeys = row.keys();
 				
 				int y = -1;
 				
@@ -159,11 +159,11 @@ public class ConfigurationFileParser {
 					continue;
 				}
 
-				// Collumns
-				while (collumnKeys.hasNext()) {
-					key = collumnKeys.next();
+				// Columns
+				while (columnKeys.hasNext()) {
+					key = columnKeys.next();
 
-					Object objCollumn = row.get(key);
+					Object objColumn = row.get(key);
 					
 					int x = -1;
 
@@ -174,14 +174,14 @@ public class ConfigurationFileParser {
 						continue;
 					}
 
-					if (objCollumn instanceof JSONObject) {
-						JSONObject collumn = (JSONObject) objCollumn;
-						String ipAdress = collumn.getString("ip");
+					if (objColumn instanceof JSONObject) {
+						JSONObject column = (JSONObject) objColumn;
+						String ipAdress = column.getString("ip");
 						
 						Device device = new Device(ipAdress, Pad.at(x, y));
 						deviceList.add(device);
 					} else
-						System.err.println("Invalid config collumn: " + key);
+						System.err.println("Invalid config column: " + key);
 				}
 
 			} else
@@ -275,21 +275,21 @@ public class ConfigurationFileParser {
 		JSONObject ipAddress = new JSONObject();
 		ipAddress.put("ip", ip);
 		
-		Object oldObjCollumn = null;
+		Object oldObjColumn = null;
 		try {
-			oldObjCollumn = jsonObj.get("" + pad.getY());
+			oldObjColumn = jsonObj.get("" + pad.getY());
 		}
 		catch(JSONException e) {}
 		
-		if(oldObjCollumn instanceof JSONObject) {
-			JSONObject oldCollumn = (JSONObject) oldObjCollumn;
-			oldCollumn.put("" + pad.getX(), ipAddress);
-			jsonObj.put("" + pad.getY(), oldCollumn);
+		if(oldObjColumn instanceof JSONObject) {
+			JSONObject oldColumn = (JSONObject) oldObjColumn;
+			oldColumn.put("" + pad.getX(), ipAddress);
+			jsonObj.put("" + pad.getY(), oldColumn);
 		}
 		else {
-			JSONObject collumn = new JSONObject();
-			collumn.put("" + pad.getX(), ipAddress);
-			jsonObj.put("" + pad.getY(), collumn);
+			JSONObject column = new JSONObject();
+			column.put("" + pad.getX(), ipAddress);
+			jsonObj.put("" + pad.getY(), column);
 		}
 		
 		dumpJSONToConfigurationFile();
@@ -311,14 +311,14 @@ public class ConfigurationFileParser {
 		if(jsonObj == null)
 			return;
 		
-		Object oldObjCollumn = null;
+		Object oldObjColumn = null;
 		try {
-			oldObjCollumn = jsonObj.get("" + pad.getY());
+			oldObjColumn = jsonObj.get("" + pad.getY());
 		}
 		catch(JSONException e) {}
-		if(oldObjCollumn instanceof JSONObject) {
-			JSONObject oldCollumn = (JSONObject) oldObjCollumn;
-			oldCollumn.remove("" + pad.getX());
+		if(oldObjColumn instanceof JSONObject) {
+			JSONObject oldColumn = (JSONObject) oldObjColumn;
+			oldColumn.remove("" + pad.getX());
 		}
 		else
 			return;
