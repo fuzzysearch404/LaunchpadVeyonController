@@ -63,9 +63,7 @@ public abstract class VeyonCommand {
 	}
 	
 	protected void destroyOldProcess() {
-		Process process = ProgramManager.getInstance().getActiveVeyonProcess();
-		if(process != null)
-			process.destroy();
+		ProgramManager.getInstance().destroyCurrentVeyonProcess();
 	}
 	
 }
