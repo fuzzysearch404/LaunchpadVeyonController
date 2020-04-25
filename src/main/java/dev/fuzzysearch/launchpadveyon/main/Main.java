@@ -12,6 +12,7 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 import static dev.fuzzysearch.launchpadveyon.config.Configuration.GUI_MAIN_FXML_PATH;
+import static dev.fuzzysearch.launchpadveyon.config.Configuration.GUI_MAIN_TITLE;
 
 public class Main extends Application {
 
@@ -35,6 +36,7 @@ public class Main extends Application {
 		VBox root = loader.load(fxmlStream);
 		ProgramManager.getInstance().setVirtualLaunchpadController(loader.getController());
 		primary.setScene(new Scene(root));
+		primary.setTitle(GUI_MAIN_TITLE);
         primary.show();
 
         /** We could not do this before, because the VirtualLaunchpadController did not exist before
