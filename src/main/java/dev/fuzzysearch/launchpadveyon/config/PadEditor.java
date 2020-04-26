@@ -20,8 +20,7 @@ import javafx.stage.Stage;
 import net.thecodersbreakfast.lp4j.api.Pad;
 
 /**
- * Class that manages the pad
- * editing process.
+ * Class that manages the pad editing process.
  * 
  * @author Roberts Ziediņš
  *
@@ -33,8 +32,7 @@ public class PadEditor {
 	private ProgramManager manager = ProgramManager.getInstance();
 	
 	/**
-	 * Constructs and starts the pad
-	 * editing process.
+	 * Constructs and starts the pad editing process.
 	 * 
 	 * @param device - previous {@link Device} on the pad
 	 * @param pad - {@link Pad} to edit

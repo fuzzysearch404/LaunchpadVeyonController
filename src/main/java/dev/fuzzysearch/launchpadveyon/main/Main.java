@@ -41,6 +41,8 @@ public class Main extends Application {
 			return;
 		}
 		
+		ProgramManager.getInstance().setMainStage(primary);
+		
 		FileInputStream fxmlStream = new FileInputStream(GUI_MAIN_FXML_PATH);
 		FXMLLoader loader = new FXMLLoader();
 		VBox root = loader.load(fxmlStream);

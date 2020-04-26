@@ -3,15 +3,30 @@ package dev.fuzzysearch.launchpadveyon.app.controllers;
 import dev.fuzzysearch.launchpadveyon.main.manager.ProgramManager;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
+import javafx.scene.control.CheckMenuItem;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.Shape;
+import javafx.stage.FileChooser;
+import javafx.stage.FileChooser.ExtensionFilter;
 import net.thecodersbreakfast.lp4j.api.Button;
 import net.thecodersbreakfast.lp4j.api.Launchpad;
 import net.thecodersbreakfast.lp4j.api.Pad;
+
+import java.awt.Desktop;
+import java.io.File;
+import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
+
+import dev.fuzzysearch.launchpadveyon.app.dialogs.ErrorAlert;
+import dev.fuzzysearch.launchpadveyon.config.ConfigurationFileParser;
+import dev.fuzzysearch.launchpadveyon.config.exceptions.ConfigException;
 import dev.fuzzysearch.launchpadveyon.events.LaunchpadButtonEventDispatcher;
 import dev.fuzzysearch.launchpadveyon.events.LaunchpadPadEventDispatcher;
+
+import static dev.fuzzysearch.launchpadveyon.config.Configuration.CONFIG_FILE_DEFAULT_FILE_NAME;;
 
 /**
  * JavaFX FXML controller class that implements
@@ -24,6 +39,10 @@ public class VirtualLaunchpadController {
 	
 	@FXML
 	private AnchorPane mainContainer;
+	
+	@FXML
+	private CheckMenuItem editmenuitem;
+	
 	private LaunchpadPadEventDispatcher padDispatcher = 
 			ProgramManager.getInstance().getPadEventDispatcher();
 	private LaunchpadButtonEventDispatcher buttonDispatcher = 
@@ -227,11 +246,91 @@ public class VirtualLaunchpadController {
 	/**
 	 * This event is fired whenever user
 	 * clicks the menu button that
+	 * imports custom user configuration.
+	 */
+	@FXML
+	protected void importConfigurationEvent() {
+		ProgramManager manager = ProgramManager.getInstance();
+		
+		FileChooser fileChooser = new FileChooser();
+		fileChooser.setTitle("Open configuration file");
+		fileChooser.setInitialFileName(CONFIG_FILE_DEFAULT_FILE_NAME);
+		fileChooser.getExtensionFilters().add(new ExtensionFilter("JSON file", "*.json"));
+		File file = fileChooser.showOpenDialog(manager.getMainStage());
+		
+		if(file != null && file.canRead()) {
+			ConfigurationFileParser parser;
+			try {
+				parser = new ConfigurationFileParser(file);
+				parser.configure();
+				parser.dumpJSONToConfigurationFile();
+				ProgramManager.getInstance().getLightManager().lightUpPadsByDevices();
+			} catch (IOException | ConfigException e) {
+				e.printStackTrace();
+				new ErrorAlert("Configuration failed", "Invalid configuration file. Check"
+						+ " if the configuration file has valid syntax.");
+			}
+			
+			// This switches edit mode off
+			if(manager.isEditMode()) {
+				manager.setEditMode(false);
+				editmenuitem.setSelected(false);
+			}
+		}
+	}
+	
+	/**
+	 * This event is fired whenever user
+	 * clicks the menu button that
+	 * exports custom user configuration.
+	 */
+	@FXML
+	protected void exportConfigurationEvent() {
+		FileChooser fileChooser = new FileChooser();
+		fileChooser.setTitle("Open configuration file");
+		fileChooser.setInitialFileName(CONFIG_FILE_DEFAULT_FILE_NAME);
+		fileChooser.getExtensionFilters().add(new ExtensionFilter("JSON file", "*.json"));
+		File file = fileChooser.showSaveDialog(ProgramManager.getInstance().getMainStage());
+		
+		if(file != null) {
+			ConfigurationFileParser parser;
+			try {
+				parser = new ConfigurationFileParser();
+				parser.writeJSONtoFile(file, true);
+			} catch (IOException | ConfigException e) {
+				e.printStackTrace();
+				new ErrorAlert("Export failed", "Could not create configuration"
+						+ " file copy in the specified location.");
+			}
+		}
+	}
+	
+	/**
+	 * This event is fired whenever user
+	 * clicks the menu button that
 	 * quits the program.
 	 */
 	@FXML
 	protected void appExitEvent() {
 		ProgramManager.getInstance().shutdownProgram();
+	}
+	
+	/**
+	 * This event is fired whenever user
+	 * clicks the menu button that
+	 * opens information about program
+	 * in the default browser.
+	 */
+	@FXML
+	protected void aboutEvent() {
+		if (Desktop.isDesktopSupported() && Desktop.getDesktop().isSupported(Desktop.Action.BROWSE)) {
+		    try {
+				Desktop.getDesktop().browse(new URI("https://github.com/fuzzysearch404/LaunchpadVeyonController"));
+			} catch (IOException | URISyntaxException e) {
+				e.printStackTrace();
+				new ErrorAlert("Unavailable", "Sorry, this option is not available.");
+			}
+		}
 	}
 
 }
