@@ -57,6 +57,9 @@ public class ProgramManager {
 	// If currently the program is in configuration mode
 	private boolean editMode = false;
 	
+	// The main JavaFX stage
+	private Stage mainStage;
+	
 	// Single instance of any JavaFX popup window
 	private Stage popupStage;
 	
@@ -164,6 +167,14 @@ public class ProgramManager {
 
 	public void setEditMode(boolean editMode) {
 		this.editMode = editMode;
+	}
+
+	public Stage getMainStage() {
+		return mainStage;
+	}
+
+	public void setMainStage(Stage mainStage) {
+		this.mainStage = mainStage;
 	}
 
 	public Stage getPopupStage() {

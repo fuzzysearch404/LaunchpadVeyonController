@@ -11,14 +11,13 @@ import dev.fuzzysearch.launchpadveyon.lights.LaunchpadLightManager;
 import dev.fuzzysearch.launchpadveyon.main.manager.ProgramManager;
 import net.thecodersbreakfast.lp4j.api.BackBufferOperation;
 import net.thecodersbreakfast.lp4j.api.Pad;
-import net.thecodersbreakfast.lp4j.midi.MidiLaunchpad;
 
 /**
  * Creates a process by executing Veyon CLI command.
  * Includes {@link CountDownLatch} to make sure
  * that {@link Process} is only accessible 
  * after it is created.
- * After the execution manages {@link MidiLaunchpad}'s
+ * After the execution manages {@link Launchpad}'s
  * lights to visualize the results.
  *
  * @author Roberts Ziediņš
@@ -83,7 +82,7 @@ public class VeyonProcessExecutor implements Runnable {
 	
 	/**
 	 * After the {@link Process} ends, this method is
-	 * called to update {@link MidiLaunchpad}'s lights.
+	 * called to update {@link Launchpad}'s lights.
 	 * 
 	 * @param processOutput - output of the process
 	 */

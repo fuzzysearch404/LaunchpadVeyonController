@@ -3,6 +3,7 @@ package dev.fuzzysearch.launchpadveyon.config;
 import static dev.fuzzysearch.launchpadveyon.config.Configuration.*;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -25,7 +26,7 @@ import net.thecodersbreakfast.lp4j.api.Pad;
  * Class for user's configuration file parsing
  * at the initialization phase of the startup.
  * 
- * @author Roberts ZiediÅ†Å¡
+ * @author Roberts Ziediņš
  *
  */
 public class ConfigurationFileParser {
@@ -35,7 +36,14 @@ public class ConfigurationFileParser {
 	private String json;
 	private JSONObject jsonObj;
 
-	public ConfigurationFileParser() throws ProgramUnconfiguredException {
+	/**
+	 * This instance loads or creates
+	 * configuration file in the default
+	 * directory.
+	 * 
+	 * @throws ConfigException
+	 */
+	public ConfigurationFileParser() throws ConfigException {
 		this.strPath = CONFIG_FILE_DEFAULT_FULL_FILE_PATH;
 
 		try {
@@ -44,11 +52,22 @@ public class ConfigurationFileParser {
 			System.out.println("[Init]: Could not find config file, creating a new one");
 			createNewConfigurationFile();
 		}
+		
+		createJSONObject();
 	}
 	
-	public ConfigurationFileParser(String pathToConfig)
-			throws ProgramUnconfiguredException {
-		this.strPath = pathToConfig;
+	/**
+	 * This instance loads up external
+	 * configuration file.
+	 * 
+	 * @param file - file to load.
+	 * @throws IOException
+	 * @throws ConfigException
+	 */
+	public ConfigurationFileParser(File file)
+			throws IOException, ConfigException {
+		readConfigurationFile(file);
+		createJSONObject();
 	}
 
 	/**
@@ -133,12 +152,11 @@ public class ConfigurationFileParser {
 	        +---+---+---+---+---+---+---+---+  +---+ 
 	      Y          D = Loaded device
 	      |
-	      ˅ 
+	      Ë… 
 	 * 
 	 * @return the loaded {@link Device} objects.
 	 */
 	private ArrayList<Device> readJSON() throws ConfigException{
-		createJSONObject();
 		Iterator<String> rowKeys = jsonObj.keys();
 
 		// Rows
@@ -213,7 +231,6 @@ public class ConfigurationFileParser {
 			throw new ConfigException("Invalid key: " + key, e);
 		}
 
-		// Indexes start from 0
 		if (num < LAUNCHPAD_PAD_MIN_X || num > LAUNCHPAD_PAD_MAX_X) {
 			throw new ConfigException("Key out of launchpad button bounds. Key: " + key);
 		}
@@ -228,6 +245,16 @@ public class ConfigurationFileParser {
 	private void readConfigurationFile() throws IOException {
 		Path path = Paths.get(strPath);
 		json = Files.readString(path);
+	}
+	
+	/**
+	 * Reads the configuration file to {@link String}.
+	 * @throws IOException
+	 */
+	private void readConfigurationFile(File file) throws IOException {
+		FileInputStream inputStream = new FileInputStream(file);
+		json = new String(inputStream.readAllBytes());
+		inputStream.close();
 	}
 	
 	/**
@@ -250,8 +277,16 @@ public class ConfigurationFileParser {
 		this.json = "{}";
 	}
 	
-	private void dumpJSONToConfigurationFile() throws IOException {
+	
+	public void dumpJSONToConfigurationFile() throws IOException {
 		File file = new File(CONFIG_FILE_DEFAULT_FULL_FILE_PATH);
+		writeJSONtoFile(file, false);
+	}
+	
+	public void writeJSONtoFile(File file, boolean createNew) throws IOException {
+		if(createNew)
+			file.createNewFile();
+		
 		FileOutputStream output = new FileOutputStream(file);
 		output.write(jsonObj.toString().getBytes());
 		output.close();
@@ -266,9 +301,7 @@ public class ConfigurationFileParser {
 	 * @throws IOException - if any I/O exception occurred
 	 * @throws ConfigException - if the old config file is invalid
 	 */
-	public void addNewDevice(Pad pad, String ip) throws IOException, ConfigException {
-		createJSONObject();
-		
+	public void addNewDevice(Pad pad, String ip) throws IOException, ConfigException {		
 		if(jsonObj == null)
 			return;
 		
@@ -306,8 +339,6 @@ public class ConfigurationFileParser {
 	 * @throws ConfigException - if the old config file is invalid
 	 */
 	public void deleteDevice(Pad pad) throws IOException, ConfigException {
-		createJSONObject();
-		
 		if(jsonObj == null)
 			return;
 		

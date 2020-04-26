@@ -5,7 +5,7 @@ import net.thecodersbreakfast.lp4j.api.Pad;
 
 /**
  * This class represents Veyon's devices 
- * and them on the Novation {@link Launchpad}
+ * and them on the {@link Launchpad}
  * pads.
  * 
  * @author Roberts Ziediņš
