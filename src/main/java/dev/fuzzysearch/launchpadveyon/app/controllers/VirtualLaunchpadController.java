@@ -254,7 +254,6 @@ public class VirtualLaunchpadController {
 		
 		FileChooser fileChooser = new FileChooser();
 		fileChooser.setTitle("Open configuration file");
-		fileChooser.setInitialFileName(CONFIG_FILE_DEFAULT_FILE_NAME);
 		fileChooser.getExtensionFilters().add(new ExtensionFilter("JSON file", "*.json"));
 		File file = fileChooser.showOpenDialog(manager.getMainStage());
 		
@@ -287,7 +286,7 @@ public class VirtualLaunchpadController {
 	@FXML
 	protected void exportConfigurationEvent() {
 		FileChooser fileChooser = new FileChooser();
-		fileChooser.setTitle("Open configuration file");
+		fileChooser.setTitle("Save configuration file");
 		fileChooser.setInitialFileName(CONFIG_FILE_DEFAULT_FILE_NAME);
 		fileChooser.getExtensionFilters().add(new ExtensionFilter("JSON file", "*.json"));
 		File file = fileChooser.showSaveDialog(ProgramManager.getInstance().getMainStage());
