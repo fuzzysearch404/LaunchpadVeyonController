@@ -1,6 +1,6 @@
 # Veyon Launchpad Controller
 
-This software turns Novation Launchpad S to a control device for Veyon remote screen access management.
+This software turns Novation Launchpad S into a control device for Veyon remote screen access management.
 
 ![Main image](https://i.imgur.com/sMGDcKwl.jpg)
 
@@ -42,7 +42,8 @@ Before using this software, there are some things to set up first.
 #### Veyon
 
 1) Install and configure Veyon on the desired devices. 
-2) **Add Veyon CLI (command line interface) to the system's environment where this program will run.** This is very important and this must be done or else this program won't be able to work as intended.
+2) **Add Veyon CLI (command line interface) to the system's environment where this program will run.**  
+This is very important and this must be done or else this program won't be able to work as intended.
 3) For best experience, it is recommended to set up and enable Veyon's authorization keys.
 
 #### Configuration (via GUI)
@@ -54,10 +55,10 @@ Configuration via graphical user interface is very simple and can even be done i
 ![Confugure Pads Option](https://i.imgur.com/HoeODbh.png)
 
 2) Configure the pads: 
-	* The blue pads represent empty pads - press any of them in the GUI or on the physical Launchpad device to configure 	them.
+	* The blue pads represent empty pads - press any of them in the GUI or on the physical Launchpad device to configure them.
 	* The red pads represent configured pads - press any of them in the GUI or on the physical Launchpad device to configure them or delete their configurations.
 
-![Editing the pads](https://i.imgur.com/3FFVySU.png)
+![Editing the pads](https://i.imgur.com/3FFVySU.png)  
 3) Exit the configuration mode. Turn `File -> Configure Pads` off.
 
 #### Configuration files
