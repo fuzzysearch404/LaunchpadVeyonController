@@ -56,7 +56,7 @@ Configuration via graphical user interface is very simple and can even be done i
 
 2) Configure the pads: 
 	* The blue pads represent empty pads - press any of them in the GUI or on the physical Launchpad device to configure them.
-	* The red pads represent configured pads - press any of them in the GUI or on the physical Launchpad device to configure them or delete their configurations.
+	* The red pads represent configured pads - press any of them in the GUI or on the physical Launchpad device to configure them or to delete their configurations.
 
 ![Editing the pads](https://i.imgur.com/3FFVySU.png)  
 3) Exit the configuration mode. Turn `File -> Configure Pads` off.
@@ -100,13 +100,11 @@ Here is the configuration file:
 
 Where the devices are on the Launchpad with this configuration file:
 ```
-
 	                   Top buttons
 	  	    +---+---+---+---+---+---+---+---+ 
-	        |   |   |   |   |   |   |   |	 |
+	        |   |   |   |   |   |   |   |   |
 	        +---+---+---+---+---+---+---+---+ 
-	          
-	                      Pads
+	                       Pads
 	          0   1   2   3   4   5   6   7   X (rows) ->
 	        +---+---+---+---+---+---+---+---+  +---+
 	      0 |   |   |   |   |   |   |   |   |  |   |
@@ -128,7 +126,5 @@ Where the devices are on the Launchpad with this configuration file:
           Y (columns)                    Right side buttons  
           |
 		  ⌄
-          
-   
 ```
-After creating the custom configuration file, it can be imported via the GUI or by replacing `config.json` under the project's `/files` directory.
+After creating the custom configuration file, it can be imported via the GUI or by replacing the `config.json` file under the project's `/files` directory.
