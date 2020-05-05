@@ -101,8 +101,8 @@ public class ConfigurationFileParser {
 	 * The JSON file must consist of object
 	 * with this structure:
 	 * 
-	 * row_number (1-7):
-	 * 		column_number (1-7):
+	 * row_number (0-7):
+	 * 		column_number (0-7):
 	 * 			-ip: The IP address
 	 * 			(and optionally the TCP port) 
 	 * 			or name of the device.
