@@ -8,29 +8,29 @@ import net.thecodersbreakfast.lp4j.api.Pad;
  * and them on the {@link Launchpad}
  * pads.
  * 
- * @author Roberts ZiediÅ†Å¡
+ * @author Roberts Ziediòð
  *
  */
 public class Device {
 	
-	private String ipAdreess;
+	private String ipAddress;
 	private Pad pad;
 	
-	public Device(String ipAdress) {
-		this.ipAdreess = ipAdress;
+	public Device(String ipAddress) {
+		this.ipAddress = ipAddress;
 	}
 
-	public Device(String ipAdreess, Pad pad) {
-		setIpAdreess(ipAdreess);
+	public Device(String ipAddress, Pad pad) {
+		setIpAddress(ipAddress);
 		setPad(pad);
 	}
 
-	public String getIpAdreess() {
-		return ipAdreess;
+	public String getIpAddress() {
+		return ipAddress;
 	}
 
-	public void setIpAdreess(String ipAdreess) {
-		this.ipAdreess = ipAdreess;
+	public void setIpAddress(String ipAddress) {
+		this.ipAddress = ipAddress;
 	}
 
 	public Pad getPad() {

@@ -12,7 +12,7 @@ import net.thecodersbreakfast.lp4j.api.Pad;
  * Remote access module {@link VeyonCommand} to launch
  * {@link Process} for remote control of a remote computer. 
  * 
- * @author Roberts ZiediÅ†Å¡
+ * @author Roberts Ziediòð
  *
  */
 public class VeyonRemoteControlScreenCommand extends VeyonCommand {
@@ -27,7 +27,7 @@ public class VeyonRemoteControlScreenCommand extends VeyonCommand {
 	
 	@Override
 	protected void createProcessExecutor() {
-		processExecutor = new VeyonProcessExecutor(commandBody + device.getIpAdreess(), pad);
+		processExecutor = new VeyonProcessExecutor(commandBody + device.getIpAddress(), pad);
 	}
 
 }

@@ -157,16 +157,16 @@ public class ConfigurationFileParser {
 	 * @return the loaded {@link Device} objects.
 	 */
 	private ArrayList<Device> readJSON() throws ConfigException{
-		Iterator<String> rowKeys = jsonObj.keys();
+		Iterator<String> columnKeys = jsonObj.keys();
 
-		// Rows
-		while (rowKeys.hasNext()) {
-			String key = rowKeys.next();
-			Object objRow = jsonObj.get(key);
+		// Columns
+		while (columnKeys.hasNext()) {
+			String key = columnKeys.next();
+			Object objColumn = jsonObj.get(key);
 
-			if (objRow instanceof JSONObject) {
-				JSONObject row = (JSONObject) objRow;
-				Iterator<String> columnKeys = row.keys();
+			if (objColumn instanceof JSONObject) {
+				JSONObject column = (JSONObject) objColumn;
+				Iterator<String> rowKeys = column.keys();
 				
 				int y = -1;
 				
@@ -177,11 +177,11 @@ public class ConfigurationFileParser {
 					continue;
 				}
 
-				// Columns
-				while (columnKeys.hasNext()) {
-					key = columnKeys.next();
+				// Rows
+				while (rowKeys.hasNext()) {
+					key = rowKeys.next();
 
-					Object objColumn = row.get(key);
+					Object objRow = column.get(key);
 					
 					int x = -1;
 
@@ -192,18 +192,18 @@ public class ConfigurationFileParser {
 						continue;
 					}
 
-					if (objColumn instanceof JSONObject) {
-						JSONObject column = (JSONObject) objColumn;
-						String ipAdress = column.getString("ip");
+					if (objRow instanceof JSONObject) {
+						JSONObject row = (JSONObject) objRow;
+						String ipAddress = row.getString("ip");
 						
-						Device device = new Device(ipAdress, Pad.at(x, y));
+						Device device = new Device(ipAddress, Pad.at(x, y));
 						deviceList.add(device);
 					} else
-						System.err.println("Invalid config column: " + key);
+						System.err.println("Invalid config row: " + key);
 				}
 
 			} else
-				System.err.println("Invalid config row: " + key);
+				System.err.println("Invalid config column: " + key);
 		}
 		
 		return deviceList;

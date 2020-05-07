@@ -13,7 +13,7 @@ import net.thecodersbreakfast.lp4j.api.Color;
  * usually should not be changed by the final user
  * and are program defaults.
  * 
- * @author Roberts ZiediÅ†Å¡
+ * @author Roberts Ziediòð
  *
  */
 public final class Configuration {
@@ -229,7 +229,7 @@ public final class Configuration {
 	 *  This is what the help command's output usually contains, 
 	 *  it is used to check if Veyon's CLI is available on the current environment
 	 */
-	public final static String VEYON_CLI_HELP_SUCCESSFUL_CONTAINS = "Available modules:";
+	public final static String VEYON_CLI_HELP_SUCCESSFUL_CONTAINS = "Commands for";
 	// Output if the process failed
 	public final static String VEYON_CLI_FAIL = "[FAIL]";
 	// Output if the process was successful
