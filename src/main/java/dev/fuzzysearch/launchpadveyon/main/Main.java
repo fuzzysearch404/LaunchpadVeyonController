@@ -14,7 +14,6 @@ public class Main extends Application {
 			Main.app.run();
 		} catch (VeyonUnavailableException e) {
 			e.printStackTrace();
-			return;
 		}
 		
 		System.out.println("[Init]: Starting JavaFX");

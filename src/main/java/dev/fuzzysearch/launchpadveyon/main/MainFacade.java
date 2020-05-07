@@ -41,7 +41,7 @@ public class MainFacade {
 		if(!ensureVeyonisAvailable()) {
 			veyonUnavailable = true;
 			throw new VeyonUnavailableException("This system's environment"
-					+ "does not have Veyon CLI available");
+					+ " does not have Veyon CLI available");
 		}
 		
 		System.out.println("[Init]: Creating ProgramManager");
@@ -143,7 +143,7 @@ public class MainFacade {
 	public void startJavaFXAndLightUpLaunchpads(Stage primary) throws Exception {
 		if(veyonUnavailable) {
 			new ErrorAlert("Veyon unavailable", "This program requires"
-					+ "Veyon CLI on this system environment");
+					+ " Veyon CLI on this system's environment");
 			return;
 		}
 		

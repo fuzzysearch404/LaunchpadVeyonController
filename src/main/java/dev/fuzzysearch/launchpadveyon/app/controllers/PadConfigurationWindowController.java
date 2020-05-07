@@ -41,7 +41,7 @@ public class PadConfigurationWindowController implements Initializable {
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		Device device = padEditor.getDevice();
 		if(device != null) {
-			ipinputfield.setText(device.getIpAdreess());
+			ipinputfield.setText(device.getIpAddress());
 		}
 		else {
 			deletebutton.setDisable(true);
