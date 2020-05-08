@@ -134,59 +134,18 @@ public class LaunchpadLightManager {
 	 * that are indicating switching between {@link VeyonCommand}s.
 	 */
 	public void lightUpContextSwitchButtons() {
-		ProgramManager manager = ProgramManager.getInstance();
-		LaunchpadClient midiLaunchpadClient = manager.getLaunchpadClient();
-		VirtualLaunchpadController virtualLaunchpadController = manager.getVirtualLaunchpadController();
-		VeyonActionType activeType = manager.getCurrentAction();
+		VeyonActionType activeType = ProgramManager.getInstance().getCurrentAction();
 		
 		if(activeType.equals(VeyonActionType.SCREEN_VIEW)) {
-			if(manager.isLaunchpadConnected())
-				midiLaunchpadClient.setButtonLight(VEYON_REMOTEACCESS_VIEW_BUTTON, 
-						LP_COLOR_ACTION_CONTEXT_ACTIVE.getMidiLaunchpadColor(), BackBufferOperation.COPY);
-			
-			virtualLaunchpadController.setButtonColor(VEYON_REMOTEACCESS_VIEW_BUTTON,
-					LP_COLOR_ACTION_CONTEXT_ACTIVE.getVirtualLaunchpadColor());
-			
-			buttonsColors.replace(VEYON_REMOTEACCESS_VIEW_BUTTON, LP_COLOR_ACTION_CONTEXT_ACTIVE);
-			
-			if(manager.isLaunchpadConnected())
-				midiLaunchpadClient.setButtonLight(VEYON_REMOTEACCESS_CONTROL_BUTTON, 
-						LP_COLOR_ACTION_CONTEXT_INACTIVE.getMidiLaunchpadColor(), BackBufferOperation.COPY);
-			
-			virtualLaunchpadController.setButtonColor(VEYON_REMOTEACCESS_CONTROL_BUTTON,
-					LP_COLOR_ACTION_CONTEXT_INACTIVE.getVirtualLaunchpadColor());
-			
-			buttonsColors.replace(VEYON_REMOTEACCESS_CONTROL_BUTTON, LP_COLOR_ACTION_CONTEXT_INACTIVE);
+			setButtonLight(VEYON_REMOTEACCESS_VIEW_BUTTON, LP_COLOR_ACTION_CONTEXT_ACTIVE, BackBufferOperation.COPY);
+			setButtonLight(VEYON_REMOTEACCESS_CONTROL_BUTTON, LP_COLOR_ACTION_CONTEXT_INACTIVE, BackBufferOperation.COPY);
 		} 
 		else if(activeType.equals(VeyonActionType.SCREEN_CONTROL)) {
-			if(manager.isLaunchpadConnected())
-				midiLaunchpadClient.setButtonLight(VEYON_REMOTEACCESS_CONTROL_BUTTON, 
-						LP_COLOR_ACTION_CONTEXT_ACTIVE.getMidiLaunchpadColor(), BackBufferOperation.COPY);
-			
-			virtualLaunchpadController.setButtonColor(VEYON_REMOTEACCESS_CONTROL_BUTTON,
-					LP_COLOR_ACTION_CONTEXT_ACTIVE.getVirtualLaunchpadColor());
-			
-			buttonsColors.replace(VEYON_REMOTEACCESS_CONTROL_BUTTON, LP_COLOR_ACTION_CONTEXT_ACTIVE);
-			
-			if(manager.isLaunchpadConnected())
-				midiLaunchpadClient.setButtonLight(VEYON_REMOTEACCESS_VIEW_BUTTON,
-						LP_COLOR_ACTION_CONTEXT_INACTIVE.getMidiLaunchpadColor() ,BackBufferOperation.COPY);
-			
-			virtualLaunchpadController.setButtonColor(VEYON_REMOTEACCESS_VIEW_BUTTON,
-					LP_COLOR_ACTION_CONTEXT_INACTIVE.getVirtualLaunchpadColor());
-			
-			buttonsColors.replace(VEYON_REMOTEACCESS_VIEW_BUTTON, LP_COLOR_ACTION_CONTEXT_INACTIVE);
+			setButtonLight(VEYON_REMOTEACCESS_CONTROL_BUTTON, LP_COLOR_DEVICE_ACTIVE, BackBufferOperation.COPY);
+			setButtonLight(VEYON_REMOTEACCESS_VIEW_BUTTON, LP_COLOR_ACTION_CONTEXT_INACTIVE, BackBufferOperation.COPY);
 		}
 		
-		if(manager.isLaunchpadConnected())
-			midiLaunchpadClient.setButtonLight(VEYON_REMOTEACCESS_STOP_BUTTON, 
-					LP_COLOR_ACTION_CONTEXT_STOP.getMidiLaunchpadColor(), BackBufferOperation.COPY);
-		
-		virtualLaunchpadController.setButtonColor(VEYON_REMOTEACCESS_STOP_BUTTON,
-				LP_COLOR_ACTION_CONTEXT_STOP.getVirtualLaunchpadColor());
-		
-		buttonsColors.replace(VEYON_REMOTEACCESS_STOP_BUTTON, LP_COLOR_ACTION_CONTEXT_STOP);
-		
+		setButtonLight(VEYON_REMOTEACCESS_STOP_BUTTON, LP_COLOR_ACTION_CONTEXT_STOP, BackBufferOperation.COPY);
 	}
 	
 	/**
@@ -235,7 +194,7 @@ public class LaunchpadLightManager {
 		ProgramManager manager = ProgramManager.getInstance();
 		
 		if(manager.isLaunchpadConnected())
-			ProgramManager.getInstance().getLaunchpadClient().setPadLight(pad, color.getMidiLaunchpadColor(), operation);
+			manager.getLaunchpadClient().setPadLight(pad, color.getMidiLaunchpadColor(), operation);
 		
 		manager.getVirtualLaunchpadController().setPadColor(pad, color.getVirtualLaunchpadColor());
 		
@@ -247,7 +206,13 @@ public class LaunchpadLightManager {
 	 * and also registers the color to the pad map.
 	 */
 	public void setButtonLight(Button button, LaunchpadColor color, BackBufferOperation operation) {
-		ProgramManager.getInstance().getLaunchpadClient().setButtonLight(button, color.getMidiLaunchpadColor(), operation);
+		ProgramManager manager = ProgramManager.getInstance();
+		
+		if(manager.isLaunchpadConnected())
+			manager.getLaunchpadClient().setButtonLight(button, color.getMidiLaunchpadColor(), operation);
+		
+		manager.getVirtualLaunchpadController().setButtonColor(button, color.getVirtualLaunchpadColor());
+		
 		buttonsColors.replace(button, color);
 	}
 	
