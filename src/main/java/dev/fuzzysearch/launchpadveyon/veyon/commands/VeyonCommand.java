@@ -21,12 +21,11 @@ public abstract class VeyonCommand {
 	/**
 	 * Constructs the command for specific device.
 	 * 
-	 * @param pad that triggered the command.
 	 * @param device for command's specific context.
 	 */
-	public VeyonCommand(Pad pad, Device device) {
-		this.pad = pad;
+	public VeyonCommand(Device device) {
 		this.device = device;
+		this.pad = device.getPad();
 		
 		createProcessExecutor();
 	}

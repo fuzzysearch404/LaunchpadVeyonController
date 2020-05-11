@@ -65,7 +65,7 @@ public class LaunchpadButtonEventDispatcher {
 			ProgramManager.getInstance().setCurrentAction(VeyonActionType.SCREEN_VIEW);
 			Device activeDevice = manager.getActiveVeyonDevice();
 			
-			VeyonCommandFactory.getVeyonCommand(activeDevice.getPad(), activeDevice).execute();
+			VeyonCommandFactory.getVeyonCommand(activeDevice).execute();
 		}
 		else
 			manager.setCurrentAction(VeyonActionType.SCREEN_VIEW);
@@ -91,7 +91,7 @@ public class LaunchpadButtonEventDispatcher {
 			ProgramManager.getInstance().setCurrentAction(VeyonActionType.SCREEN_CONTROL);
 			Device activeDevice = manager.getActiveVeyonDevice();
 			
-			VeyonCommandFactory.getVeyonCommand(activeDevice.getPad(), activeDevice).execute();
+			VeyonCommandFactory.getVeyonCommand(activeDevice).execute();
 		}
 		else
 			manager.setCurrentAction(VeyonActionType.SCREEN_CONTROL);

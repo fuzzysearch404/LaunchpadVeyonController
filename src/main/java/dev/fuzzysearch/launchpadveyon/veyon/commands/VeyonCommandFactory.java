@@ -3,7 +3,6 @@ package dev.fuzzysearch.launchpadveyon.veyon.commands;
 import dev.fuzzysearch.launchpadveyon.main.manager.ProgramManager;
 import dev.fuzzysearch.launchpadveyon.veyon.VeyonActionType;
 import dev.fuzzysearch.launchpadveyon.veyon.models.Device;
-import net.thecodersbreakfast.lp4j.api.Pad;
 
 /**
  * Factory class for {@link VeyonCommand} generation.
@@ -21,14 +20,14 @@ public class VeyonCommandFactory {
 	 * @param device Veyon device to create command context for.
 	 * @return {@link VeyonCommand} the created command.
 	 */
-	public static VeyonCommand getVeyonCommand(Pad pad, Device device) {
+	public static VeyonCommand getVeyonCommand(Device device) {
 		switch(ProgramManager.getInstance().getCurrentAction()) {
 			case SCREEN_CONTROL:
-				return new VeyonRemoteControlScreenCommand(pad, device);
+				return new VeyonRemoteControlScreenCommand(device);
 			case SCREEN_VIEW:
-				return new VeyonViewScreenCommand(pad, device);
+				return new VeyonViewScreenCommand(device);
 			default:
-				return new VeyonViewScreenCommand(pad, device);
+				return new VeyonViewScreenCommand(device);
 		}
 		
 	}
