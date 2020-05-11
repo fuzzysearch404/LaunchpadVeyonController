@@ -44,12 +44,11 @@ public abstract class VeyonCommand {
 	 * with a single window open on computer's screen.
 	 */
 	public void execute() {
-		destroyOldProcess();
-		ProgramManager.getInstance().setActiveVeyonDevice(device);
-		launchThread();
-	}
-	
-	protected void launchThread() {
+		ProgramManager manager = ProgramManager.getInstance();
+		
+		manager.destroyCurrentVeyonProcess();
+		manager.setActiveVeyonDevice(device);
+		
 		Thread thread = new Thread(processExecutor);
 		thread.start();
         
@@ -59,11 +58,7 @@ public abstract class VeyonCommand {
 			e.printStackTrace();
 		}
         
-        ProgramManager.getInstance().setActiveVeyonProcess(processExecutor.getProcess());
-	}
-	
-	protected void destroyOldProcess() {
-		ProgramManager.getInstance().destroyCurrentVeyonProcess();
+        manager.setActiveVeyonProcess(processExecutor.getProcess());
 	}
 	
 }
