@@ -48,8 +48,8 @@ public class VeyonProcessExecutor implements Runnable {
 	 * Creates, executes {@link Process}
 	 * @return {@link String} - full output of the process.
 	 */
-	private String execute(String cmd) throws IOException, InterruptedException {
-		process = run.exec(cmd);
+	private String execute() throws IOException, InterruptedException {
+		process = run.exec(this.cmd);
 		latch.countDown();
 		
 		BufferedReader buf = new BufferedReader(new InputStreamReader(process.getInputStream()));
@@ -70,7 +70,7 @@ public class VeyonProcessExecutor implements Runnable {
 	public void run() {
 		String processOutput = null;
 		try {
-			processOutput = execute(cmd);
+			processOutput = execute();
 		} catch (IOException | InterruptedException e) {
 			e.printStackTrace();
 		}
