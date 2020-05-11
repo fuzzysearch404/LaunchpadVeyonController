@@ -41,7 +41,7 @@ public class LaunchpadPadEventDispatcher {
         	return;
         }
         
-        VeyonCommand veyonCommand = getVeyonCommand(pad, device);
+        VeyonCommand veyonCommand = getVeyonCommand(device);
         veyonCommand.execute();
 	}
 
@@ -49,8 +49,8 @@ public class LaunchpadPadEventDispatcher {
 		ProgramManager.getInstance().getLightManager().setSelected(pad);
 	}
 	
-	private VeyonCommand getVeyonCommand(Pad pad, Device device) {
-		return VeyonCommandFactory.getVeyonCommand(pad, device);
+	private VeyonCommand getVeyonCommand(Device device) {
+		return VeyonCommandFactory.getVeyonCommand(device);
 	}
 	
 	private void editPad(Pad pad, Device device) {

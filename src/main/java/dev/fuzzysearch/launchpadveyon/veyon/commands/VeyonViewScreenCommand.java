@@ -6,7 +6,6 @@ import static dev.fuzzysearch.launchpadveyon.config.Configuration.VEYON_CLI_REMO
 
 import dev.fuzzysearch.launchpadveyon.veyon.models.Device;
 import dev.fuzzysearch.launchpadveyon.veyon.utils.VeyonProcessExecutor;
-import net.thecodersbreakfast.lp4j.api.Pad;
 
 /**
  * Remote access module {@link VeyonCommand} to launch
@@ -21,8 +20,8 @@ public class VeyonViewScreenCommand extends VeyonCommand {
 			+ VEYON_CLI_REMOTEACCESS_MODULE + ' '
 			+ VEYON_CLI_REMOTEACCESS_VIEW + ' ';
 	
-	public VeyonViewScreenCommand(Pad pad, Device device) {
-		super(pad, device);
+	public VeyonViewScreenCommand(Device device) {
+		super(device);
 	}
 
 	@Override
