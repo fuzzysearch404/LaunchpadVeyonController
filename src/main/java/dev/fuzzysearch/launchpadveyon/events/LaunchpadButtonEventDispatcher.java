@@ -35,16 +35,14 @@ public class LaunchpadButtonEventDispatcher {
 			switchToRemoteAccessControl();
 		
 		// Stop current remote access button
-		else if(button.equals(VEYON_REMOTEACCESS_STOP_BUTTON)) {
+		else if(button.equals(VEYON_REMOTEACCESS_STOP_BUTTON))
 			stopRemoteAccess();
-		}
 		
 		// Brightness buttons
 		else if(button.equals(LAUNCHPAD_BRIGHTNESS_UP))
 			ProgramManager.getInstance().getLightManager().setBrigtnessUp();
-		else if(button.equals(LAUNCHPAD_BRIGHTNESS_DOWN)) {
+		else if(button.equals(LAUNCHPAD_BRIGHTNESS_DOWN))
 			ProgramManager.getInstance().getLightManager().setBrigtnessDown();
-		}
 	}
 	
 	/**
@@ -62,7 +60,7 @@ public class LaunchpadButtonEventDispatcher {
 		if(activeProcess != null 
 				&& activeProcess.isAlive()
 				&& manager.getCurrentAction() == VeyonActionType.SCREEN_CONTROL) {
-			ProgramManager.getInstance().setCurrentAction(VeyonActionType.SCREEN_VIEW);
+			manager.setCurrentAction(VeyonActionType.SCREEN_VIEW);
 			Device activeDevice = manager.getActiveVeyonDevice();
 			
 			VeyonCommandFactory.getVeyonCommand(activeDevice).execute();
@@ -88,7 +86,7 @@ public class LaunchpadButtonEventDispatcher {
 		if(activeProcess != null 
 				&& activeProcess.isAlive()
 				&& manager.getCurrentAction() == VeyonActionType.SCREEN_VIEW) {
-			ProgramManager.getInstance().setCurrentAction(VeyonActionType.SCREEN_CONTROL);
+			manager.setCurrentAction(VeyonActionType.SCREEN_CONTROL);
 			Device activeDevice = manager.getActiveVeyonDevice();
 			
 			VeyonCommandFactory.getVeyonCommand(activeDevice).execute();
