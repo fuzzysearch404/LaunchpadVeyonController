@@ -21,10 +21,10 @@ public class LaunchpadPadEventDispatcher {
 	
 	public void dispatch(Pad pad, String launchpadName) {
 		System.out.println("[" + launchpadName + "] Pad pressed event : " + pad);
-        
-		manageLights(pad);
-        
 		ProgramManager manager = ProgramManager.getInstance();
+        
+		manager.getLightManager().setSelected(pad);
+		
         Device device = manager.getDeviceByPad(pad);
         
         if(manager.isEditMode()) {
@@ -41,16 +41,8 @@ public class LaunchpadPadEventDispatcher {
         	return;
         }
         
-        VeyonCommand veyonCommand = getVeyonCommand(device);
+        VeyonCommand veyonCommand = VeyonCommandFactory.getVeyonCommand(device);
         veyonCommand.execute();
-	}
-
-	private void manageLights(Pad pad) {
-		ProgramManager.getInstance().getLightManager().setSelected(pad);
-	}
-	
-	private VeyonCommand getVeyonCommand(Device device) {
-		return VeyonCommandFactory.getVeyonCommand(device);
 	}
 	
 	private void editPad(Pad pad, Device device) {
