@@ -11,7 +11,7 @@ import dev.fuzzysearch.launchpadveyon.veyon.utils.VeyonProcessExecutor;
  * Remote access module {@link VeyonCommand} to launch
  * {@link Process} for remote control of a remote computer. 
  * 
- * @author Roberts Ziediòð
+ * @author Roberts ZiediÅ†Å¡
  *
  */
 public class VeyonRemoteControlScreenCommand extends VeyonCommand {

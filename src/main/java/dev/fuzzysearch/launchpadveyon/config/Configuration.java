@@ -13,7 +13,7 @@ import net.thecodersbreakfast.lp4j.api.Color;
  * usually should not be changed by the final user
  * and are program defaults.
  * 
- * @author Roberts Ziediòð
+ * @author Roberts ZiediÅ†Å¡
  *
  */
 public final class Configuration {
@@ -59,7 +59,7 @@ public final class Configuration {
 	 *       +---+---+---+---+---+---+---+---+ 
 	 *         
 	 *                     Pads
-	 *         0   1   2   3   4   5   6   7   X ->
+	 *         0   1   2   3   4   5   6   7   X
 	 *       +---+---+---+---+---+---+---+---+  +---+
 	 *     0 |   |   |   |   |   |   |   |   |  | 	|
 	 *       +---+---+---+---+---+---+---+---+  +---+
@@ -78,8 +78,8 @@ public final class Configuration {
 	 *     7 |   |   |   |   |   |   |   |   |  | 	|
 	 *       +---+---+---+---+---+---+---+---+  +---+
 	 *     Y                             Right side buttons  
-	 *     |
-	 *     Ë… 
+	 *
+	 *  
 	 */
 	
 	
