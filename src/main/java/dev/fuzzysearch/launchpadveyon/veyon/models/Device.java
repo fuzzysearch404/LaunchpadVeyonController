@@ -8,7 +8,7 @@ import net.thecodersbreakfast.lp4j.api.Pad;
  * and them on the {@link Launchpad}
  * pads.
  * 
- * @author Roberts Ziediòð
+ * @author Roberts ZiediÅ†Å¡
  *
  */
 public class Device {
