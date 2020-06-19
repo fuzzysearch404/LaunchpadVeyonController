@@ -7,24 +7,23 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="157.0" prefWidth="295.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="165.0" prefWidth="340.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <AnchorPane prefHeight="167.0" prefWidth="311.0">
+      <AnchorPane prefHeight="157.0" prefWidth="366.0">
          <children>
-            <TextField id="ipinputfield" fx:id="ipinputfield" layoutX="12.0" layoutY="56.0" prefHeight="25.0" prefWidth="264.0" />
-            <Text layoutX="21.0" layoutY="27.0" strokeType="OUTSIDE" strokeWidth="0.0" text="IP address (and optionally the TCP port) or name of the Veyon device:" wrappingWidth="264.091796875" />
-            <Button layoutX="106.0" layoutY="112.0" mnemonicParsing="false" onMouseClicked="#configurationSaveEvent" prefHeight="34.0" prefWidth="179.0" style="-fx-background-color: #3399ff;" text="Save pad configuration" textFill="WHITE">
+            <TextField id="ipinputfield" fx:id="ipinputfield" layoutX="12.0" layoutY="56.0" prefHeight="25.0" prefWidth="320.0" />
+            <Text layoutX="12.0" layoutY="27.0" strokeType="OUTSIDE" strokeWidth="0.0" text="IP address (and optionally the TCP port) or name of the Veyon device:" wrappingWidth="328.0" />
+            <Button layoutX="115.0" layoutY="119.0" mnemonicParsing="false" onMouseClicked="#configurationSaveEvent" prefHeight="34.0" prefWidth="218.0" style="-fx-background-color: #3399ff;" text="Save pad configuration" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="13.0" />
                </font>
             </Button>
-            <Text id="inputerror" fx:id="inputerror" fill="RED" layoutX="72.0" layoutY="102.0" strokeType="OUTSIDE" strokeWidth="0.0" text="This field can't be empty" visible="false" wrappingWidth="145.0">
+            <Text id="inputerror" fx:id="inputerror" fill="RED" layoutX="16.0" layoutY="100.0" strokeType="OUTSIDE" strokeWidth="0.0" text="This field can't be empty" visible="false" wrappingWidth="277.0">
                <font>
                   <Font name="System Bold" size="12.0" />
                </font>
             </Text>
-            <Button id="deletebutton" fx:id="deletebutton" layoutX="21.0" layoutY="116.0" mnemonicParsing="false" onMouseClicked="#configurationDeleteEvent" prefHeight="25.0" prefWidth="80.0" style="-fx-background-color: #ff4d4d;" text="Delete pad" textFill="WHITE">
+            <Button id="deletebutton" fx:id="deletebutton" layoutX="12.0" layoutY="123.0" mnemonicParsing="false" onMouseClicked="#configurationDeleteEvent" prefHeight="25.0" prefWidth="92.0" style="-fx-background-color: #ff4d4d;" text="Delete pad" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="12.0" />
                </font>
